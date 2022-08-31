@@ -12,7 +12,7 @@ class Gateway extends BaseModel
 
     public $migrationDependancy = [];
 
-    protected $fillable = ['clientId',  'clientSecret', 'apiKey', 'baseUrl', 'published'];
+    protected $fillable = ['client_id',  'client_secret', 'api_key', 'base_url', 'published'];
 
     /**
      * The attributes that should be mutated to dates.
@@ -30,10 +30,10 @@ class Gateway extends BaseModel
     public function migration(Blueprint $table)
     {
         $table->increments('id');
-        $table->string('clientId');
-        $table->string('clientSecret');
-        $table->string('apiKey');
-        $table->string('baseUrl');
+        $table->string('client_id');
+        $table->string('client_secret');
+        $table->string('api_key');
+        $table->string('base_url');
         $table->tinyInteger('published')->default(false);
     }
 }

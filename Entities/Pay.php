@@ -13,7 +13,6 @@ class Pay extends BaseModel
     public $migrationDependancy = [];
 
     protected $fillable = [
-        'destination_type',  'destination_reference', 'amount', 'currency', 'description',
         'category', 'tags', 'callback', 'status', 'customer_id', 'notes', 'origination_time',
         'transaction_reference', 'completed', 'successful'
     ];

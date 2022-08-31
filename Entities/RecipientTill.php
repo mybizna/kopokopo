@@ -13,7 +13,7 @@ class Recipient extends BaseModel
     public $migrationDependancy = [];
 
     protected $fillable = [
-        'title', 'type', 'system_id', 'published'
+        'paybill_name', 'paybill_number', 'paybill_account_number', 'published'
     ];
 
 

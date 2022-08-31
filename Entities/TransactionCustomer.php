@@ -33,9 +33,6 @@ class TransactionCustomer extends BaseModel
      */
     public function migration(Blueprint $table)
     {
-
-
-
         $table->increments('id');
         $table->string('trans_id');
         $table->string('created_at');

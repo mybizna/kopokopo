@@ -13,9 +13,9 @@ class Stkpush extends BaseModel
     public $migrationDependancy = [];
 
     protected $fillable = [
-        'payment_channel',  'till_number', 'first_name', 'last_name', 'phone_number',
-        'amount', 'currency', 'email', 'callback', 'link_self', 'link_resource',
-        'customer_id', 'reference', 'notes', 'published'
+        'payment_channel',  'phone_number', 'currency', 'amount', 'till_number',
+        'first_name', 'last_name', 'email', 'callback', 'link_self', 'link_resource',
+        'published'
     ];
 
 
