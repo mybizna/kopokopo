@@ -13,8 +13,10 @@ class Payment extends BaseModel
     public $migrationDependancy = [];
 
     protected $fillable = [
-        'payment_channel',  'till_number', 'first_name', 'last_name', 'phone_number', 'amount',
-        'currency', 'email', 'callback', 'metadata', 'link_self', 'link_resource', 'published'
+        'trans_id',  'type', 'event_type', 'initiation_time', 'resource_id', 'reference',
+        'origination_time', 'amount', 'currency', 'sender_phone_number', 'till_number',
+        'system', 'resource_status', 'sender_first_name', 'sender_middle_name', 'sender_last_name',
+        'errors', 'metadata', 'link_self', 'link_resource', 'published'
     ];
 
 
@@ -35,17 +37,26 @@ class Payment extends BaseModel
     {
 
 
+
         $table->increments('id');
-        $table->string('payment_channel');
-        $table->string('till_number');
-        $table->string('first_name');
-        $table->string('last_name');
-        $table->string('phone_number');
+        $table->string('trans_id');
+        $table->string('type');
+        $table->string('event_type');
+        $table->string('initiation_time');
+        $table->string('resource_id');
+        $table->string('reference');
+        $table->string('origination_time');
         $table->string('amount');
         $table->string('currency');
-        $table->string('email');
-        $table->string('callback');
-        $table->string('metadata');
+        $table->string('sender_phone_number')->nullable();
+        $table->string('till_number')->nullable();
+        $table->string('system')->nullable();
+        $table->string('resource_status')->nullable();
+        $table->string('sender_first_name')->nullable();
+        $table->string('sender_middle_name')->nullable();
+        $table->string('sender_last_name')->nullable();
+        $table->string('errors')->nullable();
+        $table->string('metadata')->nullable();
         $table->string('link_self')->nullable();
         $table->string('link_resource')->nullable();
         $table->tinyInteger('published')->default(false);
