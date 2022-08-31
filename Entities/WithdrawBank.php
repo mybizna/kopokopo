@@ -5,14 +5,14 @@ namespace Modules\Kopokopo\Entities;
 use Modules\Base\Entities\BaseModel;
 use Illuminate\Database\Schema\Blueprint;
 
-class Withdraw extends BaseModel
+class WithdrawBank extends BaseModel
 {
 
-    protected $table = "kopokopo_withdraw";
+    protected $table = "kopokopo_withdraw_bank";
 
     public $migrationDependancy = [];
 
-    protected $fillable = ['amount', 'currency', 'callback', 'destination_type', 'origination_time', 'destination_reference', 'transaction_reference', 'published'];
+    protected $fillable = ['account_name',  'bank_branch_ref', 'account_number', 'published'];
 
     /**
      * The attributes that should be mutated to dates.
@@ -29,14 +29,11 @@ class Withdraw extends BaseModel
      */
     public function migration(Blueprint $table)
     {
+
         $table->increments('id');
-        $table->string('amount');
-        $table->string('currency');
-        $table->string('callback');
-        $table->string('destination_type')->nullable();
-        $table->string('origination_time')->nullable();
-        $table->string('destination_reference')->nullable();
-        $table->string('transaction_reference')->nullable();
+        $table->string('account_name');
+        $table->string('bank_branch_ref');
+        $table->string('account_number');
         $table->tinyInteger('published')->default(false);
     }
 }
