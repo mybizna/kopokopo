@@ -5,7 +5,7 @@ namespace Modules\Kopokopo\Entities;
 use Modules\Base\Entities\BaseModel;
 use Illuminate\Database\Schema\Blueprint;
 
-class Recipient extends BaseModel
+class RecipientTill extends BaseModel
 {
 
     protected $table = "kopokopo_recipient";
