@@ -8,7 +8,7 @@ use Illuminate\Database\Schema\Blueprint;
 class RecipientTill extends BaseModel
 {
 
-    protected $table = "kopokopo_recipient";
+    protected $table = "kopokopo_recipient_till";
 
     public $migrationDependancy = [];
 

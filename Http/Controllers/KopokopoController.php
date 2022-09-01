@@ -20,31 +20,37 @@ class KopokopoController extends BaseController
         $result = [];
         return response()->json($result);
     }
+
     public function buygoods_transaction_received(Request $request)
     {
         $result = [];
         return response()->json($result);
     }
+
     public function buygoods_transaction_reversed(Request $request)
     {
         $result = [];
         return response()->json($result);
     }
+
     public function b2b_transaction_received(Request $request)
     {
         $result = [];
         return response()->json($result);
     }
+
     public function m2m_transaction_received(Request $request)
     {
         $result = [];
         return response()->json($result);
     }
+
     public function settlement_transfer_completed(Request $request)
     {
         $result = [];
         return response()->json($result);
     }
+
     public function customer_created(Request $request)
     {
         $result = [];
