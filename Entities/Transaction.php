@@ -12,7 +12,7 @@ class Transaction extends BaseModel
 
     public $migrationDependancy = [];
 
-    protected $fillable = ['type',  'trans_id', 'created_at', 'event_type', 'resource_id', 'link_self', 'link_resource', 'published'];
+    protected $fillable = ['type',  'trans_id', 'passed_created_at', 'event_type', 'resource_id', 'link_self', 'link_resource', 'published'];
 
 
     /**
@@ -33,7 +33,7 @@ class Transaction extends BaseModel
         $table->increments('id');
         $table->enum('type', ['buygoods_transaction_received', 'buygoods_transaction_reversed', 'b2b_transaction_received', 'm2m_transaction_received', 'settlement_transfer_completed', 'customer_created'])->default('buygoods_transaction_received')->nullable();
         $table->string('trans_id');
-        $table->string('created_at');
+        $table->string('passed_created_at');
         $table->string('event_type');
         $table->string('resource_id');
         $table->string('link_self')->nullable();

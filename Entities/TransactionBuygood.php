@@ -13,7 +13,7 @@ class TransactionBuygood extends BaseModel
     public $migrationDependancy = [];
 
     protected $fillable = [
-        'trans_id', 'created_at', 'event_type', 'resource_id', 'status',
+        'trans_id', 'passed_created_at', 'event_type', 'resource_id', 'status',
         'reference', 'origination_time', 'amount', 'currency', 'sending_till',
         'sender_phone_number', 'till_number', 'system', 'sender_first_name',
         'sender_middle_name',  'sender_last_name', 'link_self', 'link_resource',
@@ -38,7 +38,7 @@ class TransactionBuygood extends BaseModel
     {
         $table->increments('id');
         $table->string('trans_id');
-        $table->string('created_at');
+        $table->string('passed_created_at');
         $table->string('event_type');
         $table->string('resource_id');
         $table->string('status');

@@ -13,7 +13,7 @@ class TransactionCustomer extends BaseModel
     public $migrationDependancy = [];
 
     protected $fillable = [
-        'trans_id', 'created_at', 'event_type', 'last_name', 'first_name', 'phone_number',
+        'trans_id', 'passed_created_at', 'event_type', 'last_name', 'first_name', 'phone_number',
         'link_self', 'link_resource', 'published',
     ];
 
@@ -35,7 +35,7 @@ class TransactionCustomer extends BaseModel
     {
         $table->increments('id');
         $table->string('trans_id');
-        $table->string('created_at');
+        $table->string('passed_created_at');
         $table->string('event_type');
         $table->string('last_name');
         $table->string('first_name');

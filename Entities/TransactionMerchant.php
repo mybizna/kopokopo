@@ -13,7 +13,7 @@ class TransactionMerchant extends BaseModel
     public $migrationDependancy = [];
 
     protected $fillable = [
-        'trans_id', 'created_at', 'event_type', 'resource_id', 'status',
+        'trans_id', 'passed_created_at', 'event_type', 'resource_id', 'status',
         'reference', 'origination_time', 'amount', 'currency', 'sending_till',
         'till_number', 'system', 'link_self', 'link_resource', 'published',
     ];
@@ -36,7 +36,7 @@ class TransactionMerchant extends BaseModel
     {
         $table->increments('id');
         $table->string('trans_id');
-        $table->string('created_at');
+        $table->string('passed_created_at');
         $table->string('event_type');
         $table->string('resource_id');
         $table->string('status');

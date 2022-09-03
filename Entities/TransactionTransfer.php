@@ -13,7 +13,7 @@ class TransactionTransfer extends BaseModel
     public $migrationDependancy = [];
 
     protected $fillable = [
-        'trans_id', 'created_at', 'event_type', 'resource_id', 'status', 'destination_type',
+        'trans_id', 'passed_created_at', 'event_type', 'resource_id', 'status', 'destination_type',
         'destination_reference', 'account_name', 'account_number', 'bank_branch_ref',
         'amount', 'currency', 'settlement_method', 'disbursements', 'link_self', 'link_resource',
         'published',
@@ -37,7 +37,7 @@ class TransactionTransfer extends BaseModel
     {
         $table->increments('id');
         $table->string('trans_id');
-        $table->string('created_at');
+        $table->string('passed_created_at');
         $table->string('event_type');
         $table->string('resource_id');
         $table->string('status');
