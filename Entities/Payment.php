@@ -15,7 +15,7 @@ class Payment extends BaseModel
     protected $fillable = [
         'trans_id',  'type', 'event_type', 'initiation_time', 'resource_id', 'reference',
         'origination_time', 'amount', 'currency', 'sender_phone_number', 'till_number',
-        'system', 'resource_status', 'sender_first_name', 'sender_middle_name', 'sender_last_name',
+        'system_str', 'resource_status', 'sender_first_name', 'sender_middle_name', 'sender_last_name',
         'errors', 'metadata', 'link_self', 'link_resource', 'published'
     ];
 
@@ -50,7 +50,7 @@ class Payment extends BaseModel
         $table->string('currency');
         $table->string('sender_phone_number')->nullable();
         $table->string('till_number')->nullable();
-        $table->string('system')->nullable();
+        $table->string('system_str')->nullable();
         $table->string('resource_status')->nullable();
         $table->string('sender_first_name')->nullable();
         $table->string('sender_middle_name')->nullable();

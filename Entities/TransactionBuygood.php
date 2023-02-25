@@ -15,7 +15,7 @@ class TransactionBuygood extends BaseModel
     protected $fillable = [
         'trans_id', 'passed_created_at', 'event_type', 'resource_id', 'status',
         'reference', 'origination_time', 'amount', 'currency', 'sending_till',
-        'sender_phone_number', 'till_number', 'system', 'sender_first_name',
+        'sender_phone_number', 'till_number', 'system_str', 'sender_first_name',
         'sender_middle_name',  'sender_last_name', 'link_self', 'link_resource',
         'published',
     ];
@@ -49,7 +49,7 @@ class TransactionBuygood extends BaseModel
         $table->string('sending_till')->nullable();
         $table->string('sender_phone_number')->nullable();
         $table->string('till_number')->nullable();
-        $table->string('system')->nullable();
+        $table->string('system_str')->nullable();
         $table->string('sender_first_name')->nullable();
         $table->string('sender_middle_name')->nullable();
         $table->string('sender_last_name')->nullable();

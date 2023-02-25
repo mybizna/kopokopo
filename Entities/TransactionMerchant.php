@@ -15,7 +15,7 @@ class TransactionMerchant extends BaseModel
     protected $fillable = [
         'trans_id', 'passed_created_at', 'event_type', 'resource_id', 'status',
         'reference', 'origination_time', 'amount', 'currency', 'sending_till',
-        'till_number', 'system', 'link_self', 'link_resource', 'published',
+        'till_number', 'system_str', 'link_self', 'link_resource', 'published',
     ];
 
 
