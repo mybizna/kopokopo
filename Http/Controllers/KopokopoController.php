@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Mpesa\Http\Controllers;
+namespace Modules\Kopokopo\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
