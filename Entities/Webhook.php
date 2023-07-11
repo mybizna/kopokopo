@@ -35,6 +35,6 @@ class Webhook extends BaseModel
         $table->string('url');
         $table->string('scope');
         $table->string('scope_reference');
-        $table->tinyInteger('published')->default(false);
+        $table->tinyInteger('published')->nullable()->default(0);
     }
 }

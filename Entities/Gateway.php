@@ -34,6 +34,6 @@ class Gateway extends BaseModel
         $table->string('client_secret');
         $table->string('api_key');
         $table->string('base_url');
-        $table->tinyInteger('published')->default(false);
+        $table->tinyInteger('published')->nullable()->default(0);
     }
 }

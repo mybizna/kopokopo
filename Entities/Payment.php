@@ -59,6 +59,6 @@ class Payment extends BaseModel
         $table->string('metadata')->nullable();
         $table->string('link_self')->nullable();
         $table->string('link_resource')->nullable();
-        $table->tinyInteger('published')->default(false);
+        $table->tinyInteger('published')->nullable()->default(0);
     }
 }

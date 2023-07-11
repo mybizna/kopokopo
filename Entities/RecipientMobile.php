@@ -38,6 +38,6 @@ class RecipientMobile extends BaseModel
         $table->string('email');
         $table->string('phone_number');
         $table->string('network');
-        $table->tinyInteger('published')->default(false);
+        $table->tinyInteger('published')->nullable()->default(0);
     }
 }

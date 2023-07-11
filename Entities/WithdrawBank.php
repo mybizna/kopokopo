@@ -34,6 +34,6 @@ class WithdrawBank extends BaseModel
         $table->string('account_name');
         $table->string('bank_branch_ref');
         $table->string('account_number');
-        $table->tinyInteger('published')->default(false);
+        $table->tinyInteger('published')->nullable()->default(0);
     }
 }

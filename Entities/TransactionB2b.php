@@ -49,6 +49,6 @@ class TransactionB2b extends BaseModel
         $table->string('till_number')->nullable();
         $table->string('link_self')->nullable();
         $table->string('link_resource')->nullable();
-        $table->tinyInteger('published')->default(false);
+        $table->tinyInteger('published')->nullable()->default(0);
     }
 }

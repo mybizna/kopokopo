@@ -41,7 +41,7 @@ class Pay extends BaseModel
         $table->string('notes')->nullable();
         $table->string('origination_time')->nullable();
         $table->string('transaction_reference')->nullable();
-        $table->tinyInteger('completed')->default(false);
-        $table->tinyInteger('successful')->default(false);
+        $table->tinyInteger('completed')->nullable()->default(0);
+        $table->tinyInteger('successful')->nullable()->default(0);
     }
 }

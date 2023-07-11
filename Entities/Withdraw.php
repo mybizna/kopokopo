@@ -37,6 +37,6 @@ class Withdraw extends BaseModel
         $table->string('origination_time')->nullable();
         $table->string('destination_reference')->nullable();
         $table->string('transaction_reference')->nullable();
-        $table->tinyInteger('published')->default(false);
+        $table->tinyInteger('published')->nullable()->default(0);
     }
 }

@@ -42,6 +42,6 @@ class TransactionCustomer extends BaseModel
         $table->string('phone_number');
         $table->string('link_self')->nullable();
         $table->string('link_resource')->nullable();
-        $table->tinyInteger('published')->default(false);
+        $table->tinyInteger('published')->nullable()->default(0);
     }
 }

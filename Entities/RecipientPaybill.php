@@ -35,6 +35,6 @@ class RecipientPaybill extends BaseModel
         $table->increments('id');
         $table->string('till_number');
         $table->string('till_name');
-        $table->tinyInteger('published')->default(false);
+        $table->tinyInteger('published')->nullable()->default(0);
     }
 }

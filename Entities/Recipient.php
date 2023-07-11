@@ -36,6 +36,6 @@ class Recipient extends BaseModel
         $table->string('title');
         $table->string('system_id');
         $table->string('type');
-        $table->tinyInteger('published')->default(false);
+        $table->tinyInteger('published')->nullable()->default(0);
     }
 }

@@ -36,6 +36,6 @@ class RecipientTill extends BaseModel
         $table->string('paybill_name');
         $table->string('paybill_number');
         $table->string('paybill_account_number');
-        $table->tinyInteger('published')->default(false);
+        $table->tinyInteger('published')->nullable()->default(0);
     }
 }

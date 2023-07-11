@@ -33,6 +33,6 @@ class WithdrawMobile extends BaseModel
         $table->string('phone_number');
         $table->string('first_name');
         $table->string('last_name');
-        $table->tinyInteger('published')->default(false);
+        $table->tinyInteger('published')->nullable()->default(0);
     }
 }

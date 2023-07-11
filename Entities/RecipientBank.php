@@ -36,6 +36,6 @@ class RecipientBank extends BaseModel
         $table->string('account_name');
         $table->string('account_number');
         $table->string('settlement_method');
-        $table->tinyInteger('published')->default(false);
+        $table->tinyInteger('published')->nullable()->default(0);
     }
 }
