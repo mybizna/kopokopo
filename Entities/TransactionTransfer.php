@@ -2,8 +2,10 @@
 
 namespace Modules\Kopokopo\Entities;
 
-use Modules\Base\Entities\BaseModel;
 use Illuminate\Database\Schema\Blueprint;
+use Modules\Base\Entities\BaseModel;
+use Modules\Core\Classes\Views\FormBuilder;
+use Modules\Core\Classes\Views\ListTable;
 
 class TransactionTransfer extends BaseModel
 {
@@ -19,7 +21,6 @@ class TransactionTransfer extends BaseModel
         'published',
     ];
 
-
     /**
      * The attributes that should be mutated to dates.
      *
@@ -27,6 +28,66 @@ class TransactionTransfer extends BaseModel
      */
     protected $dates = ['created_at', 'updated_at', 'deleted_at'];
 
+    public function listTable()
+    {
+        // listing view fields
+        $fields = new ListTable();
+
+        $fields->name('trans_id')->type('text')->ordering(true);
+        $fields->name('passed_created_at')->type('text')->ordering(true);
+        $fields->name('event_type')->type('text')->ordering(true);
+        $fields->name('status')->type('text')->ordering(true);
+        $fields->name('destination_type')->type('text')->ordering(true);
+        $fields->name('account_name')->type('text')->ordering(true);
+        $fields->name('account_number')->type('text')->ordering(true);
+        $fields->name('bank_branch_ref')->type('text')->ordering(true);
+        $fields->name('amount')->type('text')->ordering(true);
+        $fields->name('currency')->type('text')->ordering(true);
+        $fields->name('settlement_method')->type('text')->ordering(true);
+        $fields->name('published')->type('switch')->ordering(true);
+
+        return $fields;
+
+    }
+
+    public function formBuilder()
+    {
+        // listing view fields
+        $fields = new FormBuilder();
+
+        $fields->name('trans_id')->type('text')->group('w-1/2');
+        $fields->name('passed_created_at')->type('text')->group('w-1/2');
+        $fields->name('event_type')->type('text')->group('w-1/2');
+        $fields->name('status')->type('text')->group('w-1/2');
+        $fields->name('destination_type')->type('text')->group('w-1/2');
+        $fields->name('destination_reference')->type('text')->group('w-1/2');
+        $fields->name('account_name')->type('text')->group('w-1/2');
+        $fields->name('account_number')->type('text')->group('w-1/2');
+        $fields->name('bank_branch_ref')->type('text')->group('w-1/2');
+        $fields->name('amount')->type('text')->group('w-1/2');
+        $fields->name('currency')->type('text')->group('w-1/2');
+        $fields->name('settlement_method')->type('text')->group('w-1/2');
+        $fields->name('disbursements')->type('text')->group('w-1/2');
+        $fields->name('published')->type('switch')->group('w-1/2');
+
+        return $fields;
+
+    }
+
+    public function filter()
+    {
+        // listing view fields
+        $fields = new FormBuilder();
+
+        $fields->name('trans_id')->type('text')->group('w-1/6');
+        $fields->name('status')->type('text')->group('w-1/6');
+        $fields->name('amount')->type('text')->group('w-1/6');
+        $fields->name('currency')->type('text')->group('w-1/6');
+        $fields->name('published')->type('switch')->group('w-1/6');
+
+        return $fields;
+
+    }
     /**
      * List of fields for managing postings.
      *

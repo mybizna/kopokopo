@@ -5,6 +5,9 @@ namespace Modules\Kopokopo\Entities;
 use Modules\Base\Entities\BaseModel;
 use Illuminate\Database\Schema\Blueprint;
 
+use Modules\Core\Classes\Views\ListTable;
+use Modules\Core\Classes\Views\FormBuilder;
+
 class Pay extends BaseModel
 {
 
@@ -25,6 +28,62 @@ class Pay extends BaseModel
      */
     protected $dates = ['created_at', 'updated_at', 'deleted_at'];
 
+
+    public function listTable(){
+        // listing view fields
+        $fields = new ListTable();
+
+        $fields->name('category')->type('text')->ordering(true);
+        $fields->name('tags')->type('text')->ordering(true);
+        $fields->name('callback')->type('text')->ordering(true);
+        $fields->name('status')->type('text')->ordering(true);
+        $fields->name('customer_id')->type('text')->ordering(true);
+        $fields->name('notes')->type('text')->ordering(true);
+        $fields->name('origination_time')->type('text')->ordering(true);
+        $fields->name('transaction_reference')->type('text')->ordering(true);
+        $fields->name('completed')->type('switch')->ordering(true);
+        $fields->name('successful')->type('switch')->ordering(true);
+
+
+        return $fields;
+
+    }
+    
+    public function formBuilder(){
+        // listing view fields
+        $fields = new FormBuilder();
+
+        $fields->name('category')->type('text')->group('w-1/2');
+        $fields->name('tags')->type('text')->group('w-1/2');
+        $fields->name('callback')->type('text')->group('w-1/2');
+        $fields->name('status')->type('text')->group('w-1/2');
+        $fields->name('customer_id')->type('text')->group('w-1/2');
+        $fields->name('notes')->type('text')->group('w-1/2');
+        $fields->name('origination_time')->type('text')->group('w-1/2');
+        $fields->name('transaction_reference')->type('text')->group('w-1/2');
+        $fields->name('completed')->type('switch')->group('w-1/2');
+        $fields->name('successful')->type('switch')->group('w-1/2');
+
+        return $fields;
+
+    }
+
+    public function filter(){
+        // listing view fields
+        $fields = new FormBuilder();
+
+        $fields->name('category')->type('text')->group('w-1/6');
+        $fields->name('tags')->type('text')->group('w-1/6');
+        $fields->name('status')->type('text')->group('w-1/6');
+        $fields->name('customer_id')->type('text')->group('w-1/6');
+        $fields->name('transaction_reference')->type('text')->group('w-1/6');
+        $fields->name('completed')->type('switch')->group('w-1/6');
+        $fields->name('successful')->type('switch')->group('w-1/6');
+
+
+        return $fields;
+
+    }
     /**
      * List of fields for managing postings.
      *

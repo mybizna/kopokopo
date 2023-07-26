@@ -2,8 +2,10 @@
 
 namespace Modules\Kopokopo\Entities;
 
-use Modules\Base\Entities\BaseModel;
 use Illuminate\Database\Schema\Blueprint;
+use Modules\Base\Entities\BaseModel;
+use Modules\Core\Classes\Views\FormBuilder;
+use Modules\Core\Classes\Views\ListTable;
 
 class TransactionCustomer extends BaseModel
 {
@@ -17,7 +19,6 @@ class TransactionCustomer extends BaseModel
         'link_self', 'link_resource', 'published',
     ];
 
-
     /**
      * The attributes that should be mutated to dates.
      *
@@ -25,6 +26,56 @@ class TransactionCustomer extends BaseModel
      */
     protected $dates = ['created_at', 'updated_at', 'deleted_at'];
 
+    public function listTable()
+    {
+        // listing view fields
+        $fields = new ListTable();
+
+        $fields->name('trans_id')->type('text')->ordering(true);
+        $fields->name('passed_created_at')->type('text')->ordering(true);
+        $fields->name('event_type')->type('text')->ordering(true);
+        $fields->name('last_name')->type('text')->ordering(true);
+        $fields->name('first_name')->type('text')->ordering(true);
+        $fields->name('phone_number')->type('text')->ordering(true);
+        $fields->name('published')->type('switch')->ordering(true);
+
+        return $fields;
+
+    }
+
+    public function formBuilder()
+    {
+        // listing view fields
+        $fields = new FormBuilder();
+
+        $fields->name('trans_id')->type('text')->group('w-1/2');
+        $fields->name('passed_created_at')->type('text')->group('w-1/2');
+        $fields->name('event_type')->type('text')->group('w-1/2');
+        $fields->name('last_name')->type('text')->group('w-1/2');
+        $fields->name('first_name')->type('text')->group('w-1/2');
+        $fields->name('phone_number')->type('text')->group('w-1/2');
+        $fields->name('published')->type('switch')->group('w-1/2');
+
+        return $fields;
+
+    }
+
+    public function filter()
+    {
+        // listing view fields
+        $fields = new FormBuilder();
+
+        $fields->name('trans_id')->type('text')->group('w-1/6');
+        $fields->name('passed_created_at')->type('text')->group('w-1/6');
+        $fields->name('event_type')->type('text')->group('w-1/6');
+        $fields->name('last_name')->type('text')->group('w-1/6');
+        $fields->name('first_name')->type('text')->group('w-1/6');
+        $fields->name('phone_number')->type('text')->group('w-1/6');
+        $fields->name('published')->type('switch')->group('w-1/6');
+
+        return $fields;
+
+    }
     /**
      * List of fields for managing postings.
      *

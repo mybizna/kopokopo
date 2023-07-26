@@ -5,6 +5,9 @@ namespace Modules\Kopokopo\Entities;
 use Modules\Base\Entities\BaseModel;
 use Illuminate\Database\Schema\Blueprint;
 
+use Modules\Core\Classes\Views\ListTable;
+use Modules\Core\Classes\Views\FormBuilder;
+
 class Stkpush extends BaseModel
 {
 
@@ -26,6 +29,66 @@ class Stkpush extends BaseModel
      */
     protected $dates = ['created_at', 'updated_at', 'deleted_at'];
 
+
+    public function listTable(){
+        // listing view fields
+        $fields = new ListTable();
+
+        $fields->name('payment_channel')->type('text')->ordering(true);
+        $fields->name('phone_number')->type('text')->ordering(true);
+        $fields->name('currency')->type('text')->ordering(true);
+        $fields->name('amount')->type('text')->ordering(true);
+        $fields->name('till_number')->type('text')->ordering(true);
+        $fields->name('first_name')->type('text')->ordering(true);
+        $fields->name('last_name')->type('text')->ordering(true);
+        $fields->name('email')->type('text')->ordering(true);
+        $fields->name('callback')->type('text')->ordering(true);
+        $fields->name('published')->type('switch')->ordering(true);
+
+        return $fields;
+
+    }
+    
+    public function formBuilder(){
+        // listing view fields
+        $fields = new FormBuilder();
+
+        $fields->name('payment_channel')->type('text')->group('w-1/2');
+        $fields->name('phone_number')->type('text')->group('w-1/2');
+        $fields->name('currency')->type('text')->group('w-1/2');
+        $fields->name('amount')->type('text')->group('w-1/2');
+        $fields->name('till_number')->type('text')->group('w-1/2');
+        $fields->name('first_name')->type('text')->group('w-1/2');
+        $fields->name('last_name')->type('text')->group('w-1/2');
+        $fields->name('email')->type('text')->group('w-1/2');
+        $fields->name('callback')->type('text')->group('w-1/2');
+        $fields->name('published')->type('switch')->group('w-1/2');
+        $fields->name('customer_id')->type('text')->group('w-1/2');
+        $fields->name('reference')->type('text')->group('w-1/2');
+        $fields->name('notes')->type('text')->group('w-1/2');
+        $fields->name('link_self')->type('text')->group('w-1/2');
+        $fields->name('link_resource')->type('text')->group('w-1/2');
+
+
+
+        return $fields;
+
+    }
+
+    public function filter(){
+        // listing view fields
+        $fields = new FormBuilder();
+
+        $fields->name('payment_channel')->type('text')->group('w-1/6');
+        $fields->name('phone_number')->type('text')->group('w-1/6');
+        $fields->name('currency')->type('text')->group('w-1/6');
+        $fields->name('amount')->type('text')->group('w-1/6');
+        $fields->name('till_number')->type('text')->group('w-1/6');
+        $fields->name('published')->type('switch')->group('w-1/6');
+
+        return $fields;
+
+    }
     /**
      * List of fields for managing postings.
      *
