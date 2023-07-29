@@ -3,17 +3,28 @@
 namespace Modules\Kopokopo\Entities;
 
 use Illuminate\Database\Schema\Blueprint;
+use Modules\Base\Classes\Views\FormBuilder;
+use Modules\Base\Classes\Views\ListTable;
 use Modules\Base\Entities\BaseModel;
-use Modules\Core\Classes\Views\FormBuilder;
-use Modules\Core\Classes\Views\ListTable;
 
 class Transaction extends BaseModel
 {
-
+    /**
+     * The table associated with the model.
+     * @var string
+     */
     protected $table = "kopokopo_transaction";
 
-    public $migrationDependancy = [];
+    /**
+     * List of tables names that are need in this model during migration.
+     * @var array<string>
+     */
+    public array $migrationDependancy = [];
 
+    /**
+     * The fields that can be filled
+     * @var array<string>
+     */
     protected $fillable = ['type', 'trans_id', 'passed_created_at', 'event_type', 'resource_id', 'link_self', 'link_resource', 'published'];
 
     /**
@@ -23,7 +34,7 @@ class Transaction extends BaseModel
      */
     protected $dates = ['created_at', 'updated_at', 'deleted_at'];
 
-    public function listTable()
+    public function listTable(): ListTable
     {
         // listing view fields
         $fields = new ListTable();
@@ -59,7 +70,7 @@ class Transaction extends BaseModel
 
     }
 
-    public function filter()
+    public function filter(): FormBuilder
     {
         // listing view fields
         $fields = new FormBuilder();
@@ -77,7 +88,7 @@ class Transaction extends BaseModel
 
     }
     /**
-     * List of fields for managing postings.
+     * List of fields to be migrated to the datebase when creating or updating model during migration.
      *
      * @param Blueprint $table
      * @return void

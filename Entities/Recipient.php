@@ -2,23 +2,32 @@
 
 namespace Modules\Kopokopo\Entities;
 
-use Modules\Base\Entities\BaseModel;
 use Illuminate\Database\Schema\Blueprint;
-
-use Modules\Core\Classes\Views\ListTable;
-use Modules\Core\Classes\Views\FormBuilder;
+use Modules\Base\Classes\Views\FormBuilder;
+use Modules\Base\Classes\Views\ListTable;
+use Modules\Base\Entities\BaseModel;
 
 class Recipient extends BaseModel
 {
-
+    /**
+     * The table associated with the model.
+     * @var string
+     */
     protected $table = "kopokopo_recipient";
 
-    public $migrationDependancy = [];
+    /**
+     * List of tables names that are need in this model during migration.
+     * @var array<string>
+     */
+    public array $migrationDependancy = [];
 
+    /**
+     * The fields that can be filled
+     * @var array<string>
+     */
     protected $fillable = [
-        'title','type', 'system_id', 'published'
+        'title', 'type', 'system_id', 'published',
     ];
-
 
     /**
      * The attributes that should be mutated to dates.
@@ -27,8 +36,8 @@ class Recipient extends BaseModel
      */
     protected $dates = ['created_at', 'updated_at', 'deleted_at'];
 
-
-    public function listTable(){
+    public function listTable(): ListTable
+    {
         // listing view fields
         $fields = new ListTable();
 
@@ -40,8 +49,9 @@ class Recipient extends BaseModel
         return $fields;
 
     }
-    
-    public function formBuilder(){
+
+    public function formBuilder(): FormBuilder
+    {
         // listing view fields
         $fields = new FormBuilder();
 
@@ -50,27 +60,25 @@ class Recipient extends BaseModel
         $fields->name('system_id')->type('text')->group('w-1/2');
         $fields->name('published')->type('switch')->group('w-1/2');
 
-
-
-
         return $fields;
 
     }
 
-    public function filter(){
+    public function filter(): FormBuilder
+    {
         // listing view fields
         $fields = new FormBuilder();
 
         $fields->name('title')->type('text')->group('w-1/6');
-        $fields->name('type')->type('text')->group('w-1/6');   
+        $fields->name('type')->type('text')->group('w-1/6');
         $fields->name('system_id')->type('text')->group('w-1/6');
-        $fields->name('published')->type('switch')->group('w-1/6'); 
+        $fields->name('published')->type('switch')->group('w-1/6');
 
         return $fields;
 
     }
     /**
-     * List of fields for managing postings.
+     * List of fields to be migrated to the datebase when creating or updating model during migration.
      *
      * @param Blueprint $table
      * @return void

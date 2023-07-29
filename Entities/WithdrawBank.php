@@ -3,17 +3,28 @@
 namespace Modules\Kopokopo\Entities;
 
 use Illuminate\Database\Schema\Blueprint;
+use Modules\Base\Classes\Views\FormBuilder;
+use Modules\Base\Classes\Views\ListTable;
 use Modules\Base\Entities\BaseModel;
-use Modules\Core\Classes\Views\FormBuilder;
-use Modules\Core\Classes\Views\ListTable;
 
 class WithdrawBank extends BaseModel
 {
-
+    /**
+     * The table associated with the model.
+     * @var string
+     */
     protected $table = "kopokopo_withdraw_bank";
 
-    public $migrationDependancy = [];
+    /**
+     * List of tables names that are need in this model during migration.
+     * @var array<string>
+     */
+    public array $migrationDependancy = [];
 
+    /**
+     * The fields that can be filled
+     * @var array<string>
+     */
     protected $fillable = ['account_name', 'bank_branch_ref', 'account_number', 'published'];
 
     /**
@@ -23,7 +34,7 @@ class WithdrawBank extends BaseModel
      */
     protected $dates = ['created_at', 'updated_at', 'deleted_at'];
 
-    public function listTable()
+    public function listTable(): ListTable
     {
         // listing view fields
         $fields = new ListTable();
@@ -51,7 +62,7 @@ class WithdrawBank extends BaseModel
 
     }
 
-    public function filter()
+    public function filter(): FormBuilder
     {
         // listing view fields
         $fields = new FormBuilder();
@@ -65,7 +76,7 @@ class WithdrawBank extends BaseModel
 
     }
     /**
-     * List of fields for managing postings.
+     * List of fields to be migrated to the datebase when creating or updating model during migration.
      *
      * @param Blueprint $table
      * @return void

@@ -2,20 +2,30 @@
 
 namespace Modules\Kopokopo\Entities;
 
-use Modules\Base\Entities\BaseModel;
 use Illuminate\Database\Schema\Blueprint;
-
-use Modules\Core\Classes\Views\ListTable;
-use Modules\Core\Classes\Views\FormBuilder;
+use Modules\Base\Classes\Views\FormBuilder;
+use Modules\Base\Classes\Views\ListTable;
+use Modules\Base\Entities\BaseModel;
 
 class Gateway extends BaseModel
 {
-
+    /**
+     * The table associated with the model.
+     * @var string
+     */
     protected $table = "kopokopo_gateway";
 
-    public $migrationDependancy = [];
+    /**
+     * List of tables names that are need in this model during migration.
+     * @var array<string>
+     */
+    public array $migrationDependancy = [];
 
-    protected $fillable = ['client_id',  'client_secret', 'api_key', 'base_url', 'published'];
+    /**
+     * The fields that can be filled
+     * @var array<string>
+     */
+    protected $fillable = ['client_id', 'client_secret', 'api_key', 'base_url', 'published'];
 
     /**
      * The attributes that should be mutated to dates.
@@ -24,8 +34,8 @@ class Gateway extends BaseModel
      */
     protected $dates = ['created_at', 'updated_at', 'deleted_at'];
 
-
-    public function listTable(){
+    public function listTable(): ListTable
+    {
         // listing view fields
         $fields = new ListTable();
 
@@ -38,11 +48,11 @@ class Gateway extends BaseModel
         return $fields;
 
     }
-    
-    public function formBuilder(){
+
+    public function formBuilder(): FormBuilder
+    {
         // listing view fields
         $fields = new FormBuilder();
-
 
         $fields->name('client_id')->type('text')->group('w-1/2');
         $fields->name('client_secret')->type('text')->group('w-1/2');
@@ -50,12 +60,12 @@ class Gateway extends BaseModel
         $fields->name('base_url')->type('text')->group('w-1/2');
         $fields->name('published')->type('switch')->group('w-1/2');
 
-
         return $fields;
 
     }
 
-    public function filter(){
+    public function filter(): FormBuilder
+    {
         // listing view fields
         $fields = new FormBuilder();
 
@@ -66,7 +76,7 @@ class Gateway extends BaseModel
 
     }
     /**
-     * List of fields for managing postings.
+     * List of fields to be migrated to the datebase when creating or updating model during migration.
      *
      * @param Blueprint $table
      * @return void
