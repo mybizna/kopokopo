@@ -11,18 +11,21 @@ class Recipient extends BaseModel
 {
     /**
      * The table associated with the model.
+     *
      * @var string
      */
     protected $table = "kopokopo_recipient";
 
     /**
      * List of tables names that are need in this model during migration.
+     *
      * @var array<string>
      */
     public array $migrationDependancy = [];
 
     /**
      * The fields that can be filled
+     *
      * @var array<string>
      */
     protected $fillable = [
@@ -32,10 +35,15 @@ class Recipient extends BaseModel
     /**
      * The attributes that should be mutated to dates.
      *
-     * @var array
+     * @var array <string>
      */
     protected $dates = ['created_at', 'updated_at', 'deleted_at'];
 
+    /**
+     * Function for defining list of fields in table view.
+     *
+     * @return ListTable
+     */
     public function listTable(): ListTable
     {
         // listing view fields
@@ -50,6 +58,11 @@ class Recipient extends BaseModel
 
     }
 
+    /**
+     * Function for defining list of fields in form view.
+     * 
+     * @return FormBuilder
+     */
     public function formBuilder(): FormBuilder
     {
         // listing view fields
@@ -64,6 +77,11 @@ class Recipient extends BaseModel
 
     }
 
+    /**
+     * Function for defining list of fields in form view.
+     * 
+     * @return FormBuilder
+     */
     public function filter(): FormBuilder
     {
         // listing view fields
@@ -83,7 +101,7 @@ class Recipient extends BaseModel
      * @param Blueprint $table
      * @return void
      */
-    public function migration(Blueprint $table)
+    public function migration(Blueprint $table): void
     {
         $table->increments('id');
         $table->string('title');
