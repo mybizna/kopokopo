@@ -11,21 +11,21 @@ class TransactionReversal extends BaseModel
 {
     /**
      * The table associated with the model.
-     * 
+     *
      * @var string
      */
     protected $table = "kopokopo_transaction_reversal";
 
     /**
      * List of tables names that are need in this model during migration.
-     * 
+     *
      * @var array<string>
      */
     public array $migrationDependancy = [];
 
     /**
      * The fields that can be filled
-     * 
+     *
      * @var array<string>
      */
     protected $fillable = [
@@ -35,6 +35,13 @@ class TransactionReversal extends BaseModel
         'sender_middle_name', 'sender_last_name', 'link_self', 'link_resource',
         'published',
     ];
+
+    /**
+     * The fields that are to be render when performing relationship queries.
+     *
+     * @var array<string>
+     */
+    public $rec_names = ['trans_id', 'amount'];
 
     /**
      * The attributes that should be mutated to dates.
@@ -73,7 +80,7 @@ class TransactionReversal extends BaseModel
 
     /**
      * Function for defining list of fields in form view.
-     * 
+     *
      * @return FormBuilder
      */
     public function formBuilder(): FormBuilder
@@ -105,7 +112,7 @@ class TransactionReversal extends BaseModel
 
     /**
      * Function for defining list of fields in filter view.
-     * 
+     *
      * @return FormBuilder
      */
     public function filter(): FormBuilder

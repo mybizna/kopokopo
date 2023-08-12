@@ -30,6 +30,15 @@ class Transaction extends BaseModel
      */
     protected $fillable = ['type', 'trans_id', 'passed_created_at', 'event_type', 'resource_id', 'link_self', 'link_resource', 'published'];
 
+
+    /**
+     * The fields that are to be render when performing relationship queries.
+     *
+     * @var array<string>
+     */
+    public $rec_names = ['trans_id'];
+    
+ 
     /**
      * The attributes that should be mutated to dates.
      *

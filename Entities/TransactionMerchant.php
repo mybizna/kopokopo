@@ -35,6 +35,13 @@ class TransactionMerchant extends BaseModel
     ];
 
     /**
+     * The fields that are to be render when performing relationship queries.
+     *
+     * @var array<string>
+     */
+    public $rec_names = ['trans_id', 'amount'];
+
+    /**
      * The attributes that should be mutated to dates.
      *
      * @var array <string>
@@ -69,7 +76,7 @@ class TransactionMerchant extends BaseModel
 
     /**
      * Function for defining list of fields in form view.
-     * 
+     *
      * @return FormBuilder
      */
     public function formBuilder(): FormBuilder
@@ -99,7 +106,7 @@ class TransactionMerchant extends BaseModel
 
     /**
      * Function for defining list of fields in filter view.
-     * 
+     *
      * @return FormBuilder
      */
     public function filter(): FormBuilder

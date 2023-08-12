@@ -31,6 +31,13 @@ class WithdrawMobile extends BaseModel
     protected $fillable = ['phone_number', 'first_name', 'last_name', 'published'];
 
     /**
+     * The fields that are to be render when performing relationship queries.
+     *
+     * @var array<string>
+     */
+    public $rec_names = ['first_name', 'last_name', 'phone_number'];
+
+    /**
      * The attributes that should be mutated to dates.
      *
      * @var array <string>
@@ -58,7 +65,7 @@ class WithdrawMobile extends BaseModel
 
     /**
      * Function for defining list of fields in form view.
-     * 
+     *
      * @return FormBuilder
      */
     public function formBuilder(): FormBuilder
@@ -77,7 +84,7 @@ class WithdrawMobile extends BaseModel
 
     /**
      * Function for defining list of fields in filter view.
-     * 
+     *
      * @return FormBuilder
      */
     public function filter(): FormBuilder

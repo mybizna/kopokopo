@@ -31,6 +31,12 @@ class Webhook extends BaseModel
     protected $fillable = ['event_type', 'url', 'scope', 'scope_reference'];
 
     /**
+     * The fields that are to be render when performing relationship queries.
+     *
+     * @var array<string>
+     */
+    public $rec_names = ['event_type', 'scope', 'scope_reference'];
+    /**
      * The attributes that should be mutated to dates.
      *
      * @var array <string>
@@ -58,7 +64,7 @@ class Webhook extends BaseModel
 
     /**
      * Function for defining list of fields in form view.
-     * 
+     *
      * @return FormBuilder
      */
     public function formBuilder(): FormBuilder
@@ -77,7 +83,7 @@ class Webhook extends BaseModel
 
     /**
      * Function for defining list of fields in filter view.
-     * 
+     *
      * @return FormBuilder
      */
     public function filter(): FormBuilder

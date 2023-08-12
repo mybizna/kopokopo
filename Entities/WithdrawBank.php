@@ -31,6 +31,13 @@ class WithdrawBank extends BaseModel
     protected $fillable = ['account_name', 'bank_branch_ref', 'account_number', 'published'];
 
     /**
+     * The fields that are to be render when performing relationship queries.
+     *
+     * @var array<string>
+     */
+    public $rec_names = ['account_name', 'account_number'];
+
+    /**
      * The attributes that should be mutated to dates.
      *
      * @var array <string>
@@ -58,7 +65,7 @@ class WithdrawBank extends BaseModel
 
     /**
      * Function for defining list of fields in form view.
-     * 
+     *
      * @return FormBuilder
      */
     public function formBuilder(): FormBuilder
@@ -77,7 +84,7 @@ class WithdrawBank extends BaseModel
 
     /**
      * Function for defining list of fields in filter view.
-     * 
+     *
      * @return FormBuilder
      */
     public function filter(): FormBuilder

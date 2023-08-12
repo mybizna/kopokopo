@@ -31,6 +31,13 @@ class Gateway extends BaseModel
     protected $fillable = ['client_id', 'client_secret', 'api_key', 'base_url', 'published'];
 
     /**
+     * The fields that are to be render when performing relationship queries.
+     *
+     * @var array<string>
+     */
+    public $rec_names = ['client_id'];
+
+    /**
      * The attributes that should be mutated to dates.
      *
      * @var array <string>
@@ -59,7 +66,7 @@ class Gateway extends BaseModel
 
     /**
      * Function for defining list of fields in form view.
-     * 
+     *
      * @return FormBuilder
      */
     public function formBuilder(): FormBuilder
@@ -79,7 +86,7 @@ class Gateway extends BaseModel
 
     /**
      * Function for defining list of fields in filter view.
-     * 
+     *
      * @return FormBuilder
      */
     public function filter(): FormBuilder

@@ -31,6 +31,13 @@ class Withdraw extends BaseModel
     protected $fillable = ['amount', 'currency', 'callback', 'destination_type', 'origination_time', 'destination_reference', 'transaction_reference', 'published'];
 
     /**
+     * The fields that are to be render when performing relationship queries.
+     *
+     * @var array<string>
+     */
+    public $rec_names = ['amount', 'transaction_reference'];
+
+    /**
      * The attributes that should be mutated to dates.
      *
      * @var array <string>
@@ -62,7 +69,7 @@ class Withdraw extends BaseModel
 
     /**
      * Function for defining list of fields in form view.
-     * 
+     *
      * @return FormBuilder
      */
     public function formBuilder(): FormBuilder
@@ -85,7 +92,7 @@ class Withdraw extends BaseModel
 
     /**
      * Function for defining list of fields in filter view.
-     * 
+     *
      * @return FormBuilder
      */
     public function filter(): FormBuilder

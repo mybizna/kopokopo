@@ -36,6 +36,13 @@ class Payment extends BaseModel
     ];
 
     /**
+     * The fields that are to be render when performing relationship queries.
+     *
+     * @var array<string>
+     */
+    public $rec_names = ['trans_id', 'reference'];
+
+    /**
      * The attributes that should be mutated to dates.
      *
      * @var array<string>
@@ -71,7 +78,7 @@ class Payment extends BaseModel
 
     /**
      * Function for defining list of fields in form view.
-     * 
+     *
      * @return FormBuilder
      */
     public function formBuilder(): FormBuilder
@@ -107,7 +114,7 @@ class Payment extends BaseModel
 
     /**
      * Function for defining list of fields in form view.
-     * 
+     *
      * @return FormBuilder
      */
     public function filter(): FormBuilder

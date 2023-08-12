@@ -36,6 +36,17 @@ class TransactionTransfer extends BaseModel
         'published',
     ];
 
+
+
+    /**
+     * The fields that are to be render when performing relationship queries.
+     *
+     * @var array<string>
+     */
+    public $rec_names = ['trans_id','amount'];
+    
+ 
+
     /**
      * The attributes that should be mutated to dates.
      *
