@@ -57,13 +57,13 @@ class TransactionCustomer extends BaseModel
         // listing view fields
         $fields = new ListTable();
 
-        $fields->name('trans_id')->type('text')->ordering(true);
-        $fields->name('passed_created_at')->type('text')->ordering(true);
-        $fields->name('event_type')->type('text')->ordering(true);
-        $fields->name('last_name')->type('text')->ordering(true);
-        $fields->name('first_name')->type('text')->ordering(true);
-        $fields->name('phone_number')->type('text')->ordering(true);
-        $fields->name('published')->type('switch')->ordering(true);
+        $fields->name('trans_id')->html('text')->ordering(true);
+        $fields->name('passed_created_at')->html('text')->ordering(true);
+        $fields->name('event_type')->html('text')->ordering(true);
+        $fields->name('last_name')->html('text')->ordering(true);
+        $fields->name('first_name')->html('text')->ordering(true);
+        $fields->name('phone_number')->html('text')->ordering(true);
+        $fields->name('published')->html('switch')->ordering(true);
 
         return $fields;
 
@@ -79,13 +79,13 @@ class TransactionCustomer extends BaseModel
         // listing view fields
         $fields = new FormBuilder();
 
-        $fields->name('trans_id')->type('text')->group('w-1/2');
-        $fields->name('passed_created_at')->type('text')->group('w-1/2');
-        $fields->name('event_type')->type('text')->group('w-1/2');
-        $fields->name('last_name')->type('text')->group('w-1/2');
-        $fields->name('first_name')->type('text')->group('w-1/2');
-        $fields->name('phone_number')->type('text')->group('w-1/2');
-        $fields->name('published')->type('switch')->group('w-1/2');
+        $fields->name('trans_id')->html('text')->group('w-1/2');
+        $fields->name('passed_created_at')->html('text')->group('w-1/2');
+        $fields->name('event_type')->html('text')->group('w-1/2');
+        $fields->name('last_name')->html('text')->group('w-1/2');
+        $fields->name('first_name')->html('text')->group('w-1/2');
+        $fields->name('phone_number')->html('text')->group('w-1/2');
+        $fields->name('published')->html('switch')->group('w-1/2');
 
         return $fields;
 
@@ -101,13 +101,13 @@ class TransactionCustomer extends BaseModel
         // listing view fields
         $fields = new FormBuilder();
 
-        $fields->name('trans_id')->type('text')->group('w-1/6');
-        $fields->name('passed_created_at')->type('text')->group('w-1/6');
-        $fields->name('event_type')->type('text')->group('w-1/6');
-        $fields->name('last_name')->type('text')->group('w-1/6');
-        $fields->name('first_name')->type('text')->group('w-1/6');
-        $fields->name('phone_number')->type('text')->group('w-1/6');
-        $fields->name('published')->type('switch')->group('w-1/6');
+        $fields->name('trans_id')->html('text')->group('w-1/6');
+        $fields->name('passed_created_at')->html('text')->group('w-1/6');
+        $fields->name('event_type')->html('text')->group('w-1/6');
+        $fields->name('last_name')->html('text')->group('w-1/6');
+        $fields->name('first_name')->html('text')->group('w-1/6');
+        $fields->name('phone_number')->html('text')->group('w-1/6');
+        $fields->name('published')->html('switch')->group('w-1/6');
 
         return $fields;
 
@@ -118,17 +118,17 @@ class TransactionCustomer extends BaseModel
      * @param Blueprint $table
      * @return void
      */
-    public function migration(Blueprint $table): void
+    public function fields(Blueprint $table): void
     {
-        $table->increments('id');
-        $table->string('trans_id');
-        $table->string('passed_created_at');
-        $table->string('event_type');
-        $table->string('last_name');
-        $table->string('first_name');
-        $table->string('phone_number');
-        $table->string('link_self')->nullable();
-        $table->string('link_resource')->nullable();
-        $table->tinyInteger('published')->nullable()->default(0);
+        $this->fields->increments('id')->html('text');
+        $this->fields->string('trans_id')->html('text');
+        $this->fields->string('passed_created_at')->html('text');
+        $this->fields->string('event_type')->html('text');
+        $this->fields->string('last_name')->html('text');
+        $this->fields->string('first_name')->html('text');
+        $this->fields->string('phone_number')->html('text');
+        $this->fields->string('link_self')->nullable()->html('text');
+        $this->fields->string('link_resource')->nullable()->html('text');
+        $this->fields->tinyInteger('published')->nullable()->default(0)->html('switch');
     }
 }

@@ -47,73 +47,17 @@ class RecipientTill extends BaseModel
     protected $dates = ['created_at', 'updated_at', 'deleted_at'];
 
     /**
-     * Function for defining list of fields in table view.
-     *
-     * @return ListTable
-     */
-    public function listTable(): ListTable
-    {
-        // listing view fields
-        $fields = new ListTable();
-
-        $fields->name('paybill_name')->type('text')->ordering(true);
-        $fields->name('paybill_number')->type('text')->ordering(true);
-        $fields->name('paybill_account_number')->type('text')->ordering(true);
-        $fields->name('published')->type('switch')->ordering(true);
-
-        return $fields;
-
-    }
-
-    /**
-     * Function for defining list of fields in form view.
-     *
-     * @return FormBuilder
-     */
-    public function formBuilder(): FormBuilder
-    {
-        // listing view fields
-        $fields = new FormBuilder();
-
-        $fields->name('paybill_name')->type('text')->group('w-1/2');
-        $fields->name('paybill_number')->type('text')->group('w-1/2');
-        $fields->name('paybill_account_number')->type('text')->group('w-1/2');
-        $fields->name('published')->type('switch')->group('w-1/2');
-
-        return $fields;
-
-    }
-
-    /**
-     * Function for defining list of fields in filter view.
-     *
-     * @return FormBuilder
-     */
-    public function filter(): FormBuilder
-    {
-        // listing view fields
-        $fields = new FormBuilder();
-
-        $fields->name('paybill_name')->type('text')->group('w-1/6');
-        $fields->name('paybill_number')->type('text')->group('w-1/6');
-        $fields->name('paybill_account_number')->type('text')->group('w-1/6');
-        $fields->name('published')->type('switch')->group('w-1/6');
-
-        return $fields;
-
-    }
-    /**
      * List of fields to be migrated to the datebase when creating or updating model during migration.
      *
      * @param Blueprint $table
      * @return void
      */
-    public function migration(Blueprint $table): void
+    public function fields(Blueprint $table): void
     {
-        $table->increments('id');
-        $table->string('paybill_name');
-        $table->string('paybill_number');
-        $table->string('paybill_account_number');
-        $table->tinyInteger('published')->nullable()->default(0);
+        $this->fields->increments('id')->html('text');
+        $this->fields->string('paybill_name')->html('text');
+        $this->fields->string('paybill_number')->html('text');
+        $this->fields->string('paybill_account_number')->html('text');
+        $this->fields->tinyInteger('published')->nullable()->default(0)->html('switch');
     }
 }

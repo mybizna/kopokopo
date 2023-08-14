@@ -3,8 +3,6 @@
 namespace Modules\Kopokopo\Entities;
 
 use Illuminate\Database\Schema\Blueprint;
-use Modules\Base\Classes\Views\FormBuilder;
-use Modules\Base\Classes\Views\ListTable;
 use Modules\Base\Entities\BaseModel;
 
 class RecipientMobile extends BaseModel
@@ -47,80 +45,19 @@ class RecipientMobile extends BaseModel
     protected $dates = ['created_at', 'updated_at', 'deleted_at'];
 
     /**
-     * Function for defining list of fields in table view.
-     *
-     * @return ListTable
-     */
-    public function listTable(): ListTable
-    {
-        // listing view fields
-        $fields = new ListTable();
-
-        $fields->name('first_name')->type('text')->ordering(true);
-        $fields->name('last_name')->type('text')->ordering(true);
-        $fields->name('email')->type('email')->ordering(true);
-        $fields->name('phone_number')->type('text')->ordering(true);
-        $fields->name('network')->type('text')->ordering(true);
-        $fields->name('published')->type('switch')->ordering(true);
-
-        return $fields;
-
-    }
-
-    /**
-     * Function for defining list of fields in form view.
-     *
-     * @return FormBuilder
-     */
-    public function formBuilder(): FormBuilder
-    {
-        // listing view fields
-        $fields = new FormBuilder();
-
-        $fields->name('first_name')->type('text')->group('w-1/2');
-        $fields->name('last_name')->type('text')->group('w-1/2');
-        $fields->name('email')->type('email')->group('w-1/2');
-        $fields->name('phone_number')->type('text')->group('w-1/2');
-        $fields->name('network')->type('text')->group('w-1/2');
-        $fields->name('published')->type('switch')->group('w-1/2');
-
-        return $fields;
-
-    }
-
-    /**
-     * Function for defining list of fields in filter view.
-     *
-     * @return FormBuilder
-     */
-    public function filter(): FormBuilder
-    {
-        // listing view fields
-        $fields = new FormBuilder();
-
-        $fields->name('first_name')->type('text')->group('w-1/6');
-        $fields->name('last_name')->type('text')->group('w-1/6');
-        $fields->name('email')->type('email')->group('w-1/6');
-        $fields->name('network')->type('text')->group('w-1/6');
-        $fields->name('published')->type('switch')->group('w-1/6');
-
-        return $fields;
-
-    }
-    /**
      * List of fields to be migrated to the datebase when creating or updating model during migration.
      *
      * @param Blueprint $table
      * @return void
      */
-    public function migration(Blueprint $table): void
+    public function fields(Blueprint $table): void
     {
-        $table->increments('id');
-        $table->string('first_name');
-        $table->string('last_name');
-        $table->string('email');
-        $table->string('phone_number');
-        $table->string('network');
-        $table->tinyInteger('published')->nullable()->default(0);
+        $this->fields->increments('id')->html('text');
+        $this->fields->string('first_name')->html('text');
+        $this->fields->string('last_name')->html('text');
+        $this->fields->string('email')->html('email');
+        $this->fields->string('phone_number')->html('text');
+        $this->fields->string('network')->html('text');
+        $this->fields->tinyInteger('published')->nullable()->default(0)->html('switch');
     }
 }

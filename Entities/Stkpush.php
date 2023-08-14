@@ -3,8 +3,6 @@
 namespace Modules\Kopokopo\Entities;
 
 use Illuminate\Database\Schema\Blueprint;
-use Modules\Base\Classes\Views\FormBuilder;
-use Modules\Base\Classes\Views\ListTable;
 use Modules\Base\Entities\BaseModel;
 
 class Stkpush extends BaseModel
@@ -49,103 +47,28 @@ class Stkpush extends BaseModel
     protected $dates = ['created_at', 'updated_at', 'deleted_at'];
 
     /**
-     * Function for defining list of fields in table view.
-     *
-     * @return ListTable
-     */
-    public function listTable(): ListTable
-    {
-        // listing view fields
-        $fields = new ListTable();
-
-        $fields->name('payment_channel')->type('text')->ordering(true);
-        $fields->name('phone_number')->type('text')->ordering(true);
-        $fields->name('currency')->type('text')->ordering(true);
-        $fields->name('amount')->type('text')->ordering(true);
-        $fields->name('till_number')->type('text')->ordering(true);
-        $fields->name('first_name')->type('text')->ordering(true);
-        $fields->name('last_name')->type('text')->ordering(true);
-        $fields->name('email')->type('text')->ordering(true);
-        $fields->name('callback')->type('text')->ordering(true);
-        $fields->name('published')->type('switch')->ordering(true);
-
-        return $fields;
-
-    }
-
-    /**
-     * Function for defining list of fields in form view.
-     *
-     * @return FormBuilder
-     */
-    public function formBuilder(): FormBuilder
-    {
-        // listing view fields
-        $fields = new FormBuilder();
-
-        $fields->name('payment_channel')->type('text')->group('w-1/2');
-        $fields->name('phone_number')->type('text')->group('w-1/2');
-        $fields->name('currency')->type('text')->group('w-1/2');
-        $fields->name('amount')->type('text')->group('w-1/2');
-        $fields->name('till_number')->type('text')->group('w-1/2');
-        $fields->name('first_name')->type('text')->group('w-1/2');
-        $fields->name('last_name')->type('text')->group('w-1/2');
-        $fields->name('email')->type('text')->group('w-1/2');
-        $fields->name('callback')->type('text')->group('w-1/2');
-        $fields->name('published')->type('switch')->group('w-1/2');
-        $fields->name('customer_id')->type('text')->group('w-1/2');
-        $fields->name('reference')->type('text')->group('w-1/2');
-        $fields->name('notes')->type('text')->group('w-1/2');
-        $fields->name('link_self')->type('text')->group('w-1/2');
-        $fields->name('link_resource')->type('text')->group('w-1/2');
-
-        return $fields;
-
-    }
-
-    /**
-     * Function for defining list of fields in filter view.
-     *
-     * @return FormBuilder
-     */
-    public function filter(): FormBuilder
-    {
-        // listing view fields
-        $fields = new FormBuilder();
-
-        $fields->name('payment_channel')->type('text')->group('w-1/6');
-        $fields->name('phone_number')->type('text')->group('w-1/6');
-        $fields->name('currency')->type('text')->group('w-1/6');
-        $fields->name('amount')->type('text')->group('w-1/6');
-        $fields->name('till_number')->type('text')->group('w-1/6');
-        $fields->name('published')->type('switch')->group('w-1/6');
-
-        return $fields;
-
-    }
-    /**
      * List of fields to be migrated to the datebase when creating or updating model during migration.
      *
      * @param Blueprint $table
      * @return void
      */
-    public function migration(Blueprint $table): void
+    public function fields(Blueprint $table): void
     {
-        $table->increments('id');
-        $table->string('payment_channel');
-        $table->string('phone_number');
-        $table->string('currency');
-        $table->string('amount');
-        $table->string('till_number');
-        $table->string('first_name')->nullable();
-        $table->string('last_name')->nullable();
-        $table->string('email')->nullable();
-        $table->string('callback')->nullable();
-        $table->string('customer_id')->nullable();
-        $table->string('reference')->nullable();
-        $table->string('notes')->nullable();
-        $table->string('link_self')->nullable();
-        $table->string('link_resource')->nullable();
-        $table->tinyInteger('published')->nullable()->default(0);
+        $this->fields->increments('id')->html('text');
+        $this->fields->string('payment_channel')->html('text');
+        $this->fields->string('phone_number')->html('text');
+        $this->fields->string('currency')->html('text');
+        $this->fields->string('amount')->html('text');
+        $this->fields->string('till_number')->html('text');
+        $this->fields->string('first_name')->nullable()->html('text');
+        $this->fields->string('last_name')->nullable()->html('text');
+        $this->fields->string('email')->nullable()->html('text');
+        $this->fields->string('callback')->nullable()->html('text');
+        $this->fields->string('customer_id')->nullable()->html('text');
+        $this->fields->string('reference')->nullable()->html('text');
+        $this->fields->string('notes')->nullable()->html('text');
+        $this->fields->string('link_self')->nullable()->html('text');
+        $this->fields->string('link_resource')->nullable()->html('text');
+        $this->fields->tinyInteger('published')->nullable()->default(0)->html('switch');
     }
 }

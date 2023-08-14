@@ -48,105 +48,27 @@ class TransactionMerchant extends BaseModel
      */
     protected $dates = ['created_at', 'updated_at', 'deleted_at'];
 
-    /**
-     * Function for defining list of fields in table view.
-     *
-     * @return ListTable
-     */
-    public function listTable(): ListTable
-    {
-        // listing view fields
-        $fields = new ListTable();
 
-        $fields->name('trans_id')->type('text')->ordering(true);
-        $fields->name('passed_created_at')->type('text')->ordering(true);
-        $fields->name('event_type')->type('text')->ordering(true);
-        $fields->name('status')->type('text')->ordering(true);
-        $fields->name('reference')->type('text')->ordering(true);
-        $fields->name('origination_time')->type('text')->ordering(true);
-        $fields->name('amount')->type('text')->ordering(true);
-        $fields->name('currency')->type('text')->ordering(true);
-        $fields->name('sending_till')->type('text')->ordering(true);
-        $fields->name('till_number')->type('text')->ordering(true);
-        $fields->name('published')->type('switch')->ordering(true);
-
-        return $fields;
-
-    }
-
-    /**
-     * Function for defining list of fields in form view.
-     *
-     * @return FormBuilder
-     */
-    public function formBuilder(): FormBuilder
-    {
-        // listing view fields
-        $fields = new FormBuilder();
-
-        $fields->name('trans_id')->type('text')->group('w-1/2');
-        $fields->name('passed_created_at')->type('text')->group('w-1/2');
-        $fields->name('event_type')->type('text')->group('w-1/2');
-        $fields->name('status')->type('text')->group('w-1/2');
-        $fields->name('reference')->type('text')->group('w-1/2');
-        $fields->name('origination_time')->type('text')->group('w-1/2');
-        $fields->name('amount')->type('text')->group('w-1/2');
-        $fields->name('currency')->type('text')->group('w-1/2');
-        $fields->name('sending_till')->type('text')->group('w-1/2');
-        $fields->name('till_number')->type('text')->group('w-1/2');
-        $fields->name('published')->type('switch')->group('w-1/2');
-        $fields->name('system_str')->type('text')->group('w-1/2');
-        $fields->name('link_self')->type('text')->group('w-1/2');
-        $fields->name('link_resource')->type('text')->group('w-1/2');
-        $fields->name('published')->type('switch')->group('w-1/2');
-
-        return $fields;
-
-    }
-
-    /**
-     * Function for defining list of fields in filter view.
-     *
-     * @return FormBuilder
-     */
-    public function filter(): FormBuilder
-    {
-        // listing view fields
-        $fields = new FormBuilder();
-
-        $fields->name('trans_id')->type('text')->group('w-1/6');
-        $fields->name('passed_created_at')->type('text')->group('w-1/6');
-        $fields->name('event_type')->type('text')->group('w-1/6');
-        $fields->name('status')->type('text')->group('w-1/6');
-        $fields->name('amount')->type('text')->group('w-1/6');
-        $fields->name('currency')->type('text')->group('w-1/6');
-        $fields->name('sending_till')->type('text')->group('w-1/6');
-        $fields->name('till_number')->type('text')->group('w-1/6');
-        $fields->name('published')->type('switch')->group('w-1/6');
-
-        return $fields;
-
-    }
     /**
      * List of fields to be migrated to the datebase when creating or updating model during migration.
      *
      * @param Blueprint $table
      * @return void
      */
-    public function migration(Blueprint $table): void
+    public function fields(Blueprint $table): void
     {
-        $table->increments('id');
-        $table->string('trans_id');
-        $table->string('passed_created_at');
-        $table->string('event_type');
-        $table->string('resource_id');
-        $table->string('status');
-        $table->string('origination_time');
-        $table->string('amount');
-        $table->string('currency');
-        $table->string('sending_merchant')->nullable();
-        $table->string('link_self')->nullable();
-        $table->string('link_resource')->nullable();
-        $table->tinyInteger('published')->nullable()->default(0);
+        $this->fields->increments('id')->html('text');
+        $this->fields->string('trans_id')->html('text');
+        $this->fields->string('passed_created_at')->html('text');
+        $this->fields->string('event_type')->html('text');
+        $this->fields->string('resource_id')->html('text');
+        $this->fields->string('status')->html('text');
+        $this->fields->string('origination_time')->html('text');
+        $this->fields->string('amount')->html('text');
+        $this->fields->string('currency')->html('text');
+        $this->fields->string('sending_merchant')->nullable()->html('text');
+        $this->fields->string('link_self')->nullable()->html('text');
+        $this->fields->string('link_resource')->nullable()->html('text');
+        $this->fields->tinyInteger('published')->nullable()->default(0)->html('switch');
     }
 }
