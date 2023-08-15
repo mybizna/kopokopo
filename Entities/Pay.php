@@ -51,10 +51,10 @@ class Pay extends BaseModel
      * @param Blueprint $table
      * @return void
      */
-    public function fields(Blueprint $table): void
+    public function fields(Blueprint $table = null): void
     {
         $this->fields = $table ?? new Blueprint($this->table);
-        
+
         $this->fields->string('category')->html('text');
         $this->fields->string('tags')->html('text');
         $this->fields->string('callback')->html('text');
@@ -65,5 +65,18 @@ class Pay extends BaseModel
         $this->fields->string('transaction_reference')->nullable()->html('text');
         $this->fields->tinyInteger('completed')->nullable()->default(0)->html('switch');
         $this->fields->tinyInteger('successful')->nullable()->default(0)->html('switch');
+    }
+
+    /**
+     * List of structure for this model.
+     */
+    public function structure($structure): array
+    {
+        $structure = [
+            'table' => ['category', 'tags', 'status', 'origination_time', 'transaction_reference', 'completed', 'successful'],
+            'filter' => ['category', 'status', 'transaction_reference', 'completed', 'successful'],
+        ];
+
+        return $structure;
     }
 }

@@ -47,15 +47,28 @@ class Webhook extends BaseModel
      * @param Blueprint $table
      * @return void
      */
-    public function fields(Blueprint $table): void
+    public function fields(Blueprint $table = null): void
     {
         $this->fields = $table ?? new Blueprint($this->table);
-        
+
         $this->fields->increments('id')->html('text');
         $this->fields->enum('event_type', ['buygoods_transaction_received', 'buygoods_transaction_reversed', 'b2b_transaction_received', 'm2m_transaction_received', 'settlement_transfer_completed', 'customer_created'])->default('buygoods_transaction_received')->nullable()->html('select');
         $this->fields->string('url')->html('text');
         $this->fields->string('scope')->html('text');
         $this->fields->string('scope_reference')->html('text');
         $this->fields->tinyInteger('published')->nullable()->default(0)->html('switch');
+    }
+
+    /**
+     * List of structure for this model.
+     */
+    public function structure($structure): array
+    {
+        $structure = [
+            'table' => ['event_type', 'url', 'scope', 'scope_reference'],
+            'filter' => ['event_type', 'scope', 'scope_reference'],
+        ];
+
+        return $structure;
     }
 }

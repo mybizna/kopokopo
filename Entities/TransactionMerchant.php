@@ -3,8 +3,6 @@
 namespace Modules\Kopokopo\Entities;
 
 use Illuminate\Database\Schema\Blueprint;
-use Modules\Base\Classes\Views\FormBuilder;
-use Modules\Base\Classes\Views\ListTable;
 use Modules\Base\Entities\BaseModel;
 
 class TransactionMerchant extends BaseModel
@@ -48,17 +46,16 @@ class TransactionMerchant extends BaseModel
      */
     protected $dates = ['created_at', 'updated_at', 'deleted_at'];
 
-
     /**
      * List of fields to be migrated to the datebase when creating or updating model during migration.
      *
      * @param Blueprint $table
      * @return void
      */
-    public function fields(Blueprint $table): void
+    public function fields(Blueprint $table = null): void
     {
         $this->fields = $table ?? new Blueprint($this->table);
-        
+
         $this->fields->increments('id')->html('text');
         $this->fields->string('trans_id')->html('text');
         $this->fields->string('passed_created_at')->html('text');
@@ -72,5 +69,18 @@ class TransactionMerchant extends BaseModel
         $this->fields->string('link_self')->nullable()->html('text');
         $this->fields->string('link_resource')->nullable()->html('text');
         $this->fields->tinyInteger('published')->nullable()->default(0)->html('switch');
+    }
+
+    /**
+     * List of structure for this model.
+     */
+    public function structure($structure): array
+    {
+        $structure = [
+            'table' => ['trans_id', 'passed_created_at', 'resource_id', 'status', 'reference', 'amount', 'currency', 'till_number', 'published'],
+            'filter' => ['trans_id', 'passed_created_at', 'resource_id', 'status'],
+        ];
+
+        return $structure;
     }
 }

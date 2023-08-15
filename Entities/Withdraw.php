@@ -48,10 +48,10 @@ class Withdraw extends BaseModel
      * @param Blueprint $table
      * @return void
      */
-    public function fields(Blueprint $table): void
+    public function fields(Blueprint $table = null): void
     {
         $this->fields = $table ?? new Blueprint($this->table);
-        
+
         $this->fields->increments('id')->html('text');
         $this->fields->string('amount')->html('text');
         $this->fields->string('currency')->html('text');
@@ -61,5 +61,18 @@ class Withdraw extends BaseModel
         $this->fields->string('destination_reference')->nullable()->html('text');
         $this->fields->string('transaction_reference')->nullable()->html('text');
         $this->fields->tinyInteger('published')->nullable()->default(0)->html('switch');
+    }
+
+    /**
+     * List of structure for this model.
+     */
+    public function structure($structure): array
+    {
+        $structure = [
+            'table' => ['amount', 'currency', 'destination_type', 'origination_time', 'destination_reference', 'transaction_reference', 'published'],
+            'filter' => ['amount', 'destination_reference', 'published'],
+        ];
+
+        return $structure;
     }
 }

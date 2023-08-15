@@ -54,10 +54,10 @@ class TransactionTransfer extends BaseModel
      * @param Blueprint $table
      * @return void
      */
-    public function fields(Blueprint $table): void
+    public function fields(Blueprint $table = null): void
     {
         $this->fields = $table ?? new Blueprint($this->table);
-        
+
         $this->fields->increments('id')->html('text');
         $this->fields->string('trans_id')->html('text');
         $this->fields->string('passed_created_at')->html('text');
@@ -76,6 +76,19 @@ class TransactionTransfer extends BaseModel
         $this->fields->string('link_self')->nullable()->html('text');
         $this->fields->string('link_resource')->nullable()->html('text');
         $this->fields->tinyInteger('published')->nullable()->default(0)->html('switch');
+    }
+
+    /**
+     * List of structure for this model.
+     */
+    public function structure($structure): array
+    {
+        $structure = [
+            'table' => ['trans_id', 'status', 'destination_type', 'destination_reference', 'account_name', 'account_number', 'bank_branch_ref', 'amount', 'currency', 'settlement_method', 'disbursements', 'published'],
+            'filter' => ['account_name', 'account_number', 'published'],
+        ];
+
+        return $structure;
     }
 
 }

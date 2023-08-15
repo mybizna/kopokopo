@@ -48,7 +48,7 @@ class WithdrawMobile extends BaseModel
      * @param Blueprint $table
      * @return void
      */
-    public function fields(Blueprint $table): void
+    public function fields(Blueprint $table = null): void
     {
         $this->fields = $table ?? new Blueprint($this->table);
         
@@ -57,5 +57,18 @@ class WithdrawMobile extends BaseModel
         $this->fields->string('first_name')->html('text');
         $this->fields->string('last_name')->html('text');
         $this->fields->tinyInteger('published')->nullable()->default(0)->html('switch');
+    }
+
+    /**
+     * List of structure for this model.
+     */
+    public function structure($structure): array
+    {
+        $structure = [
+            'table' => ['phone_number', 'first_name', 'last_name', 'published'],
+            'filter' => ['phone_number', 'first_name', 'last_name', 'published'],
+        ];
+
+        return $structure;
     }
 }

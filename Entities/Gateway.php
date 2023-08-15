@@ -48,7 +48,7 @@ class Gateway extends BaseModel
      * @param Blueprint $table
      * @return void
      */
-    public function fields(Blueprint $table): void
+    public function fields(Blueprint $table = null): void
     {
         $this->fields = $table ?? new Blueprint($this->table);
         
@@ -58,5 +58,18 @@ class Gateway extends BaseModel
         $this->fields->string('api_key')->html('text');
         $this->fields->string('base_url')->html('text');
         $this->fields->tinyInteger('published')->nullable()->default(0)->html('switch');
+    }
+
+    /**
+     * List of structure for this model.
+     */
+    public function structure($structure): array
+    {
+        $structure = [
+            'table' => ['client_id', 'client_secret', 'api_key', 'base_url', 'published'],
+            'filter' => ['client_id', 'client_secret', 'api_key', 'base_url', 'published'],
+        ];
+
+        return $structure;
     }
 }

@@ -50,7 +50,7 @@ class RecipientBank extends BaseModel
      * @param Blueprint $table
      * @return void
      */
-    public function fields(Blueprint $table): void
+    public function fields(Blueprint $table = null): void
     {
         $this->fields = $table ?? new Blueprint($this->table);
         
@@ -59,5 +59,18 @@ class RecipientBank extends BaseModel
         $this->fields->string('account_number')->html('text');
         $this->fields->string('settlement_method')->html('text');
         $this->fields->tinyInteger('published')->nullable()->default(0)->html('switch');
+    }
+
+    /**
+     * List of structure for this model.
+     */
+    public function structure($structure): array
+    {
+        $structure = [
+            'table' => ['account_name', 'account_number', 'settlement_method', 'published',],
+            'filter' => ['account_name', 'account_number', 'published',],
+        ];
+
+        return $structure;
     }
 }

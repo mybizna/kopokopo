@@ -50,7 +50,7 @@ class Recipient extends BaseModel
      * @param Blueprint $table
      * @return void
      */
-    public function fields(Blueprint $table): void
+    public function fields(Blueprint $table = null): void
     {
         $this->fields = $table ?? new Blueprint($this->table);
         
@@ -59,5 +59,18 @@ class Recipient extends BaseModel
         $this->fields->string('system_id')->html('text');
         $this->fields->string('type')->html('text');
         $this->fields->tinyInteger('published')->nullable()->default(0)->html('switch');
+    }
+
+    /**
+     * List of structure for this model.
+     */
+    public function structure($structure): array
+    {
+        $structure = [
+            'table' => ['title', 'type', 'system_id', 'published',],
+            'filter' => ['title', 'system_id', 'published',],
+        ];
+
+        return $structure;
     }
 }

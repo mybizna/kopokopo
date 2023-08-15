@@ -51,13 +51,26 @@ class RecipientPaybill extends BaseModel
      *
      * @return void
      */
-    public function fields(Blueprint $table): void
+    public function fields(Blueprint $table = null): void
     {
         $this->fields = $table ?? new Blueprint($this->table);
-        
+
         $this->fields->increments('id')->html('text');
         $this->fields->string('till_number')->html('text');
         $this->fields->string('till_name')->html('text');
         $this->fields->tinyInteger('published')->nullable()->default(0)->html('switch');
+    }
+
+    /**
+     * List of structure for this model.
+     */
+    public function structure($structure): array
+    {
+        $structure = [
+            'table' => ['till_number', 'till_name', 'published'],
+            'filter' => ['till_number', 'till_name', 'published'],
+        ];
+
+        return $structure;
     }
 }

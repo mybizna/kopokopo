@@ -52,10 +52,10 @@ class Stkpush extends BaseModel
      * @param Blueprint $table
      * @return void
      */
-    public function fields(Blueprint $table): void
+    public function fields(Blueprint $table = null): void
     {
         $this->fields = $table ?? new Blueprint($this->table);
-        
+
         $this->fields->increments('id')->html('text');
         $this->fields->string('payment_channel')->html('text');
         $this->fields->string('phone_number')->html('text');
@@ -72,5 +72,18 @@ class Stkpush extends BaseModel
         $this->fields->string('link_self')->nullable()->html('text');
         $this->fields->string('link_resource')->nullable()->html('text');
         $this->fields->tinyInteger('published')->nullable()->default(0)->html('switch');
+    }
+
+    /**
+     * List of structure for this model.
+     */
+    public function structure($structure): array
+    {
+        $structure = [
+            'table' => ['payment_channel', 'phone_number', 'currency', 'amount', 'till_number', 'first_name', 'last_name', 'email', 'published'],
+            'filter' => ['payment_channel', 'phone_number', 'email', 'published'],
+        ];
+
+        return $structure;
     }
 }
