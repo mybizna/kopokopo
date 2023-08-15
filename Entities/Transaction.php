@@ -52,8 +52,10 @@ class Transaction extends BaseModel
     {
         $this->fields = $table ?? new Blueprint($this->table);
 
+        $type = ['buygoods_transaction_received', 'buygoods_transaction_reversed', 'b2b_transaction_received', 'm2m_transaction_received', 'settlement_transfer_completed', 'customer_created'];
+
         $this->fields->increments('id')->html('text');
-        $this->fields->enum('type', ['buygoods_transaction_received', 'buygoods_transaction_reversed', 'b2b_transaction_received', 'm2m_transaction_received', 'settlement_transfer_completed', 'customer_created'])->default('buygoods_transaction_received')->nullable()->html('select');
+        $this->fields->enum('type', $type)->options($type)->default('buygoods_transaction_received')->nullable()->html('select');
         $this->fields->string('trans_id')->html('text');
         $this->fields->string('passed_created_at')->html('text');
         $this->fields->string('event_type')->html('text');
