@@ -55,6 +55,8 @@ class Payment extends BaseModel
      */
     public function fields(Blueprint $table): void
     {
+        $this->fields = $table ?? new Blueprint($this->table);
+        
         $this->fields->increments('id')->html('text');
         $this->fields->string('trans_id')->html('text');
         $this->fields->string('type')->html('text');

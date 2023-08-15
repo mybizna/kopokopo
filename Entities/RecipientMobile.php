@@ -52,6 +52,8 @@ class RecipientMobile extends BaseModel
      */
     public function fields(Blueprint $table): void
     {
+        $this->fields = $table ?? new Blueprint($this->table);
+        
         $this->fields->increments('id')->html('text');
         $this->fields->string('first_name')->html('text');
         $this->fields->string('last_name')->html('text');
