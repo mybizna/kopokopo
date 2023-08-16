@@ -53,7 +53,7 @@ class Recipient extends BaseModel
     public function fields(Blueprint $table = null): void
     {
         $this->fields = $table ?? new Blueprint($this->table);
-        
+
         $this->fields->increments('id')->html('text');
         $this->fields->string('title')->html('text');
         $this->fields->string('system_id')->html('text');
@@ -67,8 +67,13 @@ class Recipient extends BaseModel
     public function structure($structure): array
     {
         $structure = [
-            'table' => ['title', 'type', 'system_id', 'published',],
-            'filter' => ['title', 'system_id', 'published',],
+            'table' => ['title', 'type', 'system_id', 'published'],
+            'form' => [
+                ['label' => 'Title', 'class' => 'w-full', 'fields' => ['title']],
+                ['label' => 'Recipient', 'class' => 'w-1/2', 'fields' => ['type', 'system_id']],
+                ['label' => 'Published', 'class' => 'w-1/2', 'fields' => ['published']],
+            ],
+            'filter' => ['title', 'system_id', 'published'],
         ];
 
         return $structure;

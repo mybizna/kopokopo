@@ -72,8 +72,14 @@ class Pay extends BaseModel
      */
     public function structure($structure): array
     {
+
         $structure = [
             'table' => ['category', 'tags', 'status', 'origination_time', 'transaction_reference', 'completed', 'successful'],
+            'form' => [
+                ['label' => 'Main', 'class' => 'w-1/2', 'fields' => ['category', 'tags', 'callback', 'status', 'customer_id']],
+                ['label' => 'Other', 'class' => 'w-1/2', 'fields' => ['transaction_reference', 'origination_time', 'completed', 'successful']],
+                ['label' => 'Note', 'class' => 'w-full', 'fields' => ['note']],
+            ],
             'filter' => ['category', 'status', 'transaction_reference', 'completed', 'successful'],
         ];
 
