@@ -66,10 +66,8 @@ class RecipientTill extends BaseModel
      */
     public function structure($structure): array
     {
-        $structure = [
-            'table' => ['paybill_name', 'paybill_number', 'paybill_account_number', 'published'],
-            'filter' => ['paybill_name', 'paybill_number', 'paybill_account_number', 'published'],
-        ];
+        $structure['table'] = ['paybill_name', 'paybill_number', 'paybill_account_number', 'published'];
+        $structure['filter'] = ['paybill_name', 'paybill_number', 'paybill_account_number', 'published'];
 
         return $structure;
     }

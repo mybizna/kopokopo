@@ -51,7 +51,7 @@ class WithdrawMobile extends BaseModel
     public function fields(Blueprint $table = null): void
     {
         $this->fields = $table ?? new Blueprint($this->table);
-        
+
         $this->fields->increments('id')->html('text');
         $this->fields->string('phone_number')->html('text');
         $this->fields->string('first_name')->html('text');
@@ -64,10 +64,8 @@ class WithdrawMobile extends BaseModel
      */
     public function structure($structure): array
     {
-        $structure = [
-            'table' => ['phone_number', 'first_name', 'last_name', 'published'],
-            'filter' => ['phone_number', 'first_name', 'last_name', 'published'],
-        ];
+        $structure['table'] = ['phone_number', 'first_name', 'last_name', 'published'];
+        $structure['filter'] = ['phone_number', 'first_name', 'last_name', 'published'];
 
         return $structure;
     }

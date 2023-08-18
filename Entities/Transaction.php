@@ -70,10 +70,8 @@ class Transaction extends BaseModel
      */
     public function structure($structure): array
     {
-        $structure = [
-            'table' => ['type', 'trans_id', 'passed_created_at', 'event_type', 'resource_id', 'published'],
-            'filter' => ['type', 'trans_id', 'passed_created_at', 'event_type', 'resource_id', 'published'],
-        ];
+        $structure['table'] = ['type', 'trans_id', 'passed_created_at', 'event_type', 'resource_id', 'published'];
+        $structure['filter'] = ['type', 'trans_id', 'passed_created_at', 'event_type', 'resource_id', 'published'];
 
         return $structure;
     }

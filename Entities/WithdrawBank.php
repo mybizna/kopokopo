@@ -64,10 +64,8 @@ class WithdrawBank extends BaseModel
      */
     public function structure($structure): array
     {
-        $structure = [
-            'table' => ['account_name', 'bank_branch_ref', 'account_number', 'published'],
-            'filter' => ['account_name', 'bank_branch_ref', 'account_number', 'published'],
-        ];
+        $structure['table'] = ['account_name', 'bank_branch_ref', 'account_number', 'published'];
+        $structure['filter'] = ['account_name', 'bank_branch_ref', 'account_number', 'published'];
 
         return $structure;
     }

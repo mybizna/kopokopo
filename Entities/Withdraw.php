@@ -68,10 +68,8 @@ class Withdraw extends BaseModel
      */
     public function structure($structure): array
     {
-        $structure = [
-            'table' => ['amount', 'currency', 'destination_type', 'origination_time', 'destination_reference', 'transaction_reference', 'published'],
-            'filter' => ['amount', 'destination_reference', 'published'],
-        ];
+        $structure['table'] = ['amount', 'currency', 'destination_type', 'origination_time', 'destination_reference', 'transaction_reference', 'published'];
+        $structure['filter'] = ['amount', 'destination_reference', 'published'];
 
         return $structure;
     }

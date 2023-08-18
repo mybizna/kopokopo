@@ -66,15 +66,13 @@ class Recipient extends BaseModel
      */
     public function structure($structure): array
     {
-        $structure = [
-            'table' => ['title', 'type', 'system_id', 'published'],
-            'form' => [
-                ['label' => 'Title', 'class' => 'w-full', 'fields' => ['title']],
-                ['label' => 'Recipient', 'class' => 'w-1/2', 'fields' => ['type', 'system_id']],
-                ['label' => 'Published', 'class' => 'w-1/2', 'fields' => ['published']],
-            ],
-            'filter' => ['title', 'system_id', 'published'],
+        $structure['table'] = ['title', 'type', 'system_id', 'published'];
+        $structure['form'] = [
+            ['label' => 'Title', 'class' => 'col-span-full', 'fields' => ['title']],
+            ['label' => 'Recipient', 'class' => 'col-span-6', 'fields' => ['type', 'system_id']],
+            ['label' => 'Published', 'class' => 'col-span-6', 'fields' => ['published']],
         ];
+        $structure['filter'] = ['title', 'system_id', 'published'];
 
         return $structure;
     }

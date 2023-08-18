@@ -79,10 +79,8 @@ class TransactionB2b extends BaseModel
      */
     public function structure($structure): array
     {
-        $structure = [
-            'table' => ['trans_id', 'passed_created_at', 'event_type', 'status', 'reference', 'origination_time', 'amount', 'currency', 'sending_till', 'till_number', 'published'],
-            'filter' => ['status', 'till_number', 'published'],
-        ];
+        $structure['table'] = ['trans_id', 'passed_created_at', 'event_type', 'status', 'reference', 'origination_time', 'amount', 'currency', 'sending_till', 'till_number', 'published'];
+        $structure['filter'] = ['status', 'till_number', 'published'];
 
         return $structure;
     }

@@ -72,10 +72,8 @@ class TransactionCustomer extends BaseModel
      */
     public function structure($structure): array
     {
-        $structure = [
-            'table' => ['first_name', 'last_name', 'phone_number', 'trans_id', 'passed_created_at', 'event_type', 'published'],
-            'filter' => ['first_name', 'phone_number', 'published'],
-        ];
+        $structure['table'] = ['first_name', 'last_name', 'phone_number', 'trans_id', 'passed_created_at', 'event_type', 'published'];
+        $structure['filter'] = ['first_name', 'phone_number', 'published'];
 
         return $structure;
     }

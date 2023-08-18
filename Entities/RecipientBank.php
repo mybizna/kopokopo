@@ -53,7 +53,7 @@ class RecipientBank extends BaseModel
     public function fields(Blueprint $table = null): void
     {
         $this->fields = $table ?? new Blueprint($this->table);
-        
+
         $this->fields->increments('id')->html('text');
         $this->fields->string('account_name')->html('text');
         $this->fields->string('account_number')->html('text');
@@ -66,10 +66,8 @@ class RecipientBank extends BaseModel
      */
     public function structure($structure): array
     {
-        $structure = [
-            'table' => ['account_name', 'account_number', 'settlement_method', 'published',],
-            'filter' => ['account_name', 'account_number', 'published',],
-        ];
+        $structure['table'] = ['account_name', 'account_number', 'settlement_method', 'published'];
+        $structure['filter'] = ['account_name', 'account_number', 'published'];
 
         return $structure;
     }

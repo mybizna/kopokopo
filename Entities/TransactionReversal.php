@@ -85,10 +85,8 @@ class TransactionReversal extends BaseModel
      */
     public function structure($structure): array
     {
-        $structure = [
-            'table' => ['sender_first_name', 'sender_middle_name', 'sender_last_name', 'sender_phone_number', 'trans_id', 'status', 'reference', 'origination_time', 'amount', 'currency', 'till_number', 'published'],
-            'filter' => ['sender_first_name', 'sender_phone_number', 'published'],
-        ];
+        $structure['table'] = ['sender_first_name', 'sender_middle_name', 'sender_last_name', 'sender_phone_number', 'trans_id', 'status', 'reference', 'origination_time', 'amount', 'currency', 'till_number', 'published'];
+        $structure['filter'] = ['sender_first_name', 'sender_phone_number', 'published'];
 
         return $structure;
     }

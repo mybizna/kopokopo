@@ -83,10 +83,8 @@ class TransactionTransfer extends BaseModel
      */
     public function structure($structure): array
     {
-        $structure = [
-            'table' => ['trans_id', 'status', 'destination_type', 'destination_reference', 'account_name', 'account_number', 'bank_branch_ref', 'amount', 'currency', 'settlement_method', 'disbursements', 'published'],
-            'filter' => ['account_name', 'account_number', 'published'],
-        ];
+        $structure['table'] = ['trans_id', 'status', 'destination_type', 'destination_reference', 'account_name', 'account_number', 'bank_branch_ref', 'amount', 'currency', 'settlement_method', 'disbursements', 'published'];
+        $structure['filter'] = ['account_name', 'account_number', 'published'];
 
         return $structure;
     }

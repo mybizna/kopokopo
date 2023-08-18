@@ -79,10 +79,8 @@ class Stkpush extends BaseModel
      */
     public function structure($structure): array
     {
-        $structure = [
-            'table' => ['payment_channel', 'phone_number', 'currency', 'amount', 'till_number', 'first_name', 'last_name', 'email', 'published'],
-            'filter' => ['payment_channel', 'phone_number', 'email', 'published'],
-        ];
+        $structure['table'] = ['payment_channel', 'phone_number', 'currency', 'amount', 'till_number', 'first_name', 'last_name', 'email', 'published'];
+        $structure['filter'] = ['payment_channel', 'phone_number', 'email', 'published'];
 
         return $structure;
     }

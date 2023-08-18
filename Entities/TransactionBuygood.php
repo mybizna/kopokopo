@@ -85,10 +85,8 @@ class TransactionBuygood extends BaseModel
      */
     public function structure($structure): array
     {
-        $structure = [
-            'table' => ['sender_first_name', 'sender_middle_name', 'sender_last_name', 'sender_phone_number', 'trans_id', 'passed_created_at', 'status', 'amount', 'currency', 'till_number', 'published'],
-            'filter' => ['sender_phone_number', 'trans_id'],
-        ];
+        $structure['table'] = ['sender_first_name', 'sender_middle_name', 'sender_last_name', 'sender_phone_number', 'trans_id', 'passed_created_at', 'status', 'amount', 'currency', 'till_number', 'published'];
+        $structure['filter'] = ['sender_phone_number', 'trans_id'];
 
         return $structure;
     }

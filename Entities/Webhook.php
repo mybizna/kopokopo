@@ -66,10 +66,8 @@ class Webhook extends BaseModel
      */
     public function structure($structure): array
     {
-        $structure = [
-            'table' => ['event_type', 'url', 'scope', 'scope_reference'],
-            'filter' => ['event_type', 'scope', 'scope_reference'],
-        ];
+        $structure['table'] = ['event_type', 'url', 'scope', 'scope_reference'];
+        $structure['filter'] = ['event_type', 'scope', 'scope_reference'];
 
         return $structure;
     }

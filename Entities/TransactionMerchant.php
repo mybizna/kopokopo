@@ -76,10 +76,8 @@ class TransactionMerchant extends BaseModel
      */
     public function structure($structure): array
     {
-        $structure = [
-            'table' => ['trans_id', 'passed_created_at', 'resource_id', 'status', 'reference', 'amount', 'currency', 'till_number', 'published'],
-            'filter' => ['trans_id', 'passed_created_at', 'resource_id', 'status'],
-        ];
+        $structure['table'] = ['trans_id', 'passed_created_at', 'resource_id', 'status', 'reference', 'amount', 'currency', 'till_number', 'published'];
+        $structure['filter'] = ['trans_id', 'passed_created_at', 'resource_id', 'status'];
 
         return $structure;
     }
