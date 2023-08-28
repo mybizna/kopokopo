@@ -54,7 +54,7 @@ class RecipientBank extends BaseModel
     {
         $this->fields = $table ?? new Blueprint($this->table);
 
-        $this->fields->increments('id')->html('text');
+        $this->fields->increments('id')->html('hidden');
         $this->fields->string('account_name')->html('text');
         $this->fields->string('account_number')->html('text');
         $this->fields->string('settlement_method')->html('text');

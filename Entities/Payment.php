@@ -57,7 +57,7 @@ class Payment extends BaseModel
     {
         $this->fields = $table ?? new Blueprint($this->table);
 
-        $this->fields->increments('id')->html('text');
+        $this->fields->increments('id')->html('hidden');
         $this->fields->string('trans_id')->html('text');
         $this->fields->string('type')->html('text');
         $this->fields->string('event_type')->html('text');

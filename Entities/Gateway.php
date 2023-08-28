@@ -52,7 +52,7 @@ class Gateway extends BaseModel
     {
         $this->fields = $table ?? new Blueprint($this->table);
 
-        $this->fields->increments('id')->html('text');
+        $this->fields->increments('id')->html('hidden');
         $this->fields->string('client_id')->html('text');
         $this->fields->string('client_secret')->html('text');
         $this->fields->string('api_key')->html('text');

@@ -54,7 +54,7 @@ class RecipientTill extends BaseModel
     {
         $this->fields = $table ?? new Blueprint($this->table);
 
-        $this->fields->increments('id')->html('text');
+        $this->fields->increments('id')->html('hidden');
         $this->fields->string('paybill_name')->html('text');
         $this->fields->string('paybill_number')->html('text');
         $this->fields->string('paybill_account_number')->html('text');

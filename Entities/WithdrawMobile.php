@@ -52,7 +52,7 @@ class WithdrawMobile extends BaseModel
     {
         $this->fields = $table ?? new Blueprint($this->table);
 
-        $this->fields->increments('id')->html('text');
+        $this->fields->increments('id')->html('hidden');
         $this->fields->string('phone_number')->html('text');
         $this->fields->string('first_name')->html('text');
         $this->fields->string('last_name')->html('text');

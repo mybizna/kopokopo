@@ -52,7 +52,7 @@ class WithdrawBank extends BaseModel
     {
         $this->fields = $table ?? new Blueprint($this->table);
 
-        $this->fields->increments('id')->html('text');
+        $this->fields->increments('id')->html('hidden');
         $this->fields->string('account_name')->html('text');
         $this->fields->string('bank_branch_ref')->html('text');
         $this->fields->string('account_number')->html('text');

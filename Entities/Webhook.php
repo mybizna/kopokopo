@@ -53,7 +53,7 @@ class Webhook extends BaseModel
 
         $type = ['buygoods_transaction_received', 'buygoods_transaction_reversed', 'b2b_transaction_received', 'm2m_transaction_received', 'settlement_transfer_completed', 'customer_created'];
 
-        $this->fields->increments('id')->html('text');
+        $this->fields->increments('id')->html('hidden');
         $this->fields->enum('event_type', $type)->options($type)->default('buygoods_transaction_received')->nullable()->html('select');
         $this->fields->string('url')->html('text');
         $this->fields->string('scope')->html('text');

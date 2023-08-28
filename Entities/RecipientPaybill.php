@@ -55,7 +55,7 @@ class RecipientPaybill extends BaseModel
     {
         $this->fields = $table ?? new Blueprint($this->table);
 
-        $this->fields->increments('id')->html('text');
+        $this->fields->increments('id')->html('hidden');
         $this->fields->string('till_number')->html('text');
         $this->fields->string('till_name')->html('text');
         $this->fields->tinyInteger('published')->nullable()->default(0)->html('switch');
