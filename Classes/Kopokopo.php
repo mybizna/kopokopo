@@ -2,6 +2,7 @@
 
 namespace Modules\Kopokopo\Classes;
 
+use Kopokopo\SDK\K2;
 use Modules\Kopokopo\Entities\Stkpush;
 use Modules\Kopokopo\Entities\Transaction;
 use Modules\Kopokopo\Entities\TransactionB2b;
@@ -12,11 +13,20 @@ use Modules\Kopokopo\Entities\Withdraw;
 
 class Kopokopo
 {
+
     public function simulate($data)
     {
         $result = [];
         return response()->json($result);
     }
+
+    public function stkpushprocessed($data)
+    {
+        $result = Stkpush::create($data);
+
+        return response()->json($result);
+    }
+
 
     public function stkpush($data)
     {
