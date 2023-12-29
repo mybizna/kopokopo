@@ -18,12 +18,12 @@
   "repositories": [
     {
       "type": "vcs",
-      "url": "https://github.com/dedanirungu/k2-connect-php.git"
+      "url": "https://github.com/dedanirungu/k2-connect-php"
     }
   ],
   "require": {
     "mybizna/core": ">=23.06.0",
-    "dedanirungu/k2-connect-php": "master"
+    "dedanirungu/k2-connect-php": "dev-master"
   },
   "extra": {
     "laravel": {
