@@ -10,7 +10,7 @@ use Modules\Account\Entities\Transaction;
 use Modules\Kopokopo\Entities\Payment as Kopokopopayment;
 use Modules\Kopokopo\Entities\Transaction as Kopokopotransaction;
 
-class Kopokopo
+class KopokopoOld
 {
     public function paymentKopokopoCancel(Request $request)
     {
