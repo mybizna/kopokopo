@@ -23,7 +23,7 @@
   ],
   "require": {
     "mybizna/core": ">=23.06.0",
-    "dedanirungu/k2-connect-php": "dev-master"
+    "kopokopo/k2-connect-php": "dev-master"
   },
   "extra": {
     "laravel": {
