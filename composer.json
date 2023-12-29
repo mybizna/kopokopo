@@ -15,9 +15,15 @@
       "email": "dedanirungu@gmail.com"
     }
   ],
+  "repositories": [
+    {
+      "type": "git",
+      "url": "https://github.com/dedanirungu/k2-connect-php.git"
+    }
+  ],
   "require": {
     "mybizna/core": ">=23.06.0",
-    "kopokopo/k2-connect-php": ">=v1.2.0"
+    "kopokopo/k2-connect-php": "dev-development"
   },
   "extra": {
     "laravel": {
