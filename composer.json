@@ -15,19 +15,13 @@
       "email": "dedanirungu@gmail.com"
     }
   ],
-  "repositories": [
-    {
-      "type": "vcs",
-      "url": "git@github.com:dedanirungu/k2-connect-php.git"
-    }
-  ],
   "require": {
     "mybizna/core": ">=23.06.0",
     "dedanirungu/k2-connect-php": "dev-master"
   },
   "extra": {
     "laravel": {
-      "providers": [],
+      "providers": [], 
       "aliases": {}
     }
   },
