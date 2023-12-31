@@ -14,7 +14,10 @@ class KopokopoAPI
     public function __construct()
     {
 
-        Config::set('database.connections.freeradius.driver', 'mysql');
+        $is_sandbox = Config::set('kopokopo.is_sandbox', true);
+        $client_id = Config::set('kopokopo.client_id', true);
+        $client_secret = Config::set('kopokopo.client_secret', true);
+        $api_key = Config::set('kopokopo.api_key', true);
 
         if (Cache::has("kopokopo_access_token")) {
             $this->access_token = Cache::get("kopokopo_access_token");

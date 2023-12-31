@@ -4,7 +4,7 @@ namespace Modules\Kopokopo\Listeners;
 
 use Modules\Kopokopo\Classes\Kopokopo;
 
-class StkpushCreated
+class KopokopoStkpushCreated
 {
     /**
      * Create the event listener.
