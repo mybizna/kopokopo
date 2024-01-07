@@ -27,7 +27,7 @@ class RecipientBank extends BaseModel
      * @var array<string>
      */
     protected $fillable = [
-        'reference', 'account_name', 'account_number', 'settlement_method', 'published',
+        'reference', 'branch_reference', 'account_name', 'account_number', 'settlement_method', 'published',
     ];
 
     /**
@@ -56,6 +56,7 @@ class RecipientBank extends BaseModel
 
         $this->fields->increments('id')->html('hidden');
         $this->fields->string('reference')->html('text');
+        $this->fields->string('branch_reference')->html('text');
         $this->fields->string('account_name')->html('text');
         $this->fields->string('account_number')->html('text');
         $this->fields->string('settlement_method')->html('text');

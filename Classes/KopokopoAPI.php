@@ -10,50 +10,60 @@ class KopokopoAPI
 {
     private $access_token;
     private $options;
+    private $till_number;
     private $K2;
 
-    public function __construct($faking = false)
+    public function __construct()
     {
 
-        if($faking){
-            $faking = !Config::get('kopokopo.enable_faking');
+        $enable_faking = Config::get('kopokopo.enable_faking');
+
+        $faking = session('client_faking');
+        
+        if (!$enable_faking) {
+            $faking = false;
         }
 
         $sandbox_till_number = Config::get('kopokopo.sandbox_till_number');
         $sandbox_client_id = Config::get('kopokopo.sandbox_client_id');
         $sandbox_client_secret = Config::get('kopokopo.sandbox_client_secret');
         $sandbox_api_key = Config::get('kopokopo.sandbox_api_key');
-        print_r($sandbox_client_secret."\n");exit;
 
         $till_number = Config::get('kopokopo.till_number');
         $client_id = Config::get('kopokopo.client_id');
         $client_secret = Config::get('kopokopo.client_secret');
         $api_key = Config::get('kopokopo.api_key');
 
-        if (Cache::has("kopokopo_access_token")) {
-            $this->access_token = Cache::get("kopokopo_access_token");
+        if ($sandbox_client_id != '' && $client_id == '') {
+            $faking = true;
+        }
+
+        $subdomain = ($faking) ? 'sandbox' : 'api';
+
+        $this->till_number = ($faking) ? $sandbox_till_number : $till_number;
+
+        $this->options = [
+            'clientId' => ($faking) ? $sandbox_client_id : $client_id,
+            'clientSecret' => ($faking) ? $sandbox_client_secret : $client_secret,
+            'apiKey' => ($faking) ? $sandbox_api_key : $api_key,
+            'baseUrl' => "https://{$subdomain}.kopokopo.com",
+        ];
+
+        if (Cache::has("kopokopo_{ $subdomain}_access_token")) {
+            $this->access_token = Cache::get("kopokopo_{ $subdomain}_access_token");
         } else {
             try {
-                $subdomain = ($faking) ? 'sandbox' : 'api';
-                // do not hard code these values
-                $options = [
-                    'clientId' => ($faking)?$sandbox_client_id:$client_id,
-                    'clientSecret' => ($faking)?$sandbox_client_secret:$client_secret,
-                    'apiKey' => ($faking)?$sandbox_api_key:$api_key,
-                    'baseUrl' => "https://{$subdomain}.kopokopo.com",
-                ];
+                $K2 = new K2($this->options);
 
-                $K2 = new K2($options);
-
-                // Get one of the services
                 $tokens = $K2->TokenService();
+
+                $response = $tokens->getToken();
 
                 // Use the service
                 $this->access_token = $response['data']['accessToken'];
-                $this->K2 = $K2;
+                $expiresIn = $response['data']['expiresIn'];
 
-                Cache::put("kopokopo_K2", $result, 3599);
-                Cache::put("kopokopo_access_token", $result, 3599);
+                Cache::put("kopokopo_{ $subdomain}_access_token", $this->access_token, $expiresIn);
 
             } catch (\Throwable $th) {
                 throw $th;
@@ -70,7 +80,7 @@ class KopokopoAPI
 
         $response = $tokens->revokeToken(['accessToken' => $this->access_token]);
 
-        echo json_encode($response);
+        return $response;
     }
 
     public function infotoken()
@@ -81,7 +91,7 @@ class KopokopoAPI
 
         $response = $tokens->infoToken(['accessToken' => $this->access_token]);
 
-        echo json_encode($response);
+        return $response;
     }
 
     public function introspecttoken()
@@ -92,7 +102,7 @@ class KopokopoAPI
 
         $response = $tokens->introspectToken(['accessToken' => $this->access_token]);
 
-        echo json_encode($response);
+        return $response;
     }
 
     public function subscribe($data)
@@ -111,30 +121,31 @@ class KopokopoAPI
 
         $response = $webhooks->subscribe($options);
 
-        echo json_encode($response);
+        return $response;
     }
 
     public function stk($data)
     {
+
         $K2 = new K2($this->options);
 
-        $url = $this->getUrl();
         $stk = $K2->StkService();
 
         $options = [
             'paymentChannel' => 'M-PESA STK Push',
-            'tillNumber' => '514459',
+            'tillNumber' => $this->till_number,
             'firstName' => $data['firstName'],
             'lastName' => $data['lastName'],
+            'currency' => 'KES',
             'phoneNumber' => $data['phoneNumber'],
             'amount' => $data['amount'],
-            'callbackUrl' => $url . 'kopokopo/stk/webhook',
+            'callbackUrl' => $data['callbackUrl'] ?? url('/') . '/kopokopo/stk/webhook',
             'accessToken' => $this->access_token,
         ];
 
         $response = $stk->initiateIncomingPayment($options);
 
-        echo json_encode($response);
+        return $response;
     }
 
     public function polling($data)
@@ -154,7 +165,7 @@ class KopokopoAPI
 
         $response = $polling->pollTransactions($options);
 
-        echo json_encode($response);
+        return $response;
     }
 
     public function smsnotification($data)
@@ -172,7 +183,7 @@ class KopokopoAPI
 
         $response = $sms_notification->sendTransactionSmsNotification($options);
 
-        echo json_encode($response);
+        return $response;
     }
 
     public function merchantwallet($data)
@@ -191,7 +202,7 @@ class KopokopoAPI
 
         $response = $transfer->createMerchantWallet($options);
 
-        echo json_encode($response);
+        return $response;
     }
 
     public function merchantbankaccount($data)
@@ -210,7 +221,7 @@ class KopokopoAPI
 
         $response = $transfer->createMerchantBankAccount($options);
 
-        echo json_encode($response);
+        return $response;
     }
     public function transfer($data)
     {
@@ -229,7 +240,7 @@ class KopokopoAPI
 
         $response = $transfer->settleFunds($options);
 
-        echo json_encode($response);
+        return $response;
     }
     public function paymobilerecipient($data)
     {
@@ -242,14 +253,16 @@ class KopokopoAPI
             'firstName' => $data['firstName'],
             'lastName' => $data['lastName'],
             'phoneNumber' => $data['phoneNumber'],
+            'email' => 'dedanirungu+' . $data['lastName'] . '@gmail.com',
             'network' => $data['network'],
             'accessToken' => $this->access_token,
         ];
 
         $response = $transfer->addPayRecipient($options);
 
-        echo json_encode($response);
+        return $response;
     }
+
     public function paybankrecipient($data)
     {
         $K2 = new K2($this->options);
@@ -267,7 +280,7 @@ class KopokopoAPI
 
         $response = $transfer->addPayRecipient($options);
 
-        echo json_encode($response);
+        return $response;
     }
 
     public function paytillrecipient($data)
@@ -285,7 +298,7 @@ class KopokopoAPI
 
         $response = $transfer->addPayRecipient($options);
 
-        echo json_encode($response);
+        return $response;
     }
     public function paypaybillrecipient($data)
     {
@@ -303,7 +316,7 @@ class KopokopoAPI
 
         $response = $transfer->addPayRecipient($options);
 
-        echo json_encode($response);
+        return $response;
     }
     public function pay($data)
     {
@@ -325,7 +338,7 @@ class KopokopoAPI
 
         $response = $pay->sendPay($options);
 
-        echo json_encode($response);
+        return $response;
     }
 
     public function webhook()
@@ -338,9 +351,8 @@ class KopokopoAPI
 
         $response = $webhooks->webhookHandler($json_str, $_SERVER['HTTP_X_KOPOKOPO_SIGNATURE']);
 
-        echo json_encode($response);
-        // print("POST Details: " .$json_str);
-        // print_r($json_str);
+        return $response;
+        
     }
 
     public function stk_webhook()
@@ -353,9 +365,8 @@ class KopokopoAPI
 
         $response = $webhooks->webhookHandler($json_str, $_SERVER['HTTP_X_KOPOKOPO_SIGNATURE']);
 
-        echo json_encode($response);
-        // print("POST Details: " .$json_str);
-        // print_r($json_str);
+        return $response;
+        
     }
 
     public function polling_webhook()
@@ -368,9 +379,8 @@ class KopokopoAPI
 
         $response = $webhooks->webhookHandler($json_str, $_SERVER['HTTP_X_KOPOKOPO_SIGNATURE']);
 
-        echo json_encode($response);
-        // print("POST Details: " .$json_str);
-        // print_r($json_str);
+        return $response;
+        
     }
 
     public function smsnotification_webhook()
@@ -383,9 +393,7 @@ class KopokopoAPI
 
         $response = $webhooks->webhookHandler($json_str, $_SERVER['HTTP_X_KOPOKOPO_SIGNATURE']);
 
-        echo json_encode($response);
-        // print("POST Details: " .$json_str);
-        // print_r($json_str);
+        return $response;
     }
 
     public function transfer_webhook()
@@ -398,9 +406,8 @@ class KopokopoAPI
 
         $response = $webhooks->webhookHandler($json_str, $_SERVER['HTTP_X_KOPOKOPO_SIGNATURE']);
 
-        echo json_encode($response);
-        // print("POST Details: " .$json_str);
-        // print_r($json_str);
+        return $response;
+        
     }
 
     public function pay_webhook()
@@ -413,9 +420,8 @@ class KopokopoAPI
 
         $response = $webhooks->webhookHandler($json_str, $_SERVER['HTTP_X_KOPOKOPO_SIGNATURE']);
 
-        echo json_encode($response);
-        // print("POST Details: " .$json_str);
-        // print_r($json_str);
+        return $response;
+        
     }
 
     public function status($data)
@@ -430,7 +436,7 @@ class KopokopoAPI
         );
         $response = $webhooks->getStatus($options);
 
-        echo json_encode($response);
+        return $response;
     }
 
 }

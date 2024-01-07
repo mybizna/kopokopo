@@ -4,7 +4,7 @@ namespace Modules\Kopokopo\Listeners;
 
 use Modules\Kopokopo\Classes\KopokopoAPI;
 
-class KopokopoStkpushCreated
+class KopokopoRecipientTillCreated
 {
     /**
      * Create the event listener.
@@ -24,19 +24,16 @@ class KopokopoStkpushCreated
      */
     public function handle($event)
     {
-        if ($event->table_name == 'kopokopo_stkpush') {
+        if ($event->table_name == 'kopokopo_recipient_till') {
 
             $data = [
-                'firstName' => $event->model->first_name,
-                'lastName' => $event->model->last_name,
-                'phoneNumber' => $event->model->phone_number,
-                'amount' => $event->model->amount,
-                'callbackUrl' => $event->model->callback_url,
+                'tillName' => $event->model->till_number,
+                'tillNumber' => $event->model->till_name,
             ];
 
             $kopokopo = new KopokopoAPI();
 
-            $response = $kopokopo->stk($data);
+            $response = $kopokopo->paytillrecipient($data);
 
             $event->model->link_resource = $response['location'];
             $event->model->save();

@@ -5,7 +5,7 @@ return [
 
     'enable_faking' => [
         "title" => " Enable Faking",
-        "description" => "Enable Faking.",
+        "description" => "Enable Faking i.e. Sandbox.",
         "info" => "Set Enable Faking.",
         "type" => "switch",
         "value" => "1",

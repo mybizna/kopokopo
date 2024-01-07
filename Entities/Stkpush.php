@@ -29,7 +29,7 @@ class Stkpush extends BaseModel
     protected $fillable = [
         'payment_channel', 'phone_number', 'currency', 'amount', 'till_number',
         'first_name', 'last_name', 'email', 'callback', 'link_self', 'link_resource',
-        'module', 'model','published',
+        'module', 'model', 'faking', 'published',
     ];
 
     /**
@@ -73,6 +73,7 @@ class Stkpush extends BaseModel
         $this->fields->string('notes')->nullable()->html('text');
         $this->fields->string('link_self')->nullable()->html('text');
         $this->fields->string('link_resource')->nullable()->html('text');
+        $this->fields->tinyInteger('faking')->nullable()->default(0)->html('switch');
         $this->fields->tinyInteger('published')->nullable()->default(0)->html('switch');
     }
 
@@ -81,8 +82,8 @@ class Stkpush extends BaseModel
      */
     public function structure($structure): array
     {
-        $structure['table'] = ['module','model', 'phone_number', 'currency', 'amount', 'till_number', 'first_name', 'last_name', 'email', 'published'];
-        $structure['filter'] = ['module','model','payment_channel', 'phone_number', 'email', 'published'];
+        $structure['table'] = ['module', 'model', 'faking', 'phone_number', 'currency', 'amount', 'till_number', 'first_name', 'last_name', 'email', 'published'];
+        $structure['filter'] = ['module', 'model', 'payment_channel', 'phone_number', 'email', 'published'];
 
         return $structure;
     }

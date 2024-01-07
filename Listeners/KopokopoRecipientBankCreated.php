@@ -4,7 +4,7 @@ namespace Modules\Kopokopo\Listeners;
 
 use Modules\Kopokopo\Classes\KopokopoAPI;
 
-class KopokopoStkpushCreated
+class KopokopoRecipientBankCreated
 {
     /**
      * Create the event listener.
@@ -24,19 +24,18 @@ class KopokopoStkpushCreated
      */
     public function handle($event)
     {
-        if ($event->table_name == 'kopokopo_stkpush') {
+        if ($event->table_name == 'kopokopo_recipient_bank') {
 
             $data = [
-                'firstName' => $event->model->first_name,
-                'lastName' => $event->model->last_name,
-                'phoneNumber' => $event->model->phone_number,
-                'amount' => $event->model->amount,
-                'callbackUrl' => $event->model->callback_url,
+                'bankBranchRef' => $event->model->reference,
+                'accountName' => $event->model->account_name,
+                'accountNumber' => $event->model->account_number,
+                'settlementMethod' => $event->model->settlement_method,
             ];
 
             $kopokopo = new KopokopoAPI();
 
-            $response = $kopokopo->stk($data);
+            $response = $kopokopo->paybankrecipient($data);
 
             $event->model->link_resource = $response['location'];
             $event->model->save();
