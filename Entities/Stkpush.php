@@ -29,7 +29,7 @@ class Stkpush extends BaseModel
     protected $fillable = [
         'payment_channel', 'phone_number', 'currency', 'amount', 'till_number',
         'first_name', 'last_name', 'email', 'callback', 'link_self', 'link_resource',
-        'published',
+        'module', 'model','published',
     ];
 
     /**
@@ -57,10 +57,12 @@ class Stkpush extends BaseModel
         $this->fields = $table ?? new Blueprint($this->table);
 
         $this->fields->increments('id')->html('hidden');
-        $this->fields->string('payment_channel')->html('text');
+        $this->fields->string('payment_channel')->default('M-PESA STK Push')->html('text');
         $this->fields->string('phone_number')->html('text');
         $this->fields->string('currency')->html('text');
         $this->fields->string('amount')->html('text');
+        $this->fields->tinyInteger('module')->html('switch');
+        $this->fields->tinyInteger('model')->html('switch');
         $this->fields->string('till_number')->html('text');
         $this->fields->string('first_name')->nullable()->html('text');
         $this->fields->string('last_name')->nullable()->html('text');
@@ -79,8 +81,8 @@ class Stkpush extends BaseModel
      */
     public function structure($structure): array
     {
-        $structure['table'] = ['payment_channel', 'phone_number', 'currency', 'amount', 'till_number', 'first_name', 'last_name', 'email', 'published'];
-        $structure['filter'] = ['payment_channel', 'phone_number', 'email', 'published'];
+        $structure['table'] = ['module','model', 'phone_number', 'currency', 'amount', 'till_number', 'first_name', 'last_name', 'email', 'published'];
+        $structure['filter'] = ['module','model','payment_channel', 'phone_number', 'email', 'published'];
 
         return $structure;
     }

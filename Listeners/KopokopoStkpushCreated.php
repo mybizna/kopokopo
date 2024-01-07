@@ -4,6 +4,8 @@ namespace Modules\Kopokopo\Listeners;
 
 use Modules\Kopokopo\Classes\Kopokopo;
 
+use Modules\Kopokopo\Classes\KopokopoAPI;
+
 class KopokopoStkpushCreated
 {
     /**
@@ -29,8 +31,8 @@ class KopokopoStkpushCreated
                 return;
             }
 
-            $kopokopo = new Kopokopo();
-            $kopokopo->setPackages($event->model);
+            $kopokopo = new KopokopoAPI();
+            $kopokopo->stk($event->model);
         }
 
     }

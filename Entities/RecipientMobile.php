@@ -27,7 +27,7 @@ class RecipientMobile extends BaseModel
      * @var array<string>
      */
     protected $fillable = [
-        'first_name', 'last_name', 'email', 'phone_number', 'network', 'published',
+        'reference', 'first_name', 'last_name', 'email', 'phone_number', 'network', 'published',
     ];
 
     /**
@@ -53,8 +53,9 @@ class RecipientMobile extends BaseModel
     public function fields(Blueprint $table = null): void
     {
         $this->fields = $table ?? new Blueprint($this->table);
-        
+
         $this->fields->increments('id')->html('hidden');
+        $this->fields->string('reference')->html('text');
         $this->fields->string('first_name')->html('text');
         $this->fields->string('last_name')->html('text');
         $this->fields->string('email')->html('email');

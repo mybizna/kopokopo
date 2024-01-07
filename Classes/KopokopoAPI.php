@@ -9,27 +9,38 @@ use Kopokopo\SDK\K2;
 class KopokopoAPI
 {
     private $access_token;
+    private $options;
     private $K2;
 
-    public function __construct()
+    public function __construct($faking = false)
     {
 
-        $is_sandbox = Config::set('kopokopo.is_sandbox', true);
-        $client_id = Config::set('kopokopo.client_id', true);
-        $client_secret = Config::set('kopokopo.client_secret', true);
-        $api_key = Config::set('kopokopo.api_key', true);
+        if($faking){
+            $faking = !Config::get('kopokopo.enable_faking');
+        }
+
+        $sandbox_till_number = Config::get('kopokopo.sandbox_till_number');
+        $sandbox_client_id = Config::get('kopokopo.sandbox_client_id');
+        $sandbox_client_secret = Config::get('kopokopo.sandbox_client_secret');
+        $sandbox_api_key = Config::get('kopokopo.sandbox_api_key');
+        print_r($sandbox_client_secret."\n");exit;
+
+        $till_number = Config::get('kopokopo.till_number');
+        $client_id = Config::get('kopokopo.client_id');
+        $client_secret = Config::get('kopokopo.client_secret');
+        $api_key = Config::get('kopokopo.api_key');
 
         if (Cache::has("kopokopo_access_token")) {
             $this->access_token = Cache::get("kopokopo_access_token");
             $this->K2 = Cache::get("kopokopo_K2");
         } else {
             try {
-                $subdomain = ($is_sandbox) ? 'sandbox' : 'api';
+                $subdomain = ($faking) ? 'sandbox' : 'api';
                 // do not hard code these values
                 $options = [
-                    'clientId' => $clientId,
-                    'clientSecret' => $clientSecret,
-                    'apiKey' => $apiKey,
+                    'clientId' => ($faking)?$sandbox_client_id:$client_id,
+                    'clientSecret' => ($faking)?$sandbox_client_secret:$client_secret,
+                    'apiKey' => ($faking)?$sandbox_api_key:$api_key,
                     'baseUrl' => "https://{$subdomain}.kopokopo.com",
                 ];
 
@@ -54,6 +65,8 @@ class KopokopoAPI
 
     public function revoketoken()
     {
+        $K2 = new K2($options);
+
         $tokens = $this->K2->TokenService();
 
         $response = $tokens->revokeToken(['accessToken' => $this->access_token]);
@@ -108,8 +121,6 @@ class KopokopoAPI
             'lastName' => $data['lastName'],
             'phoneNumber' => $data['phoneNumber'],
             'amount' => $data['amount'],
-            'currency' => 'KES',
-            'email' => 'example@example.com',
             'callbackUrl' => $url . 'kopokopo/stk/webhook',
             'accessToken' => $this->access_token,
         ];
@@ -282,7 +293,7 @@ class KopokopoAPI
             'amount' => $data['amount'],
             'currency' => 'KES',
             'accessToken' => $this->access_token,
-            'callbackUrl' => $url . 'kopokopo/pay/webhook',
+            'callbackUrl' => $data['callbackUrl'] ?? $url . 'kopokopo/pay/webhook',
         ];
 
         $response = $pay->sendPay($options);

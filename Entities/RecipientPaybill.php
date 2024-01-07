@@ -27,7 +27,7 @@ class RecipientPaybill extends BaseModel
      * @var array<string>
      */
     protected $fillable = [
-        'till_number', 'till_name', 'published',
+        'reference', 'paybill_name', 'paybill_number', 'paybill_account_number', 'published',
     ];
 
     /**
@@ -35,7 +35,7 @@ class RecipientPaybill extends BaseModel
      *
      * @var array<string>
      */
-    public $rec_names = ['till_number', 'till_name'];
+    public $rec_names = ['paybill_name', 'paybill_number'];
 
     /**
      * The attributes that should be mutated to dates.
@@ -48,7 +48,6 @@ class RecipientPaybill extends BaseModel
      * List of fields to be migrated to the datebase when creating or updating model during migration.
      *
      * @param Blueprint $table
-     *
      * @return void
      */
     public function fields(Blueprint $table = null): void
@@ -56,8 +55,10 @@ class RecipientPaybill extends BaseModel
         $this->fields = $table ?? new Blueprint($this->table);
 
         $this->fields->increments('id')->html('hidden');
-        $this->fields->string('till_number')->html('text');
-        $this->fields->string('till_name')->html('text');
+        $this->fields->string('reference')->html('text');
+        $this->fields->string('paybill_name')->html('text');
+        $this->fields->string('paybill_number')->html('text');
+        $this->fields->string('paybill_account_number')->html('text');
         $this->fields->tinyInteger('published')->nullable()->default(0)->html('switch');
     }
 
@@ -66,9 +67,10 @@ class RecipientPaybill extends BaseModel
      */
     public function structure($structure): array
     {
-        $structure['table'] = ['till_number', 'till_name', 'published'];
-        $structure['filter'] = ['till_number', 'till_name', 'published'];
+        $structure['table'] = ['paybill_name', 'paybill_number', 'paybill_account_number', 'published'];
+        $structure['filter'] = ['paybill_name', 'paybill_number', 'paybill_account_number', 'published'];
 
         return $structure;
     }
+
 }

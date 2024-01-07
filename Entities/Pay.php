@@ -26,9 +26,8 @@ class Pay extends BaseModel
      *
      * @var array<string>
      */
-    protected $fillable = [
-        'category', 'tags', 'callback', 'status', 'customer_id', 'notes', 'origination_time',
-        'transaction_reference', 'completed', 'successful',
+    protected $fillable = ['client_id',
+        'destination_type', 'destination_reference', 'currency', 'amount', 'callback_url', 'faking',
     ];
 
     /**
@@ -36,7 +35,7 @@ class Pay extends BaseModel
      *
      * @var array<string>
      */
-    public $rec_names = ['category', 'customer_id'];
+    public $rec_names = ['client_id', 'destination_type', 'amount'];
 
     /**
      * The attributes that should be mutated to dates.
@@ -55,16 +54,15 @@ class Pay extends BaseModel
     {
         $this->fields = $table ?? new Blueprint($this->table);
 
-        $this->fields->string('category')->html('text');
-        $this->fields->string('tags')->html('text');
-        $this->fields->string('callback')->html('text');
-        $this->fields->string('status')->html('text');
-        $this->fields->string('customer_id')->html('text');
-        $this->fields->string('notes')->nullable()->html('text');
-        $this->fields->string('origination_time')->nullable()->html('text');
-        $this->fields->string('transaction_reference')->nullable()->html('text');
-        $this->fields->tinyInteger('completed')->nullable()->default(0)->html('switch');
-        $this->fields->tinyInteger('successful')->nullable()->default(0)->html('switch');
+        $this->fields->increments('id')->html('hidden');
+        $this->fields->foreignId('client_id')->html('recordpicker')->relation(['mpesauto', 'client']);
+        $this->fields->string('destination_type')->html('text');
+        $this->fields->string('destination_reference')->html('text');
+        $this->fields->string('currency')->html('text');
+        $this->fields->string('amount')->html('text');
+        $this->fields->string('callback_url')->html('text');
+        $this->fields->tinyInteger('faking')->nullable()->default(0)->html('switch');
+        $this->fields->tinyInteger('published')->nullable()->default(0)->html('switch');
     }
 
     /**
@@ -72,14 +70,8 @@ class Pay extends BaseModel
      */
     public function structure($structure): array
     {
-
-        $structure['table'] = ['category', 'tags', 'status', 'origination_time', 'transaction_reference', 'completed', 'successful'];
-        $structure['form'] = [
-            ['label' => 'Main', 'class' => 'col-span-6', 'fields' => ['category', 'tags', 'callback', 'status', 'customer_id']],
-            ['label' => 'Other', 'class' => 'col-span-6', 'fields' => ['transaction_reference', 'origination_time', 'completed', 'successful']],
-            ['label' => 'Note', 'class' => 'col-span-full', 'fields' => ['note']],
-        ];
-        $structure['filter'] = ['category', 'status', 'transaction_reference', 'completed', 'successful'];
+        $structure['table'] = ['client_id', 'destination_type', 'destination_reference', 'currency', 'amount', 'callback_url', 'published'];
+        $structure['filter'] = ['destination_type', 'client_id', 'faking', 'published'];
 
         return $structure;
     }
