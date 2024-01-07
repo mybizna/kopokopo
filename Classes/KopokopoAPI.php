@@ -32,7 +32,6 @@ class KopokopoAPI
 
         if (Cache::has("kopokopo_access_token")) {
             $this->access_token = Cache::get("kopokopo_access_token");
-            $this->K2 = Cache::get("kopokopo_K2");
         } else {
             try {
                 $subdomain = ($faking) ? 'sandbox' : 'api';
@@ -65,9 +64,9 @@ class KopokopoAPI
 
     public function revoketoken()
     {
-        $K2 = new K2($options);
+        $K2 = new K2($this->options);
 
-        $tokens = $this->K2->TokenService();
+        $tokens = $K2->TokenService();
 
         $response = $tokens->revokeToken(['accessToken' => $this->access_token]);
 
@@ -76,7 +75,9 @@ class KopokopoAPI
 
     public function infotoken()
     {
-        $tokens = $this->K2->TokenService();
+        $K2 = new K2($this->options);
+
+        $tokens = $K2->TokenService();
 
         $response = $tokens->infoToken(['accessToken' => $this->access_token]);
 
@@ -85,7 +86,9 @@ class KopokopoAPI
 
     public function introspecttoken()
     {
-        $tokens = $this->K2->TokenService();
+        $K2 = new K2($this->options);
+
+        $tokens = $K2->TokenService();
 
         $response = $tokens->introspectToken(['accessToken' => $this->access_token]);
 
@@ -94,7 +97,9 @@ class KopokopoAPI
 
     public function subscribe($data)
     {
-        $webhooks = $this->K2->Webhooks();
+        $K2 = new K2($this->options);
+
+        $webhooks = $K2->Webhooks();
 
         $options = array(
             'eventType' => $data['eventType'],
@@ -111,8 +116,10 @@ class KopokopoAPI
 
     public function stk($data)
     {
+        $K2 = new K2($this->options);
+
         $url = $this->getUrl();
-        $stk = $this->K2->StkService();
+        $stk = $K2->StkService();
 
         $options = [
             'paymentChannel' => 'M-PESA STK Push',
@@ -132,7 +139,9 @@ class KopokopoAPI
 
     public function polling($data)
     {
-        $polling = $this->K2->PollingService();
+        $K2 = new K2($this->options);
+
+        $polling = $K2->PollingService();
 
         $options = [
             'fromTime' => $data['from_time'],
@@ -150,7 +159,9 @@ class KopokopoAPI
 
     public function smsnotification($data)
     {
-        $sms_notification = $this->K2->SmsNotificationService();
+        $K2 = new K2($this->options);
+
+        $sms_notification = $K2->SmsNotificationService();
 
         $options = [
             'message' => $data['message'],
@@ -166,7 +177,9 @@ class KopokopoAPI
 
     public function merchantwallet($data)
     {
-        $transfer = $this->K2->SettlementTransferService();
+        $K2 = new K2($this->options);
+
+        $transfer = $K2->SettlementTransferService();
 
         $options = [
             'firstName' => $data['firstName'],
@@ -183,7 +196,9 @@ class KopokopoAPI
 
     public function merchantbankaccount($data)
     {
-        $transfer = $this->K2->SettlementTransferService();
+        $K2 = new K2($this->options);
+
+        $transfer = $K2->SettlementTransferService();
 
         $options = [
             'bankBranchRef' => $data['bankBranchRef'],
@@ -199,7 +214,9 @@ class KopokopoAPI
     }
     public function transfer($data)
     {
-        $transfer = $this->K2->SettlementTransferService();
+        $K2 = new K2($this->options);
+
+        $transfer = $K2->SettlementTransferService();
 
         $options = [
             'amount' => $data['amount'],
@@ -216,7 +233,9 @@ class KopokopoAPI
     }
     public function paymobilerecipient($data)
     {
-        $transfer = $this->K2->PayService();
+        $K2 = new K2($this->options);
+
+        $transfer = $K2->PayService();
 
         $options = [
             'type' => 'mobile_wallet',
@@ -233,7 +252,9 @@ class KopokopoAPI
     }
     public function paybankrecipient($data)
     {
-        $transfer = $this->K2->PayService();
+        $K2 = new K2($this->options);
+
+        $transfer = $K2->PayService();
 
         $options = [
             'type' => 'bank_account',
@@ -251,7 +272,9 @@ class KopokopoAPI
 
     public function paytillrecipient($data)
     {
-        $transfer = $this->K2->PayService();
+        $K2 = new K2($this->options);
+
+        $transfer = $K2->PayService();
 
         $options = [
             'type' => 'till',
@@ -266,7 +289,9 @@ class KopokopoAPI
     }
     public function paypaybillrecipient($data)
     {
-        $transfer = $this->K2->PayService();
+        $K2 = new K2($this->options);
+
+        $transfer = $K2->PayService();
 
         $options = [
             'type' => 'paybill',
@@ -282,7 +307,9 @@ class KopokopoAPI
     }
     public function pay($data)
     {
-        $pay = $this->K2->PayService();
+        $K2 = new K2($this->options);
+
+        $pay = $K2->PayService();
 
         $options = [
             'destinationType' => $data['destinationType'],
@@ -303,7 +330,9 @@ class KopokopoAPI
 
     public function webhook()
     {
-        $webhooks = $this->K2->Webhooks();
+        $K2 = new K2($this->options);
+
+        $webhooks = $K2->Webhooks();
 
         $json_str = file_get_contents('php://input');
 
@@ -316,7 +345,9 @@ class KopokopoAPI
 
     public function stk_webhook()
     {
-        $webhooks = $this->K2->Webhooks();
+        $K2 = new K2($this->options);
+
+        $webhooks = $K2->Webhooks();
 
         $json_str = file_get_contents('php://input');
 
@@ -329,7 +360,9 @@ class KopokopoAPI
 
     public function polling_webhook()
     {
-        $webhooks = $this->K2->Webhooks();
+        $K2 = new K2($this->options);
+
+        $webhooks = $K2->Webhooks();
 
         $json_str = file_get_contents('php://input');
 
@@ -342,7 +375,9 @@ class KopokopoAPI
 
     public function smsnotification_webhook()
     {
-        $webhooks = $this->K2->Webhooks();
+        $K2 = new K2($this->options);
+
+        $webhooks = $K2->Webhooks();
 
         $json_str = file_get_contents('php://input');
 
@@ -355,7 +390,9 @@ class KopokopoAPI
 
     public function transfer_webhook()
     {
-        $webhooks = $this->K2->Webhooks();
+        $K2 = new K2($this->options);
+
+        $webhooks = $K2->Webhooks();
 
         $json_str = file_get_contents('php://input');
 
@@ -368,7 +405,9 @@ class KopokopoAPI
 
     public function pay_webhook()
     {
-        $webhooks = $this->K2->Webhooks();
+        $K2 = new K2($this->options);
+
+        $webhooks = $K2->Webhooks();
 
         $json_str = file_get_contents('php://input');
 
@@ -381,7 +420,9 @@ class KopokopoAPI
 
     public function status($data)
     {
-        $webhooks = $this->K2->Webhooks();
+        $K2 = new K2($this->options);
+
+        $webhooks = $K2->Webhooks();
 
         $options = array(
             'location' => $data['location'],
