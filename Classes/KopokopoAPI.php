@@ -58,6 +58,7 @@ class KopokopoAPI
                 $tokens = $K2->TokenService();
 
                 $response = $tokens->getToken();
+                //print_r($response); exit;
 
                 // Use the service
                 $this->access_token = $response['data']['accessToken'];
