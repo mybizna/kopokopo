@@ -28,7 +28,7 @@ class TransactionCustomer extends BaseModel
      */
     protected $fillable = [
         'trans_id', 'passed_created_at', 'event_type', 'last_name', 'first_name', 'phone_number',
-        'link_self', 'link_resource', 'published',
+        'link_self', 'link_resource', 'location', 'faking', 'published',
     ];
 
     /**
@@ -64,6 +64,8 @@ class TransactionCustomer extends BaseModel
         $this->fields->string('phone_number')->html('text');
         $this->fields->string('link_self')->nullable()->html('text');
         $this->fields->string('link_resource')->nullable()->html('text');
+        $this->fields->string('location')->nullable()->html('text');
+        $this->fields->tinyInteger('faking')->nullable()->default(0)->html('switch');
         $this->fields->tinyInteger('published')->nullable()->default(0)->html('switch');
     }
 

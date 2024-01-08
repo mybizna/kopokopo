@@ -26,7 +26,7 @@ class Webhook extends BaseModel
      *
      * @var array<string>
      */
-    protected $fillable = ['event_type', 'url', 'scope', 'scope_reference'];
+    protected $fillable = ['event_type', 'url', 'scope', 'scope_reference', 'location', 'faking'];
 
     /**
      * The fields that are to be render when performing relationship queries.
@@ -58,6 +58,8 @@ class Webhook extends BaseModel
         $this->fields->string('url')->html('text');
         $this->fields->string('scope')->html('text');
         $this->fields->string('scope_reference')->html('text');
+        $this->fields->string('location')->nullable()->html('text');
+        $this->fields->tinyInteger('faking')->nullable()->default(0)->html('switch');
         $this->fields->tinyInteger('published')->nullable()->default(0)->html('switch');
     }
 

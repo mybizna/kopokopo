@@ -37,7 +37,7 @@ class KopokopoRecipientBankCreated
 
             $response = $kopokopo->paybankrecipient($data);
 
-            $event->model->link_resource = $response['location'];
+            $event->model->location = $response['location'];
             $event->model->save();
         }
 

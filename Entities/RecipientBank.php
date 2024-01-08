@@ -27,7 +27,7 @@ class RecipientBank extends BaseModel
      * @var array<string>
      */
     protected $fillable = [
-        'reference', 'branch_reference', 'account_name', 'account_number', 'settlement_method', 'published',
+        'reference', 'branch_reference', 'account_name', 'account_number', 'settlement_method', 'location', 'faking', 'published',
     ];
 
     /**
@@ -60,6 +60,8 @@ class RecipientBank extends BaseModel
         $this->fields->string('account_name')->html('text');
         $this->fields->string('account_number')->html('text');
         $this->fields->string('settlement_method')->html('text');
+        $this->fields->string('location')->nullable()->html('text');
+        $this->fields->tinyInteger('faking')->nullable()->default(0)->html('switch');
         $this->fields->tinyInteger('published')->nullable()->default(0)->html('switch');
     }
 

@@ -31,7 +31,7 @@ class TransactionTransfer extends BaseModel
         'trans_id', 'passed_created_at', 'event_type', 'resource_id', 'status', 'destination_type',
         'destination_reference', 'account_name', 'account_number', 'bank_branch_ref',
         'amount', 'currency', 'settlement_method', 'disbursements', 'link_self', 'link_resource',
-        'published',
+        'location', 'faking', 'published',
     ];
 
     /**
@@ -75,6 +75,8 @@ class TransactionTransfer extends BaseModel
         $this->fields->string('disbursements')->nullable()->html('text');
         $this->fields->string('link_self')->nullable()->html('text');
         $this->fields->string('link_resource')->nullable()->html('text');
+        $this->fields->string('location')->nullable()->html('text');
+        $this->fields->tinyInteger('faking')->nullable()->default(0)->html('switch');
         $this->fields->tinyInteger('published')->nullable()->default(0)->html('switch');
     }
 

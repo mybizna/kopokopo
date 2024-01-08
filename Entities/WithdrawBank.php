@@ -26,7 +26,7 @@ class WithdrawBank extends BaseModel
      *
      * @var array<string>
      */
-    protected $fillable = ['account_name', 'bank_branch_ref', 'account_number', 'published'];
+    protected $fillable = ['account_name', 'bank_branch_ref', 'account_number', 'location', 'faking', 'published'];
 
     /**
      * The fields that are to be render when performing relationship queries.
@@ -56,6 +56,8 @@ class WithdrawBank extends BaseModel
         $this->fields->string('account_name')->html('text');
         $this->fields->string('bank_branch_ref')->html('text');
         $this->fields->string('account_number')->html('text');
+        $this->fields->string('location')->nullable()->html('text');
+        $this->fields->tinyInteger('faking')->nullable()->default(0)->html('switch');
         $this->fields->tinyInteger('published')->nullable()->default(0)->html('switch');
     }
 

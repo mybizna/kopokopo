@@ -27,7 +27,7 @@ class Pay extends BaseModel
      * @var array<string>
      */
     protected $fillable = ['client_id',
-        'destination_type', 'destination_reference', 'currency', 'amount', 'callback_url', 'faking',
+        'destination_type', 'destination_reference', 'currency', 'amount', 'callback_url', 'location', 'faking',
     ];
 
     /**
@@ -61,6 +61,7 @@ class Pay extends BaseModel
         $this->fields->string('currency')->html('text');
         $this->fields->string('amount')->html('text');
         $this->fields->string('callback_url')->html('text');
+        $this->fields->string('location')->nullable()->html('text');
         $this->fields->tinyInteger('faking')->nullable()->default(0)->html('switch');
         $this->fields->tinyInteger('published')->nullable()->default(0)->html('switch');
     }

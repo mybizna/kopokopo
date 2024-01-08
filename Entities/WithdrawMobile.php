@@ -26,7 +26,7 @@ class WithdrawMobile extends BaseModel
      *
      * @var array<string>
      */
-    protected $fillable = ['phone_number', 'first_name', 'last_name', 'published'];
+    protected $fillable = ['phone_number', 'first_name', 'last_name', 'location', 'faking', 'published'];
 
     /**
      * The fields that are to be render when performing relationship queries.
@@ -56,6 +56,8 @@ class WithdrawMobile extends BaseModel
         $this->fields->string('phone_number')->html('text');
         $this->fields->string('first_name')->html('text');
         $this->fields->string('last_name')->html('text');
+        $this->fields->string('location')->nullable()->html('text');
+        $this->fields->tinyInteger('faking')->nullable()->default(0)->html('switch');
         $this->fields->tinyInteger('published')->nullable()->default(0)->html('switch');
     }
 

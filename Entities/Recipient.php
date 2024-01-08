@@ -27,7 +27,7 @@ class Recipient extends BaseModel
      * @var array<string>
      */
     protected $fillable = [
-        'title', 'type', 'system_id', 'published',
+        'title', 'type', 'system_id', 'location', 'faking', 'published',
     ];
 
     /**
@@ -58,6 +58,8 @@ class Recipient extends BaseModel
         $this->fields->string('title')->html('text');
         $this->fields->string('system_id')->html('text');
         $this->fields->string('type')->html('text');
+        $this->fields->string('location')->nullable()->html('text');
+        $this->fields->tinyInteger('faking')->nullable()->default(0)->html('switch');
         $this->fields->tinyInteger('published')->nullable()->default(0)->html('switch');
     }
 

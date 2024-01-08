@@ -26,7 +26,7 @@ class Transaction extends BaseModel
      *
      * @var array<string>
      */
-    protected $fillable = ['type', 'trans_id', 'passed_created_at', 'event_type', 'resource_id', 'link_self', 'link_resource', 'published'];
+    protected $fillable = ['type', 'trans_id', 'passed_created_at', 'event_type', 'resource_id', 'link_self', 'link_resource', 'location', 'faking', 'published'];
 
     /**
      * The fields that are to be render when performing relationship queries.
@@ -62,6 +62,8 @@ class Transaction extends BaseModel
         $this->fields->string('resource_id')->html('text');
         $this->fields->string('link_self')->nullable()->html('text');
         $this->fields->string('link_resource')->nullable()->html('text');
+        $this->fields->string('location')->nullable()->html('text');
+        $this->fields->tinyInteger('faking')->nullable()->default(0)->html('switch');
         $this->fields->tinyInteger('published')->nullable()->default(0)->html('switch');
     }
 

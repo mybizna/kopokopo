@@ -31,7 +31,7 @@ class TransactionReversal extends BaseModel
         'reference', 'origination_time', 'amount', 'currency', 'sending_till',
         'sender_phone_number', 'till_number', 'system_str', 'sender_first_name',
         'sender_middle_name', 'sender_last_name', 'link_self', 'link_resource',
-        'published',
+        'location', 'faking', 'published',
     ];
 
     /**
@@ -77,6 +77,8 @@ class TransactionReversal extends BaseModel
         $this->fields->string('sender_last_name')->nullable()->html('text');
         $this->fields->string('link_self')->nullable()->html('text');
         $this->fields->string('link_resource')->nullable()->html('text');
+        $this->fields->string('location')->nullable()->html('text');
+        $this->fields->tinyInteger('faking')->nullable()->default(0)->html('switch');
         $this->fields->tinyInteger('published')->nullable()->default(0)->html('switch');
     }
 

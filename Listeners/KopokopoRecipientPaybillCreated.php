@@ -37,7 +37,7 @@ class KopokopoRecipientPaybillCreated
 
             $response = $kopokopo->paypaybillrecipient($data);
 
-            $event->model->link_resource = $response['location'];
+            $event->model->location = $response['location'] ?? '';
             $event->model->save();
         }
 

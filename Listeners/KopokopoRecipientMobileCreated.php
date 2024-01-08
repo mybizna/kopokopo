@@ -33,16 +33,11 @@ class KopokopoRecipientMobileCreated
                 'network' => $event->model->network,
             ];
 
-           
-
-
-
             $kopokopo = new KopokopoAPI();
 
             $response = $kopokopo->paymobilerecipient($data);
-            print_r($response); exit;
 
-            $event->model->link_resource = $response['location'];
+            $event->model->location = $response['location'] ?? '';
             $event->model->save();
         }
 

@@ -30,7 +30,7 @@ class Payment extends BaseModel
         'trans_id', 'type', 'event_type', 'initiation_time', 'resource_id', 'reference',
         'origination_time', 'amount', 'currency', 'sender_phone_number', 'till_number',
         'system_str', 'resource_status', 'sender_first_name', 'sender_middle_name', 'sender_last_name',
-        'errors', 'metadata', 'link_self', 'link_resource', 'published',
+        'errors', 'metadata', 'link_self', 'link_resource', 'location', 'faking', 'published',
     ];
 
     /**
@@ -78,6 +78,8 @@ class Payment extends BaseModel
         $this->fields->string('metadata')->nullable()->html('text');
         $this->fields->string('link_self')->nullable()->html('text');
         $this->fields->string('link_resource')->nullable()->html('text');
+        $this->fields->string('location')->nullable()->html('text');
+        $this->fields->tinyInteger('faking')->nullable()->default(0)->html('switch');
         $this->fields->tinyInteger('published')->nullable()->default(0)->html('switch');
     }
 

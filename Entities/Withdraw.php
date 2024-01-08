@@ -26,7 +26,7 @@ class Withdraw extends BaseModel
      *
      * @var array<string>
      */
-    protected $fillable = ['amount', 'currency', 'callback', 'destination_type', 'origination_time', 'destination_reference', 'transaction_reference', 'published'];
+    protected $fillable = ['amount', 'currency', 'callback', 'destination_type', 'origination_time', 'destination_reference', 'transaction_reference', 'location', 'faking', 'published'];
 
     /**
      * The fields that are to be render when performing relationship queries.
@@ -60,6 +60,8 @@ class Withdraw extends BaseModel
         $this->fields->string('origination_time')->nullable()->html('text');
         $this->fields->string('destination_reference')->nullable()->html('text');
         $this->fields->string('transaction_reference')->nullable()->html('text');
+        $this->fields->string('location')->nullable()->html('text');
+        $this->fields->tinyInteger('faking')->nullable()->default(0)->html('switch');
         $this->fields->tinyInteger('published')->nullable()->default(0)->html('switch');
     }
 

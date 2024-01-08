@@ -30,6 +30,7 @@ class TransactionM2m extends BaseModel
         'trans_id', 'passed_created_at', 'event_type', 'resource_id', 'status',
         'reference', 'origination_time', 'amount', 'currency', 'sending_till',
         'till_number', 'system_str', 'link_self', 'link_resource', 'published',
+        'location', 'faking',
     ];
 
     /**
@@ -71,6 +72,8 @@ class TransactionM2m extends BaseModel
         $this->fields->string('till_number')->nullable()->html('text');
         $this->fields->string('link_self')->nullable()->html('text');
         $this->fields->string('link_resource')->nullable()->html('text');
+        $this->fields->string('location')->nullable()->html('text');
+        $this->fields->tinyInteger('faking')->nullable()->default(0)->html('switch');
         $this->fields->tinyInteger('published')->nullable()->default(0)->html('switch');
     }
 
