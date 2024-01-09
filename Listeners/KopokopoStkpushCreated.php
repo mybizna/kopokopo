@@ -38,7 +38,7 @@ class KopokopoStkpushCreated
 
             $response = $kopokopo->stk($data);
 
-            $event->model->link_relocationsource = $response['location'];
+            $event->model->location = $response['location'];
             $event->model->save();
         }
 
