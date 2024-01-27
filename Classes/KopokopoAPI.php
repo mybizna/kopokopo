@@ -4,6 +4,7 @@ namespace Modules\Kopokopo\Classes;
 
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\Log;
 use Kopokopo\SDK\K2;
 
 class KopokopoAPI
@@ -11,7 +12,6 @@ class KopokopoAPI
     private $access_token;
     private $options;
     private $till_number;
-    private $K2;
 
     public function __construct()
     {
@@ -19,7 +19,7 @@ class KopokopoAPI
         $enable_faking = Config::get('kopokopo.enable_faking');
 
         $faking = session('client_faking');
-        
+
         if (!$enable_faking) {
             $faking = false;
         }
@@ -58,7 +58,8 @@ class KopokopoAPI
                 $tokens = $K2->TokenService();
 
                 $response = $tokens->getToken();
-               // print_r($response); exit;
+                // print_r($response); exit;
+                $this->log('getToken', $response);
 
                 // Use the service
                 $this->access_token = $response['data']['accessToken'];
@@ -81,6 +82,8 @@ class KopokopoAPI
 
         $response = $tokens->revokeToken(['accessToken' => $this->access_token]);
 
+        $this->log('revoketoken', $response);
+
         return $response;
     }
 
@@ -92,6 +95,8 @@ class KopokopoAPI
 
         $response = $tokens->infoToken(['accessToken' => $this->access_token]);
 
+        $this->log('infotoken', $response);
+
         return $response;
     }
 
@@ -102,6 +107,8 @@ class KopokopoAPI
         $tokens = $K2->TokenService();
 
         $response = $tokens->introspectToken(['accessToken' => $this->access_token]);
+
+        $this->log('introspecttoken', $response);
 
         return $response;
     }
@@ -121,6 +128,10 @@ class KopokopoAPI
         );
 
         $response = $webhooks->subscribe($options);
+
+        $response['result'] = $this->status($response, 'webhooks');
+
+        $this->log('subscribe', $response);
 
         return $response;
     }
@@ -143,8 +154,13 @@ class KopokopoAPI
             'callbackUrl' => $data['callbackUrl'] ?? url('/') . '/kopokopo/stk/webhook',
             'accessToken' => $this->access_token,
         ];
+        $this->log('stk options', $options);
 
         $response = $stk->initiateIncomingPayment($options);
+
+        $response['result'] = $this->status($response, 'stk');
+
+        $this->log('stk', $response);
 
         return $response;
     }
@@ -166,6 +182,10 @@ class KopokopoAPI
 
         $response = $polling->pollTransactions($options);
 
+        $response['result'] = $this->status($response, 'polling');
+
+        $this->log('polling', $response);
+
         return $response;
     }
 
@@ -183,6 +203,10 @@ class KopokopoAPI
         ];
 
         $response = $sms_notification->sendTransactionSmsNotification($options);
+
+        $response['result'] = $this->status($response, 'smsnotification');
+
+        $this->log('smsnotification', $response);
 
         return $response;
     }
@@ -203,6 +227,10 @@ class KopokopoAPI
 
         $response = $transfer->createMerchantWallet($options);
 
+        $response['result'] = $this->status($response, 'transfer');
+
+        $this->log('merchantwallet', $response);
+
         return $response;
     }
 
@@ -222,6 +250,10 @@ class KopokopoAPI
 
         $response = $transfer->createMerchantBankAccount($options);
 
+        $response['result'] = $this->status($response, 'transfer');
+
+        $this->log('merchantbankaccount', $response);
+
         return $response;
     }
     public function transfer($data)
@@ -240,6 +272,10 @@ class KopokopoAPI
         ];
 
         $response = $transfer->settleFunds($options);
+
+        $response['result'] = $this->status($response, 'transfer');
+
+        $this->log('transfer', $response);
 
         return $response;
     }
@@ -261,6 +297,10 @@ class KopokopoAPI
 
         $response = $transfer->addPayRecipient($options);
 
+        $response['result'] = $this->status($response, 'pay');
+
+        $this->log('paymobilerecipient', $response);
+
         return $response;
     }
 
@@ -281,6 +321,10 @@ class KopokopoAPI
 
         $response = $transfer->addPayRecipient($options);
 
+        $response['result'] = $this->status($response, 'pay');
+
+        $this->log('paybankrecipient', $response);
+
         return $response;
     }
 
@@ -299,6 +343,10 @@ class KopokopoAPI
 
         $response = $transfer->addPayRecipient($options);
 
+        $response['result'] = $this->status($response, 'pay');
+
+        $this->log('paytillrecipient', $response);
+
         return $response;
     }
     public function paypaybillrecipient($data)
@@ -316,6 +364,10 @@ class KopokopoAPI
         ];
 
         $response = $transfer->addPayRecipient($options);
+
+        $response['result'] = $this->status($response, 'pay');
+
+        $this->log('paypaybillrecipient', $response);
 
         return $response;
     }
@@ -339,21 +391,31 @@ class KopokopoAPI
 
         $response = $pay->sendPay($options);
 
+        $response['result'] = $this->status($response, 'pay');
+
+        $this->log('pay', $response);
+
         return $response;
     }
 
-    public function webhook()
+    public function webhook($data)
     {
         $K2 = new K2($this->options);
 
         $webhooks = $K2->Webhooks();
 
-        $json_str = file_get_contents('php://input');
+        //check if the array is empty
+        if (empty($data)) {
+            $json_str = file_get_contents('php://input');
+            $data = json_decode($json_str, true);
+        }
 
-        $response = $webhooks->webhookHandler($json_str, $_SERVER['HTTP_X_KOPOKOPO_SIGNATURE']);
+        $response = $webhooks->webhookHandler($data, $_SERVER['HTTP_X_KOPOKOPO_SIGNATURE']);
+
+        $this->log('webhook', $response);
 
         return $response;
-        
+
     }
 
     public function stk_webhook()
@@ -362,12 +424,18 @@ class KopokopoAPI
 
         $webhooks = $K2->Webhooks();
 
-        $json_str = file_get_contents('php://input');
+        //check if the array is empty
+        if (empty($data)) {
+            $json_str = file_get_contents('php://input');
+            $data = json_decode($json_str, true);
+        }
 
-        $response = $webhooks->webhookHandler($json_str, $_SERVER['HTTP_X_KOPOKOPO_SIGNATURE']);
+        $response = $webhooks->webhookHandler($data, $_SERVER['HTTP_X_KOPOKOPO_SIGNATURE']);
+
+        $this->log('stk_webhook', $response);
 
         return $response;
-        
+
     }
 
     public function polling_webhook()
@@ -376,12 +444,18 @@ class KopokopoAPI
 
         $webhooks = $K2->Webhooks();
 
-        $json_str = file_get_contents('php://input');
+        //check if the array is empty
+        if (empty($data)) {
+            $json_str = file_get_contents('php://input');
+            $data = json_decode($json_str, true);
+        }
 
-        $response = $webhooks->webhookHandler($json_str, $_SERVER['HTTP_X_KOPOKOPO_SIGNATURE']);
+        $response = $webhooks->webhookHandler($data, $_SERVER['HTTP_X_KOPOKOPO_SIGNATURE']);
+
+        $this->log('polling_webhook', $response);
 
         return $response;
-        
+
     }
 
     public function smsnotification_webhook()
@@ -390,9 +464,15 @@ class KopokopoAPI
 
         $webhooks = $K2->Webhooks();
 
-        $json_str = file_get_contents('php://input');
+        //check if the array is empty
+        if (empty($data)) {
+            $json_str = file_get_contents('php://input');
+            $data = json_decode($json_str, true);
+        }
 
-        $response = $webhooks->webhookHandler($json_str, $_SERVER['HTTP_X_KOPOKOPO_SIGNATURE']);
+        $response = $webhooks->webhookHandler($data, $_SERVER['HTTP_X_KOPOKOPO_SIGNATURE']);
+
+        $this->log('smsnotification_webhook', $response);
 
         return $response;
     }
@@ -403,12 +483,18 @@ class KopokopoAPI
 
         $webhooks = $K2->Webhooks();
 
-        $json_str = file_get_contents('php://input');
+        //check if the array is empty
+        if (empty($data)) {
+            $json_str = file_get_contents('php://input');
+            $data = json_decode($json_str, true);
+        }
 
-        $response = $webhooks->webhookHandler($json_str, $_SERVER['HTTP_X_KOPOKOPO_SIGNATURE']);
+        $response = $webhooks->webhookHandler($data, $_SERVER['HTTP_X_KOPOKOPO_SIGNATURE']);
+
+        $this->log('transfer_webhook', $response);
 
         return $response;
-        
+
     }
 
     public function pay_webhook()
@@ -417,27 +503,80 @@ class KopokopoAPI
 
         $webhooks = $K2->Webhooks();
 
-        $json_str = file_get_contents('php://input');
+        //check if the array is empty
+        if (empty($data)) {
+            $json_str = file_get_contents('php://input');
+            $data = json_decode($json_str, true);
+        }
 
-        $response = $webhooks->webhookHandler($json_str, $_SERVER['HTTP_X_KOPOKOPO_SIGNATURE']);
+        $response = $webhooks->webhookHandler($data, $_SERVER['HTTP_X_KOPOKOPO_SIGNATURE']);
+
+        $this->log('pay_webhook', $response);
 
         return $response;
-        
+
     }
 
-    public function status($data)
+    public function status($data, $type = 'webhooks')
     {
+
+        //check if data is string or array with status and location
+        if (is_array($data)) {
+            $location = $data['location'];
+        } else {
+            $location = $data;
+        }
+
+        //check if status is success
+        if (is_array($data) && $data['status'] != 'success') {
+            return ['status' => 'error', 'data' => [], 'message' => 'Invalid status'];
+        }
+
         $K2 = new K2($this->options);
 
         $webhooks = $K2->Webhooks();
 
-        $options = array(
-            'location' => $data['location'],
-            'accessToken' => $access_token,
-        );
-        $response = $webhooks->getStatus($options);
+        switch ($type) {
+            case 'stk':
+                $webhooks = $K2->StkService();
+                break;
+            case 'polling':
+                $webhooks = $K2->PollingService();
+                break;
+            case 'smsnotification':
+                $webhooks = $K2->SmsNotificationService();
+                break;
+            case 'transfer':
+                $webhooks = $K2->SettlementTransferService();
+                break;
+            case 'pay':
+                $webhooks = $K2->PayService();
+                break;
+            default:
+                break;
+        }
 
-        return $response;
+        $options = array(
+            'location' => $location,
+            'accessToken' => $this->access_token,
+        );
+
+        $result = $webhooks->getStatus($options);
+
+        return $result;
+    }
+
+    //function for logging the response from kopokopo
+
+    public function log($function, $response)
+    {
+        $output = new \Symfony\Component\Console\Output\ConsoleOutput();
+
+        $output->writeln('----------------------------------');
+        $output->writeln('kopokopo response for ' . $function);
+        $output->writeln(json_encode($response));
+        $output->writeln('');
+
     }
 
 }

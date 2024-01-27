@@ -27,7 +27,8 @@ class RecipientMobile extends BaseModel
      * @var array<string>
      */
     protected $fillable = [
-        'reference', 'first_name', 'last_name', 'email', 'phone_number', 'network', 'location', 'faking', 'published',
+        'reference', 'first_name', 'last_name', 'email', 'phone_number', 'network', 
+        'location', 'faking', 'result', 'published',
     ];
 
     /**
@@ -62,6 +63,7 @@ class RecipientMobile extends BaseModel
         $this->fields->string('phone_number')->html('text');
         $this->fields->string('network')->html('text');
         $this->fields->string('location')->nullable()->html('text');
+        $this->fields->text('result')->nullable()->html('textarea');
         $this->fields->tinyInteger('faking')->nullable()->default(0)->html('switch');
         $this->fields->tinyInteger('published')->nullable()->default(0)->html('switch');
     }

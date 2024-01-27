@@ -74,6 +74,7 @@ class Stkpush extends BaseModel
         $this->fields->string('link_self')->nullable()->html('text');
         $this->fields->string('link_resource')->nullable()->html('text');
         $this->fields->string('location')->nullable()->html('text');
+        $this->fields->text('result')->nullable()->html('textarea');
         $this->fields->tinyInteger('faking')->nullable()->default(0)->html('switch');
         $this->fields->tinyInteger('published')->nullable()->default(0)->html('switch');
     }

@@ -27,7 +27,7 @@ class RecipientTill extends BaseModel
      * @var array<string>
      */
     protected $fillable = [
-        'reference', 'till_number', 'till_name', 'location', 'faking', 'published',
+        'reference', 'till_number', 'till_name', 'location', 'faking', 'result', 'published',
     ];
 
     /**
@@ -60,6 +60,7 @@ class RecipientTill extends BaseModel
         $this->fields->string('till_number')->html('text');
         $this->fields->string('till_name')->html('text');
         $this->fields->string('location')->nullable()->html('text');
+        $this->fields->string('result')->nullable()->html('textarea');
         $this->fields->tinyInteger('faking')->nullable()->default(0)->html('switch');
         $this->fields->tinyInteger('published')->nullable()->default(0)->html('switch');
     }

@@ -35,7 +35,20 @@ class KopokopoRecipientTillCreated
 
             $response = $kopokopo->paytillrecipient($data);
 
-            $event->model->location = $response['location'] ?? '';
+            //check if response['status'] is success and location is set
+            if ($response['status'] == 'success' && isset($response['location'])) {
+                $event->model->location = $response['location'];
+                //check if response['result'] is an array and response['result']['status'] is success
+                if (is_array($response['result']) && $response['result']['status'] == 'success') {
+                    $event->model->published = true;
+                    $event->model->result = $response['result'];
+                    $event->model->reference = $response['result']['data']['recipientReference'];
+                } else {
+                    $event->model->published = false;
+                }
+
+            }
+
             $event->model->save();
         }
 

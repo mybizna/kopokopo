@@ -27,7 +27,8 @@ class RecipientPaybill extends BaseModel
      * @var array<string>
      */
     protected $fillable = [
-        'reference', 'paybill_name', 'paybill_number', 'paybill_account_number', 'location', 'faking', 'published',
+        'reference', 'paybill_name', 'paybill_number', 'paybill_account_number', 
+        'location', 'faking', 'result', 'published',
     ];
 
     /**
@@ -60,6 +61,7 @@ class RecipientPaybill extends BaseModel
         $this->fields->string('paybill_number')->html('text');
         $this->fields->string('paybill_account_number')->html('text');
         $this->fields->string('location')->nullable()->html('text');
+        $this->fields->text('result')->nullable()->html('textarea');
         $this->fields->tinyInteger('faking')->nullable()->default(0)->html('switch');
         $this->fields->tinyInteger('published')->nullable()->default(0)->html('switch');
     }
