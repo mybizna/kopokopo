@@ -6,29 +6,33 @@ use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Log;
 use Kopokopo\SDK\K2;
+use Modules\Kopokopo\Entities\Payment;
 
 class KopokopoAPI
 {
     private $access_token;
     private $options;
     private $till_number;
+    private $stk_till_number;
 
     public function __construct()
     {
 
         $enable_faking = Config::get('kopokopo.enable_faking');
-
+        
         $faking = session('client_faking');
 
         if (!$enable_faking) {
             $faking = false;
         }
 
+        $sandbox_stk_till_number = Config::get('kopokopo.sandbox_stk_till_number');
         $sandbox_till_number = Config::get('kopokopo.sandbox_till_number');
         $sandbox_client_id = Config::get('kopokopo.sandbox_client_id');
         $sandbox_client_secret = Config::get('kopokopo.sandbox_client_secret');
         $sandbox_api_key = Config::get('kopokopo.sandbox_api_key');
 
+        $stk_till_number = Config::get('kopokopo.stk_till_number');
         $till_number = Config::get('kopokopo.till_number');
         $client_id = Config::get('kopokopo.client_id');
         $client_secret = Config::get('kopokopo.client_secret');
@@ -41,6 +45,7 @@ class KopokopoAPI
         $subdomain = ($faking) ? 'sandbox' : 'api';
 
         $this->till_number = ($faking) ? $sandbox_till_number : $till_number;
+        $this->stk_till_number = ($faking) ? $sandbox_stk_till_number : $stk_till_number;
 
         $this->options = [
             'clientId' => ($faking) ? $sandbox_client_id : $client_id,
@@ -145,12 +150,13 @@ class KopokopoAPI
 
         $options = [
             'paymentChannel' => 'M-PESA STK Push',
-            'tillNumber' => $this->till_number,
+            'tillNumber' => $this->stk_till_number,
             'firstName' => $data['firstName'],
             'lastName' => $data['lastName'],
             'currency' => 'KES',
             'phoneNumber' => $data['phoneNumber'],
             'amount' => $data['amount'],
+            'metadata' => $data['metadata'],
             'callbackUrl' => $data['callbackUrl'] ?? url('/') . '/kopokopo/stk/webhook',
             'accessToken' => $this->access_token,
         ];
@@ -418,23 +424,75 @@ class KopokopoAPI
 
     }
 
-    public function stk_webhook()
+    public function stk_webhook($data)
     {
         $K2 = new K2($this->options);
 
         $webhooks = $K2->Webhooks();
 
-        //check if the array is empty
-        if (empty($data)) {
-            $json_str = file_get_contents('php://input');
-            $data = json_decode($json_str, true);
+        $this->log('stk_webhook', $data);
+
+        $data = $data['data'];
+
+        $result = [
+            'trans_id' => $data['id'],
+            'type' => $data['type'],
+        ]; 
+
+        if (isset($data['attributes'])) {
+
+            $attributes = $data['attributes'];
+
+            $result['initiation_time'] = (isset($attributes['initiation_time'])) ? $attributes['initiation_time'] : date('Y-m-d H:i:s');
+            $result['status'] = (isset($attributes['status'])) ? strtolower($attributes['status']) : 'failed';
+            $result['metadata'] = (isset($attributes['metadata'])) ? json_encode($attributes['metadata']) : '{}';
+
+            if (isset($attributes['event'])) {
+
+                $event = $attributes['event'];
+
+                $result['event_type'] = (isset($event['type'])) ? $event['type'] : '';
+                $result['errors'] = (isset($event['errors'])) ? json_encode($event['errors']) : '{}';
+
+                if (isset($event['resource'])) {
+                    $resource = $event['resource'];
+
+                    $result['resource_id'] = $resource['id'];
+                    $result['reference'] = $resource['reference'];
+                    $result['origination_time'] = $resource['origination_time'];
+                    $result['amount'] = $resource['amount'];
+                    $result['currency'] = $resource['currency'];
+                    $result['sender_phone_number'] = $resource['sender_phone_number'];
+                    $result['till_number'] = $resource['till_number'];
+                    $result['resource_status'] = $resource['status'];
+                    $result['sender_first_name'] = $resource['sender_first_name'];
+                    $result['sender_middle_name'] = $resource['sender_middle_name'];
+                    $result['sender_last_name'] = $resource['sender_last_name'];
+                }
+
+            }
+
+            if (isset($attributes['_links'])) {
+                $result['link_self'] = $attributes['_links']['self'];
+                $result['link_resource'] = $attributes['_links']['callback_url'];
+            }
         }
 
-        $response = $webhooks->webhookHandler($data, $_SERVER['HTTP_X_KOPOKOPO_SIGNATURE']);
+        // check if link_self has sandbox
+        $result['faking'] = (strpos($result['link_self'], 'sandbox') !== false) ? true : false;
+        $result['published'] = ($result['status'] == 'success') ? true : false;
 
-        $this->log('stk_webhook', $response);
+        $payment = Payment::where('trans_id', $result['trans_id'])->first();
 
-        return $response;
+        if ($payment) {
+            $payment->update($result);
+        } else {
+            $payment = Payment::create($result);
+        }
+
+        $this->log('stk_webhook result', $result);
+
+        return $result;
 
     }
 
@@ -572,9 +630,18 @@ class KopokopoAPI
     {
         $output = new \Symfony\Component\Console\Output\ConsoleOutput();
 
+        Log::info('This is an informational message.');
+
+        Log::info('----------------------------------');
         $output->writeln('----------------------------------');
+
+        Log::info('kopokopo response for ' . $function);
         $output->writeln('kopokopo response for ' . $function);
+
+        Log::info(json_encode($response));
         $output->writeln(json_encode($response));
+
+        Log::info('');
         $output->writeln('');
 
     }

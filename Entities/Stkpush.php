@@ -29,6 +29,7 @@ class Stkpush extends BaseModel
     protected $fillable = [
         'payment_channel', 'phone_number', 'currency', 'amount', 'till_number',
         'first_name', 'last_name', 'email', 'callback', 'link_self', 'link_resource',
+        'customer_id', 'reference', 'notes', 'result', 'item_id',
         'module', 'model', 'location', 'faking', 'published',
     ];
 
@@ -61,8 +62,9 @@ class Stkpush extends BaseModel
         $this->fields->string('phone_number')->html('text');
         $this->fields->string('currency')->html('text');
         $this->fields->string('amount')->html('text');
-        $this->fields->tinyInteger('module')->html('switch');
-        $this->fields->tinyInteger('model')->html('switch');
+        $this->fields->string('module')->html('text');
+        $this->fields->string('model')->html('text');
+        $this->fields->string('item_id')->html('number');
         $this->fields->string('till_number')->html('text');
         $this->fields->string('first_name')->nullable()->html('text');
         $this->fields->string('last_name')->nullable()->html('text');

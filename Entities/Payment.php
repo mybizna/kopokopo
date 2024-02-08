@@ -29,8 +29,9 @@ class Payment extends BaseModel
     protected $fillable = [
         'trans_id', 'type', 'event_type', 'initiation_time', 'resource_id', 'reference',
         'origination_time', 'amount', 'currency', 'sender_phone_number', 'till_number',
-        'system_str', 'resource_status', 'sender_first_name', 'sender_middle_name', 'sender_last_name',
-        'errors', 'metadata', 'link_self', 'link_resource', 'location', 'faking', 'published',
+        'status', 'system_str', 'resource_status', 'sender_first_name', 'sender_middle_name',
+        'sender_last_name', 'errors', 'metadata', 'link_self', 'link_resource', 'location', 
+        'faking', 'published',
     ];
 
     /**
@@ -70,6 +71,7 @@ class Payment extends BaseModel
         $this->fields->string('sender_phone_number')->nullable()->html('text');
         $this->fields->string('till_number')->nullable()->html('text');
         $this->fields->string('system_str')->nullable()->html('text');
+        $this->fields->string('status')->nullable()->html('text');
         $this->fields->string('resource_status')->nullable()->html('text');
         $this->fields->string('sender_first_name')->nullable()->html('text');
         $this->fields->string('sender_middle_name')->nullable()->html('text');
@@ -88,7 +90,7 @@ class Payment extends BaseModel
      */
     public function structure($structure): array
     {
-        $structure['table'] = ['sender_first_name', 'sender_middle_name', 'sender_last_name', 'sender_phone_number', 'trans_id', 'type', 'resource_id', 'reference', 'origination_time', 'amount', 'currency', 'till_number', 'published'];
+        $structure['table'] = ['sender_phone_number', 'trans_id', 'type', 'status', 'resource_id', 'reference', 'origination_time', 'amount', 'currency', 'till_number', 'published'];
         $structure['filter'] = ['sender_phone_number', 'till_number', 'published'];
 
         return $structure;

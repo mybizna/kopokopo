@@ -45,11 +45,11 @@ class KopokopoController extends BaseController
 
     public function stkpushprocessed(Request $request)
     {
-        $kopokopo = new Kopokopo();
+        $kopokopo = new KopokopoAPI();
 
         $data = $request->all();
 
-        $result = $kopokopo->stkpushprocessed($data);
+        $result = $kopokopo->stk_webhook($data);
 
         return response()->json($result);
     }

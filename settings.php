@@ -2,13 +2,21 @@
 
 return [
 
-
     'enable_faking' => [
         "title" => " Enable Faking",
         "description" => "Enable Faking i.e. Sandbox.",
         "info" => "Set Enable Faking.",
         "type" => "switch",
         "value" => "1",
+
+    ],
+
+    'sandbox_stk_till_number' => [
+        "title" => "Sandbox Stk Till Number",
+        "description" => "Sandbox Stk Till Number.",
+        "info" => "Set Sandbox Stk Till Number.",
+        "type" => "text",
+        "value" => "",
 
     ],
 
@@ -42,6 +50,15 @@ return [
         "title" => "Sandbox API Key",
         "description" => "Sandbox API Key.",
         "info" => "Set Sandbox API Key.",
+        "type" => "text",
+        "value" => "",
+
+    ],
+
+    'stk_till_number' => [
+        "title" => "Stk Till Number",
+        "description" => "Stk Till Number.",
+        "info" => "Set Stk Till Number.",
         "type" => "text",
         "value" => "",
 

@@ -32,6 +32,11 @@ class KopokopoStkpushCreated
                 'phoneNumber' => $event->model->phone_number,
                 'amount' => $event->model->amount,
                 'callbackUrl' => $event->model->callback_url,
+                'metadata' => [
+                    'model' => $event->model->model,
+                    'module'=>$event->model->module,
+                    'item_id'=>$event->model->item_id,
+                ]
             ];
 
             $kopokopo = new KopokopoAPI();
