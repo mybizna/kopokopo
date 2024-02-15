@@ -9,11 +9,13 @@ use Modules\Kopokopo\Listeners\KopokopoRecipientMobileCreated;
 use Modules\Kopokopo\Listeners\KopokopoRecipientPaybillCreated;
 use Modules\Kopokopo\Listeners\KopokopoRecipientTillCreated;
 use Modules\Kopokopo\Listeners\KopokopoStkpushCreated;
+use Modules\Kopokopo\Listeners\KopokopoPayCreated;
 
 class EventServiceProvider extends ServiceProvider
 {
     protected $listen = [
         ModelCreated::class => [
+            KopokopoPayCreated::class,
             KopokopoStkpushCreated::class,
             KopokopoRecipientBankCreated::class,
             KopokopoRecipientMobileCreated::class,

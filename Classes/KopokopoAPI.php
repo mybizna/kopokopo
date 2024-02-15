@@ -303,6 +303,8 @@ class KopokopoAPI
 
         $response = $transfer->addPayRecipient($options);
 
+        $this->log('pre paymobilerecipient', $response);
+
         $response['result'] = $this->status($response, 'pay');
 
         $this->log('paymobilerecipient', $response);
@@ -396,6 +398,8 @@ class KopokopoAPI
         ];
 
         $response = $pay->sendPay($options);
+
+        $this->log('pre pay', $response);
 
         $response['result'] = $this->status($response, 'pay');
 
@@ -580,14 +584,14 @@ class KopokopoAPI
 
         //check if data is string or array with status and location
         if (is_array($data)) {
-            $location = $data['location'];
+            $location = (isset($data['location'])) ? $data['location'] : '';
         } else {
             $location = $data;
         }
 
         //check if status is success
         if (is_array($data) && $data['status'] != 'success') {
-            return ['status' => 'error', 'data' => [], 'message' => 'Invalid status'];
+            return ['status' => 'error', 'data' => $data, 'message' => 'Invalid status'];
         }
 
         $K2 = new K2($this->options);
