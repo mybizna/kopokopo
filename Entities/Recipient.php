@@ -72,8 +72,8 @@ class Recipient extends BaseModel
         $structure['table'] = ['title', 'type', 'system_id', 'published'];
         $structure['form'] = [
             ['label' => 'Title', 'class' => 'col-span-full', 'fields' => ['title']],
-            ['label' => 'Recipient', 'class' => 'col-span-full md:col-span-6', 'fields' => ['type', 'system_id']],
-            ['label' => 'Published', 'class' => 'col-span-full md:col-span-6', 'fields' => ['published']],
+            ['label' => 'Recipient', 'class' => 'col-span-full  md:col-span-6 md:pr-2', 'fields' => ['type', 'system_id']],
+            ['label' => 'Published', 'class' => 'col-span-full  md:col-span-6 md:pr-2', 'fields' => ['published']],
         ];
         $structure['filter'] = ['title', 'system_id', 'published'];
 
