@@ -67,4 +67,14 @@ class RecipientMobile extends BaseModel
         $this->fields->tinyInteger('faking')->nullable()->default(0)->html('switch');
         $this->fields->tinyInteger('published')->nullable()->default(0)->html('switch');
     }
+
+    /**
+     * Define rights for this model.
+     *
+     * @return array
+     */
+    public function rights(): array
+    {
+
+    }
 }
