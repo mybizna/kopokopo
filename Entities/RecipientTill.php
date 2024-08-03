@@ -15,13 +15,6 @@ class RecipientTill extends BaseModel
     protected $table = "kopokopo_recipient_till";
 
     /**
-     * List of tables names that are need in this model during migration.
-     *
-     * @var array<string>
-     */
-    public array $migrationDependancy = [];
-
-    /**
      * The fields that can be filled
      *
      * @var array<string>
@@ -29,13 +22,6 @@ class RecipientTill extends BaseModel
     protected $fillable = [
         'reference', 'till_number', 'till_name', 'location', 'faking', 'result', 'published',
     ];
-
-    /**
-     * The fields that are to be render when performing relationship queries.
-     *
-     * @var array<string>
-     */
-    public $rec_names = ['till_number', 'till_name'];
 
     /**
      * The attributes that should be mutated to dates.
@@ -65,30 +51,7 @@ class RecipientTill extends BaseModel
         $this->fields->tinyInteger('published')->nullable()->default(0)->html('switch');
     }
 
-    /**
-     * List of structure for this model.
-     */
-    public function structure($structure): array
-    {
-        $structure['table'] = ['till_number', 'till_name', 'published'];
-        $structure['filter'] = ['till_number', 'till_name', 'published'];
+  
 
-        return $structure;
-    }
 
-    /**
-     * Define rights for this model.
-     *
-     * @return array
-     */
-    public function rights(): array
-    {
-        $rights = parent::rights();
-
-        $rights['staff'] = ['view' => true];
-        $rights['registered'] = ['view' => true];
-        $rights['guest'] = [];
-
-        return $rights;
-    }
 }

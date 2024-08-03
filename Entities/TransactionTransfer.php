@@ -16,13 +16,6 @@ class TransactionTransfer extends BaseModel
     protected $table = "kopokopo_transaction_transfer";
 
     /**
-     * List of tables names that are need in this model during migration.
-     *
-     * @var array<string>
-     */
-    public array $migrationDependancy = [];
-
-    /**
      * The fields that can be filled
      *
      * @var array<string>
@@ -33,13 +26,6 @@ class TransactionTransfer extends BaseModel
         'amount', 'currency', 'settlement_method', 'disbursements', 'link_self', 'link_resource',
         'location', 'faking', 'published',
     ];
-
-    /**
-     * The fields that are to be render when performing relationship queries.
-     *
-     * @var array<string>
-     */
-    public $rec_names = ['trans_id', 'amount'];
 
     /**
      * The attributes that should be mutated to dates.
@@ -80,31 +66,8 @@ class TransactionTransfer extends BaseModel
         $this->fields->tinyInteger('published')->nullable()->default(0)->html('switch');
     }
 
-    /**
-     * List of structure for this model.
-     */
-    public function structure($structure): array
-    {
-        $structure['table'] = ['trans_id', 'status', 'destination_type', 'destination_reference', 'account_name', 'account_number', 'bank_branch_ref', 'amount', 'currency', 'settlement_method', 'disbursements', 'published'];
-        $structure['filter'] = ['account_name', 'account_number', 'published'];
+  
 
-        return $structure;
-    }
 
-    /**
-     * Define rights for this model.
-     *
-     * @return array
-     */
-    public function rights(): array
-    {
-        $rights = parent::rights();
-
-        $rights['staff'] = ['view' => true];
-        $rights['registered'] = ['view' => true];
-        $rights['guest'] = [];
-
-        return $rights;
-    }
 
 }

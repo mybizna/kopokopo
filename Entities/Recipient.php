@@ -15,13 +15,6 @@ class Recipient extends BaseModel
     protected $table = "kopokopo_recipient";
 
     /**
-     * List of tables names that are need in this model during migration.
-     *
-     * @var array<string>
-     */
-    public array $migrationDependancy = [];
-
-    /**
      * The fields that can be filled
      *
      * @var array<string>
@@ -30,12 +23,6 @@ class Recipient extends BaseModel
         'title', 'type', 'system_id', 'location', 'faking', 'result', 'published',
     ];
 
-    /**
-     * The fields that are to be render when performing relationship queries.
-     *
-     * @var array<string>
-     */
-    public $rec_names = ['title'];
 
     /**
      * The attributes that should be mutated to dates.
@@ -64,35 +51,6 @@ class Recipient extends BaseModel
         $this->fields->tinyInteger('published')->nullable()->default(0)->html('switch');
     }
 
-    /**
-     * List of structure for this model.
-     */
-    public function structure($structure): array
-    {
-        $structure['table'] = ['title', 'type', 'system_id', 'published'];
-        $structure['form'] = [
-            ['label' => 'Recipient Title', 'class' => 'col-span-full', 'fields' => ['title']],
-            ['label' => 'Recipient Details', 'class' => 'col-span-full  md:col-span-6 md:pr-2', 'fields' => ['type', 'system_id']],
-            ['label' => 'Recipient Published', 'class' => 'col-span-full  md:col-span-6 md:pr-2', 'fields' => ['published']],
-        ];
-        $structure['filter'] = ['title', 'system_id', 'published'];
 
-        return $structure;
-    }
-
-    /**
-     * Define rights for this model.
-     *
-     * @return array
-     */
-    public function rights(): array
-    {
-        $rights = parent::rights();
-
-        $rights['staff'] = ['view' => true];
-        $rights['registered'] = ['view' => true];
-        $rights['guest'] = [];
-
-        return $rights;
-    }
+ 
 }

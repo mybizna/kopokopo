@@ -15,13 +15,6 @@ class Payment extends BaseModel
     protected $table = "kopokopo_payment";
 
     /**
-     * List of tables names that are need in this model during migration.
-     *
-     * @var array<string>
-     */
-    public array $migrationDependancy = [];
-
-    /**
      * The fields that can be filled
      *
      * @var array<string>
@@ -33,13 +26,6 @@ class Payment extends BaseModel
         'sender_last_name', 'errors', 'metadata', 'link_self', 'link_resource', 'location', 
         'faking', 'published',
     ];
-
-    /**
-     * The fields that are to be render when performing relationship queries.
-     *
-     * @var array<string>
-     */
-    public $rec_names = ['trans_id', 'reference'];
 
     /**
      * The attributes that should be mutated to dates.
@@ -85,30 +71,7 @@ class Payment extends BaseModel
         $this->fields->tinyInteger('published')->nullable()->default(0)->html('switch');
     }
 
-    /**
-     * List of structure for this model.
-     */
-    public function structure($structure): array
-    {
-        $structure['table'] = ['sender_phone_number', 'trans_id', 'type', 'status', 'resource_id', 'reference', 'origination_time', 'amount', 'currency', 'till_number', 'published'];
-        $structure['filter'] = ['sender_phone_number', 'till_number', 'published'];
 
-        return $structure;
-    }
 
-    /**
-     * Define rights for this model.
-     *
-     * @return array
-     */
-    public function rights(): array
-    {
-        $rights = parent::rights();
 
-        $rights['staff'] = ['view' => true];
-        $rights['registered'] = ['view' => true];
-        $rights['guest'] = [];
-
-        return $rights;
-    }
 }

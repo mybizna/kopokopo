@@ -15,13 +15,6 @@ class RecipientPaybill extends BaseModel
     protected $table = "kopokopo_recipient_paybill";
 
     /**
-     * List of tables names that are need in this model during migration.
-     *
-     * @var array<string>
-     */
-    public array $migrationDependancy = [];
-
-    /**
      * The fields that can be filled
      *
      * @var array<string>
@@ -30,13 +23,6 @@ class RecipientPaybill extends BaseModel
         'reference', 'paybill_name', 'paybill_number', 'paybill_account_number', 
         'location', 'faking', 'result', 'published',
     ];
-
-    /**
-     * The fields that are to be render when performing relationship queries.
-     *
-     * @var array<string>
-     */
-    public $rec_names = ['paybill_name', 'paybill_number'];
 
     /**
      * The attributes that should be mutated to dates.
@@ -66,32 +52,8 @@ class RecipientPaybill extends BaseModel
         $this->fields->tinyInteger('published')->nullable()->default(0)->html('switch');
     }
 
-    /**
-     * List of structure for this model.
-     */
-    public function structure($structure): array
-    {
-        $structure['table'] = ['paybill_name', 'paybill_number', 'paybill_account_number', 'published'];
-        $structure['filter'] = ['paybill_name', 'paybill_number', 'paybill_account_number', 'published'];
-
-        return $structure;
-    }
+  
 
 
-    /**
-     * Define rights for this model.
-     *
-     * @return array
-     */
-    public function rights(): array
-    {
-        $rights = parent::rights();
-
-        $rights['staff'] = ['view' => true];
-        $rights['registered'] = ['view' => true];
-        $rights['guest'] = [];
-
-        return $rights;
-    }
 
 }
