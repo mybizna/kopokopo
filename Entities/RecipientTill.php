@@ -2,7 +2,6 @@
 
 namespace Modules\Kopokopo\Entities;
 
-use Illuminate\Database\Schema\Blueprint;
 use Modules\Base\Entities\BaseModel;
 
 class RecipientTill extends BaseModel
@@ -29,29 +28,5 @@ class RecipientTill extends BaseModel
      * @var array <string>
      */
     protected $dates = ['created_at', 'updated_at', 'deleted_at'];
-
-    /**
-     * List of fields to be migrated to the datebase when creating or updating model during migration.
-     *
-     * @param Blueprint $table
-     *
-     * @return void
-     */
-    public function fields(Blueprint $table = null): void
-    {
-        $this->fields = $table ?? new Blueprint($this->table);
-
-        $this->fields->increments('id')->html('hidden');
-        $this->fields->string('reference')->html('text');
-        $this->fields->string('till_number')->html('text');
-        $this->fields->string('till_name')->html('text');
-        $this->fields->string('location')->nullable()->html('text');
-        $this->fields->string('result')->nullable()->html('textarea');
-        $this->fields->tinyInteger('faking')->nullable()->default(0)->html('switch');
-        $this->fields->tinyInteger('published')->nullable()->default(0)->html('switch');
-    }
-
-  
-
 
 }

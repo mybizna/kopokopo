@@ -13,7 +13,14 @@ return new class extends Migration
     {
         Schema::create('kopokopo_withdraw_mobile', function (Blueprint $table) {
             $table->id();
-            
+
+            $table->string('phone_number');
+            $table->string('first_name');
+            $table->string('last_name');
+            $table->string('location')->nullable();
+            $table->tinyInteger('faking')->nullable()->default(0);
+            $table->tinyInteger('published')->nullable()->default(0);
+
             $table->timestamps();
         });
     }

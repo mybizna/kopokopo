@@ -13,7 +13,22 @@ return new class extends Migration
     {
         Schema::create('kopokopo_transaction_merchant', function (Blueprint $table) {
             $table->id();
-            
+
+            $table->string('trans_id');
+            $table->string('passed_created_at');
+            $table->string('event_type');
+            $table->string('resource_id');
+            $table->string('status');
+            $table->string('origination_time');
+            $table->string('amount');
+            $table->string('currency');
+            $table->string('sending_merchant')->nullable();
+            $table->string('link_self')->nullable();
+            $table->string('link_resource')->nullable();
+            $table->string('location')->nullable();
+            $table->tinyInteger('faking')->nullable()->default(0);
+            $table->tinyInteger('published')->nullable()->default(0);
+
             $table->timestamps();
         });
     }

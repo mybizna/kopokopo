@@ -13,6 +13,17 @@ return new class extends Migration
     {
         Schema::create('kopokopo_recipient_paybill', function (Blueprint $table) {
             $table->id();
+
+            $table->string('reference');
+            $table->string('paybill_name');
+            $table->string('paybill_number');
+            $table->string('paybill_account_number');
+            $table->string('location')->nullable();
+            $table->text('result')->nullable();
+            $table->tinyInteger('faking')->nullable()->default(0);
+            $table->tinyInteger('published')->nullable()->default(0);
+
+
             
             $table->timestamps();
         });

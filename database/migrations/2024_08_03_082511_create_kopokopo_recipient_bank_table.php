@@ -13,7 +13,17 @@ return new class extends Migration
     {
         Schema::create('kopokopo_recipient_bank', function (Blueprint $table) {
             $table->id();
-            
+
+            $table->string('reference');
+            $table->string('branch_reference');
+            $table->string('account_name');
+            $table->string('account_number');
+            $table->string('settlement_method');
+            $table->string('location')->nullable();
+            $table->text('result')->nullable();
+            $table->tinyInteger('faking')->nullable()->default(0);
+            $table->tinyInteger('published')->nullable()->default(0);
+
             $table->timestamps();
         });
     }

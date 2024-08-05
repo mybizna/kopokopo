@@ -2,7 +2,6 @@
 
 namespace Modules\Kopokopo\Entities;
 
-use Illuminate\Database\Schema\Blueprint;
 use Modules\Base\Entities\BaseModel;
 
 class TransactionMerchant extends BaseModel
@@ -32,35 +31,5 @@ class TransactionMerchant extends BaseModel
      * @var array <string>
      */
     protected $dates = ['created_at', 'updated_at', 'deleted_at'];
-
-    /**
-     * List of fields to be migrated to the datebase when creating or updating model during migration.
-     *
-     * @param Blueprint $table
-     * @return void
-     */
-    public function fields(Blueprint $table = null): void
-    {
-        $this->fields = $table ?? new Blueprint($this->table);
-
-        $this->fields->increments('id')->html('hidden');
-        $this->fields->string('trans_id')->html('text');
-        $this->fields->string('passed_created_at')->html('text');
-        $this->fields->string('event_type')->html('text');
-        $this->fields->string('resource_id')->html('text');
-        $this->fields->string('status')->html('text');
-        $this->fields->string('origination_time')->html('text');
-        $this->fields->string('amount')->html('text');
-        $this->fields->string('currency')->html('text');
-        $this->fields->string('sending_merchant')->nullable()->html('text');
-        $this->fields->string('link_self')->nullable()->html('text');
-        $this->fields->string('link_resource')->nullable()->html('text');
-        $this->fields->string('location')->nullable()->html('text');
-        $this->fields->tinyInteger('faking')->nullable()->default(0)->html('switch');
-        $this->fields->tinyInteger('published')->nullable()->default(0)->html('switch');
-    }
-
-  
-
 
 }

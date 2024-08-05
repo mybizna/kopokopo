@@ -13,7 +13,15 @@ return new class extends Migration
     {
         Schema::create('kopokopo_recipient', function (Blueprint $table) {
             $table->id();
-            
+
+            $table->string('title');
+            $table->string('system_id');
+            $table->string('type');
+            $table->string('location')->nullable();
+            $table->text('result')->nullable();
+            $table->tinyInteger('faking')->nullable()->default(0);
+            $table->tinyInteger('published')->nullable()->default(0);
+
             $table->timestamps();
         });
     }

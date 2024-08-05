@@ -2,7 +2,6 @@
 
 namespace Modules\Kopokopo\Entities;
 
-use Illuminate\Database\Schema\Blueprint;
 use Modules\Base\Entities\BaseModel;
 
 class Stkpush extends BaseModel
@@ -32,42 +31,5 @@ class Stkpush extends BaseModel
      * @var array <string>
      */
     protected $dates = ['created_at', 'updated_at', 'deleted_at'];
-
-    /**
-     * List of fields to be migrated to the datebase when creating or updating model during migration.
-     *
-     * @param Blueprint $table
-     * @return void
-     */
-    public function fields(Blueprint $table = null): void
-    {
-        $this->fields = $table ?? new Blueprint($this->table);
-
-        $this->fields->increments('id')->html('hidden');
-        $this->fields->string('payment_channel')->default('M-PESA STK Push')->html('text');
-        $this->fields->string('phone_number')->html('text');
-        $this->fields->string('currency')->html('text');
-        $this->fields->string('amount')->html('text');
-        $this->fields->string('module')->html('text');
-        $this->fields->string('model')->html('text');
-        $this->fields->string('item_id')->html('number');
-        $this->fields->string('till_number')->html('text');
-        $this->fields->string('first_name')->nullable()->html('text');
-        $this->fields->string('last_name')->nullable()->html('text');
-        $this->fields->string('email')->nullable()->html('text');
-        $this->fields->string('callback')->nullable()->html('text');
-        $this->fields->string('customer_id')->nullable()->html('text');
-        $this->fields->string('reference')->nullable()->html('text');
-        $this->fields->string('notes')->nullable()->html('text');
-        $this->fields->string('link_self')->nullable()->html('text');
-        $this->fields->string('link_resource')->nullable()->html('text');
-        $this->fields->string('location')->nullable()->html('text');
-        $this->fields->text('result')->nullable()->html('textarea');
-        $this->fields->tinyInteger('faking')->nullable()->default(0)->html('switch');
-        $this->fields->tinyInteger('published')->nullable()->default(0)->html('switch');
-    }
-
-  
-
 
 }

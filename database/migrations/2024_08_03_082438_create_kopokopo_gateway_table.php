@@ -13,7 +13,13 @@ return new class extends Migration
     {
         Schema::create('kopokopo_gateway', function (Blueprint $table) {
             $table->id();
-            
+
+            $table->string('client_id');
+            $table->string('client_secret');
+            $table->string('api_key');
+            $table->string('base_url');
+            $table->tinyInteger('published')->nullable()->default(0);
+
             $table->timestamps();
         });
     }
