@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('kopokopo_pay', function (Blueprint $table) {
             $table->id();
 
-            $table->foreignId('client_id');
+            $table->string('client_id');
             $table->string('destination_type');
             $table->string('destination_reference');
             $table->string('currency');
