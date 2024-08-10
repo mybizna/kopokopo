@@ -2,14 +2,13 @@
 
 namespace Modules\Kopokopo\Classes;
 
-use Kopokopo\SDK\K2;
-use Modules\Kopokopo\Entities\Stkpush;
-use Modules\Kopokopo\Entities\Transaction;
-use Modules\Kopokopo\Entities\TransactionB2b;
-use Modules\Kopokopo\Entities\TransactionCustomer;
-use Modules\Kopokopo\Entities\TransactionM2m;
-use Modules\Kopokopo\Entities\TransactionReversal;
-use Modules\Kopokopo\Entities\Withdraw;
+use Modules\Kopokopo\Models\Stkpush;
+use Modules\Kopokopo\Models\Transaction;
+use Modules\Kopokopo\Models\TransactionB2b;
+use Modules\Kopokopo\Models\TransactionCustomer;
+use Modules\Kopokopo\Models\TransactionM2m;
+use Modules\Kopokopo\Models\TransactionReversal;
+use Modules\Kopokopo\Models\Withdraw;
 
 class Kopokopo
 {
@@ -26,7 +25,6 @@ class Kopokopo
 
         return response()->json($result);
     }
-
 
     public function stkpush($data)
     {

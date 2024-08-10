@@ -1,9 +1,8 @@
 <?php
 
-namespace Modules\Kopokopo\Entities;
+namespace Modules\Kopokopo\Models;
 
-use Illuminate\Database\Schema\Blueprint;
-use Modules\Base\Entities\BaseModel;
+use Modules\Base\Models\BaseModel;
 
 class RecipientPaybill extends BaseModel
 {
@@ -20,7 +19,7 @@ class RecipientPaybill extends BaseModel
      * @var array<string>
      */
     protected $fillable = [
-        'reference', 'paybill_name', 'paybill_number', 'paybill_account_number', 
+        'reference', 'paybill_name', 'paybill_number', 'paybill_account_number',
         'location', 'faking', 'result', 'published',
     ];
 
@@ -30,10 +29,5 @@ class RecipientPaybill extends BaseModel
      * @var array <string>
      */
     protected $dates = ['created_at', 'updated_at', 'deleted_at'];
-
-
-  
-
-
 
 }

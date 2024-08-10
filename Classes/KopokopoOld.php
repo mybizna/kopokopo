@@ -6,9 +6,9 @@ use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use Modules\Account\Classes\PaymentProcessor;
-use Modules\Account\Entities\Transaction;
-use Modules\Kopokopo\Entities\Payment as Kopokopopayment;
-use Modules\Kopokopo\Entities\Transaction as Kopokopotransaction;
+use Modules\Account\Models\Transaction;
+use Modules\Kopokopo\Models\Payment as Kopokopopayment;
+use Modules\Kopokopo\Models\Transaction as Kopokopotransaction;
 
 class KopokopoOld
 {

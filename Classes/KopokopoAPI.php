@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Log;
 use Kopokopo\SDK\K2;
-use Modules\Kopokopo\Entities\Payment;
+use Modules\Kopokopo\Models\Payment;
 
 class KopokopoAPI
 {
@@ -19,7 +19,7 @@ class KopokopoAPI
     {
 
         $enable_faking = Config::get('kopokopo.enable_faking');
-        
+
         $faking = session('client_faking');
 
         if (!$enable_faking) {
@@ -441,7 +441,7 @@ class KopokopoAPI
         $result = [
             'trans_id' => $data['id'],
             'type' => $data['type'],
-        ]; 
+        ];
 
         if (isset($data['attributes'])) {
 

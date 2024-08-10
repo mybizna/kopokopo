@@ -1,9 +1,8 @@
 <?php
 
-namespace Modules\Kopokopo\Entities;
+namespace Modules\Kopokopo\Models;
 
-use Illuminate\Database\Schema\Blueprint;
-use Modules\Base\Entities\BaseModel;
+use Modules\Base\Models\BaseModel;
 
 class TransactionB2b extends BaseModel
 {
@@ -32,7 +31,5 @@ class TransactionB2b extends BaseModel
      * @var array <string>
      */
     protected $dates = ['created_at', 'updated_at', 'deleted_at'];
-
-
 
 }

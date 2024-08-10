@@ -1,9 +1,8 @@
 <?php
 
-namespace Modules\Kopokopo\Entities;
+namespace Modules\Kopokopo\Models;
 
-use Illuminate\Database\Schema\Blueprint;
-use Modules\Base\Entities\BaseModel;
+use Modules\Base\Models\BaseModel;
 
 class RecipientBank extends BaseModel
 {
@@ -20,8 +19,8 @@ class RecipientBank extends BaseModel
      * @var array<string>
      */
     protected $fillable = [
-        'reference', 'branch_reference', 'account_name', 'account_number', 
-        'settlement_method', 'location', 'faking', 'result', 'published'
+        'reference', 'branch_reference', 'account_name', 'account_number',
+        'settlement_method', 'location', 'faking', 'result', 'published',
     ];
 
     /**
@@ -30,8 +29,5 @@ class RecipientBank extends BaseModel
      * @var array <string>
      */
     protected $dates = ['created_at', 'updated_at', 'deleted_at'];
-
- 
-
 
 }

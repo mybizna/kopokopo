@@ -1,8 +1,8 @@
 <?php
 
-namespace Modules\Kopokopo\Entities;
+namespace Modules\Kopokopo\Models;
 
-use Modules\Base\Entities\BaseModel;
+use Modules\Base\Models\BaseModel;
 
 class Pay extends BaseModel
 {
