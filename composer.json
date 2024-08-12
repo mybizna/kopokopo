@@ -27,7 +27,14 @@
   },
   "autoload": {
     "psr-4": {
-      "Modules\\Kopokopo\\": ""
+      "Modules\\Kopokopo\\": "app/",
+      "Modules\\Kopokopo\\Database\\Factories\\": "database/factories/",
+      "Modules\\Kopokopo\\Database\\Seeders\\": "database/seeders/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Modules\\Kopokopo\\Tests\\": "tests/"
     }
   }
 }
