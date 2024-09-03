@@ -6,6 +6,7 @@ use Modules\Base\Models\BaseModel;
 
 class TransactionM2m extends BaseModel
 {
+
     /**
      * The table associated with the model.
      *
@@ -31,5 +32,4 @@ class TransactionM2m extends BaseModel
      * @var array <string>
      */
     protected $dates = ['created_at', 'updated_at', 'deleted_at'];
-
 }

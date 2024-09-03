@@ -6,6 +6,7 @@ use Modules\Base\Models\BaseModel;
 
 class Gateway extends BaseModel
 {
+
     /**
      * The table associated with the model.
      *
@@ -26,5 +27,4 @@ class Gateway extends BaseModel
      * @var array <string>
      */
     protected $dates = ['created_at', 'updated_at', 'deleted_at'];
-
 }

@@ -6,6 +6,7 @@ use Modules\Base\Models\BaseModel;
 
 class Recipient extends BaseModel
 {
+
     /**
      * The table associated with the model.
      *
@@ -28,5 +29,4 @@ class Recipient extends BaseModel
      * @var array <string>
      */
     protected $dates = ['created_at', 'updated_at', 'deleted_at'];
-
 }
