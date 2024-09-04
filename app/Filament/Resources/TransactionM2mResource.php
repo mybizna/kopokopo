@@ -2,9 +2,6 @@
 
 namespace Modules\Kopokopo\Filament\Resources;
 
-use Modules\Kopokopo\Filament\Resources\TransactionM2mResource\Pages;
-use Modules\Kopokopo\Filament\Resources\TransactionM2mResource\RelationManagers;
-use Modules\Kopokopo\Models\TransactionM2m;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -12,10 +9,16 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Modules\Kopokopo\Filament\Resources\TransactionM2mResource\Pages;
+use Modules\Kopokopo\Models\TransactionM2m;
 
 class TransactionM2mResource extends Resource
 {
     protected static ?string $model = TransactionM2m::class;
+
+    protected static ?string $slug = 'kopokopo/transaction/m2m';
+
+    protected static ?string $navigationGroup = 'Kopokopo';
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 

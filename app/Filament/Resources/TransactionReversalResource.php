@@ -2,9 +2,6 @@
 
 namespace Modules\Kopokopo\Filament\Resources;
 
-use Modules\Kopokopo\Filament\Resources\TransactionReversalResource\Pages;
-use Modules\Kopokopo\Filament\Resources\TransactionReversalResource\RelationManagers;
-use Modules\Kopokopo\Models\TransactionReversal;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -12,10 +9,16 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Modules\Kopokopo\Filament\Resources\TransactionReversalResource\Pages;
+use Modules\Kopokopo\Models\TransactionReversal;
 
 class TransactionReversalResource extends Resource
 {
     protected static ?string $model = TransactionReversal::class;
+
+    protected static ?string $slug = 'kopokopo/transaction/reversal';
+
+    protected static ?string $navigationGroup = 'Kopokopo';
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 

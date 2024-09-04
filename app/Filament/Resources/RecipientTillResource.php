@@ -2,9 +2,6 @@
 
 namespace Modules\Kopokopo\Filament\Resources;
 
-use Modules\Kopokopo\Filament\Resources\RecipientTillResource\Pages;
-use Modules\Kopokopo\Filament\Resources\RecipientTillResource\RelationManagers;
-use Modules\Kopokopo\Models\RecipientTill;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -12,10 +9,16 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Modules\Kopokopo\Filament\Resources\RecipientTillResource\Pages;
+use Modules\Kopokopo\Models\RecipientTill;
 
 class RecipientTillResource extends Resource
 {
     protected static ?string $model = RecipientTill::class;
+
+    protected static ?string $slug = 'kopokopo/recipient/till';
+
+    protected static ?string $navigationGroup = 'Kopokopo';
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 

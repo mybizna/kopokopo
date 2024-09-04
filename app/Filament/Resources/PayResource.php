@@ -2,9 +2,6 @@
 
 namespace Modules\Kopokopo\Filament\Resources;
 
-use Modules\Kopokopo\Filament\Resources\PayResource\Pages;
-use Modules\Kopokopo\Filament\Resources\PayResource\RelationManagers;
-use Modules\Kopokopo\Models\Pay;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -12,10 +9,16 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Modules\Kopokopo\Filament\Resources\PayResource\Pages;
+use Modules\Kopokopo\Models\Pay;
 
 class PayResource extends Resource
 {
     protected static ?string $model = Pay::class;
+
+    protected static ?string $slug = 'kopokopo/pay';
+
+    protected static ?string $navigationGroup = 'Kopokopo';
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 

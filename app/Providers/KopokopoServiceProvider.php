@@ -9,7 +9,7 @@ class KopokopoServiceProvider extends ServiceProvider
 {
     protected string $moduleName = 'Kopokopo';
 
-    protected string $moduleNameLower = 'Kopokopo';
+    protected string $moduleNameLower = 'kopokopo';
 
     /**
      * Boot the application events.

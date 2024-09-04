@@ -2,9 +2,6 @@
 
 namespace Modules\Kopokopo\Filament\Resources;
 
-use Modules\Kopokopo\Filament\Resources\RecipientPaybillResource\Pages;
-use Modules\Kopokopo\Filament\Resources\RecipientPaybillResource\RelationManagers;
-use Modules\Kopokopo\Models\RecipientPaybill;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -12,10 +9,16 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Modules\Kopokopo\Filament\Resources\RecipientPaybillResource\Pages;
+use Modules\Kopokopo\Models\RecipientPaybill;
 
 class RecipientPaybillResource extends Resource
 {
     protected static ?string $model = RecipientPaybill::class;
+
+    protected static ?string $slug = 'kopokopo/recipient/paybill';
+
+    protected static ?string $navigationGroup = 'Kopokopo';
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 

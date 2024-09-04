@@ -2,9 +2,6 @@
 
 namespace Modules\Kopokopo\Filament\Resources;
 
-use Modules\Kopokopo\Filament\Resources\WithdrawMobileResource\Pages;
-use Modules\Kopokopo\Filament\Resources\WithdrawMobileResource\RelationManagers;
-use Modules\Kopokopo\Models\WithdrawMobile;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -12,10 +9,16 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Modules\Kopokopo\Filament\Resources\WithdrawMobileResource\Pages;
+use Modules\Kopokopo\Models\WithdrawMobile;
 
 class WithdrawMobileResource extends Resource
 {
     protected static ?string $model = WithdrawMobile::class;
+
+    protected static ?string $slug = 'kopokopo/withdraw/mobile';
+
+    protected static ?string $navigationGroup = 'Kopokopo';
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
