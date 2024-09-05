@@ -27,4 +27,5 @@ class Gateway extends BaseModel
      * @var array <string>
      */
     protected $dates = ['created_at', 'updated_at', 'deleted_at'];
+
 }
