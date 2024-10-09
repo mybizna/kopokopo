@@ -4,15 +4,12 @@ namespace Modules\Kopokopo\Filament\Resources;
 
 use Filament\Forms;
 use Filament\Forms\Form;
-use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
-use Modules\Kopokopo\Filament\Resources\RecipientTillResource\Pages;
+use Modules\Base\Filament\Resources\BaseResource;
 use Modules\Kopokopo\Models\RecipientTill;
 
-class RecipientTillResource extends Resource
+class RecipientTillResource extends BaseResource
 {
     protected static ?string $model = RecipientTill::class;
 
@@ -91,27 +88,4 @@ class RecipientTillResource extends Resource
             ]);
     }
 
-    public static function getRelations(): array
-    {
-        return [
-            //
-        ];
-    }
-
-    public static function getPages(): array
-    {
-        return [
-            'index' => Pages\ListRecipientTills::route('/'),
-            'create' => Pages\CreateRecipientTill::route('/create'),
-            'edit' => Pages\EditRecipientTill::route('/{record}/edit'),
-        ];
-    }
-
-    public static function getEloquentQuery(): Builder
-    {
-        return parent::getEloquentQuery()
-            ->withoutGlobalScopes([
-                SoftDeletingScope::class,
-            ]);
-    }
 }

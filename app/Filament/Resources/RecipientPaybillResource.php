@@ -4,15 +4,12 @@ namespace Modules\Kopokopo\Filament\Resources;
 
 use Filament\Forms;
 use Filament\Forms\Form;
-use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
-use Modules\Kopokopo\Filament\Resources\RecipientPaybillResource\Pages;
+use Modules\Base\Filament\Resources\BaseResource;
 use Modules\Kopokopo\Models\RecipientPaybill;
 
-class RecipientPaybillResource extends Resource
+class RecipientPaybillResource extends BaseResource
 {
     protected static ?string $model = RecipientPaybill::class;
 
@@ -96,27 +93,4 @@ class RecipientPaybillResource extends Resource
             ]);
     }
 
-    public static function getRelations(): array
-    {
-        return [
-            //
-        ];
-    }
-
-    public static function getPages(): array
-    {
-        return [
-            'index' => Pages\ListRecipientPaybills::route('/'),
-            'create' => Pages\CreateRecipientPaybill::route('/create'),
-            'edit' => Pages\EditRecipientPaybill::route('/{record}/edit'),
-        ];
-    }
-
-    public static function getEloquentQuery(): Builder
-    {
-        return parent::getEloquentQuery()
-            ->withoutGlobalScopes([
-                SoftDeletingScope::class,
-            ]);
-    }
 }

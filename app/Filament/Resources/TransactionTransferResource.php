@@ -4,15 +4,12 @@ namespace Modules\Kopokopo\Filament\Resources;
 
 use Filament\Forms;
 use Filament\Forms\Form;
-use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
-use Modules\Kopokopo\Filament\Resources\TransactionTransferResource\Pages;
+use Modules\Base\Filament\Resources\BaseResource;
 use Modules\Kopokopo\Models\TransactionTransfer;
 
-class TransactionTransferResource extends Resource
+class TransactionTransferResource extends BaseResource
 {
     protected static ?string $model = TransactionTransfer::class;
 
@@ -154,27 +151,4 @@ class TransactionTransferResource extends Resource
             ]);
     }
 
-    public static function getRelations(): array
-    {
-        return [
-            //
-        ];
-    }
-
-    public static function getPages(): array
-    {
-        return [
-            'index' => Pages\ListTransactionTransfers::route('/'),
-            'create' => Pages\CreateTransactionTransfer::route('/create'),
-            'edit' => Pages\EditTransactionTransfer::route('/{record}/edit'),
-        ];
-    }
-
-    public static function getEloquentQuery(): Builder
-    {
-        return parent::getEloquentQuery()
-            ->withoutGlobalScopes([
-                SoftDeletingScope::class,
-            ]);
-    }
 }

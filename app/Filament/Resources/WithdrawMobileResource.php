@@ -4,15 +4,12 @@ namespace Modules\Kopokopo\Filament\Resources;
 
 use Filament\Forms;
 use Filament\Forms\Form;
-use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
-use Modules\Kopokopo\Filament\Resources\WithdrawMobileResource\Pages;
+use Modules\Base\Filament\Resources\BaseResource;
 use Modules\Kopokopo\Models\WithdrawMobile;
 
-class WithdrawMobileResource extends Resource
+class WithdrawMobileResource extends BaseResource
 {
     protected static ?string $model = WithdrawMobile::class;
 
@@ -90,27 +87,4 @@ class WithdrawMobileResource extends Resource
             ]);
     }
 
-    public static function getRelations(): array
-    {
-        return [
-            //
-        ];
-    }
-
-    public static function getPages(): array
-    {
-        return [
-            'index' => Pages\ListWithdrawMobiles::route('/'),
-            'create' => Pages\CreateWithdrawMobile::route('/create'),
-            'edit' => Pages\EditWithdrawMobile::route('/{record}/edit'),
-        ];
-    }
-
-    public static function getEloquentQuery(): Builder
-    {
-        return parent::getEloquentQuery()
-            ->withoutGlobalScopes([
-                SoftDeletingScope::class,
-            ]);
-    }
 }
