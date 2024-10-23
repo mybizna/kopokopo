@@ -7,7 +7,7 @@ use Filament\Forms\Form;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Modules\Base\Filament\Resources\BaseResource;
-use Modules\Kopokopo\Filament\Resources\RecipienttillResource\Pages;
+use Modules\Kopokopo\Filament\Resources\RecipientTillResource\Pages;
 use Modules\Kopokopo\Models\RecipientTill;
 
 class RecipientTillResource extends BaseResource
