@@ -33,7 +33,6 @@ class Recipient extends BaseModel
 
     public function migration(Blueprint $table): void
     {
-        $table->id();
 
         $table->string('title');
         $table->string('system_id');

@@ -36,7 +36,6 @@ class Stkpush extends BaseModel
 
     public function migration(Blueprint $table): void
     {
-        $table->id();
 
         $table->string('payment_channel')->default('M-PESA STK Push');
         $table->string('phone_number');

@@ -31,7 +31,6 @@ class WithdrawBank extends BaseModel
 
     public function migration(Blueprint $table): void
     {
-        $table->id();
 
         $table->string('account_name');
         $table->string('bank_branch_ref');

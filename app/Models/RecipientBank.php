@@ -34,7 +34,6 @@ class RecipientBank extends BaseModel
 
     public function migration(Blueprint $table): void
     {
-        $table->id();
 
         $table->string('reference');
         $table->string('branch_reference');

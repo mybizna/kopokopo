@@ -31,7 +31,6 @@ class WithdrawMobile extends BaseModel
 
     public function migration(Blueprint $table): void
     {
-        $table->id();
 
         $table->string('phone_number');
         $table->string('first_name');

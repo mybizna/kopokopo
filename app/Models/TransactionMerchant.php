@@ -36,7 +36,6 @@ class TransactionMerchant extends BaseModel
 
     public function migration(Blueprint $table): void
     {
-        $table->id();
 
         $table->string('trans_id');
         $table->string('passed_created_at');

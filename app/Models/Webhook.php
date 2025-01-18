@@ -31,7 +31,6 @@ class Webhook extends BaseModel
 
     public function migration(Blueprint $table): void
     {
-        $table->id();
 
         $table->enum('event_type', ['buygoods_transaction_received', 'buygoods_transaction_reversed', 'b2b_transaction_received', 'm2m_transaction_received', 'settlement_transfer_completed', 'customer_created'])->default('buygoods_transaction_received')->nullable();
         $table->string('url');

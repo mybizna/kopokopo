@@ -34,7 +34,6 @@ class Pay extends BaseModel
 
     public function migration(Blueprint $table): void
     {
-        $table->id();
 
         $table->string('client_id');
         $table->string('destination_type');
