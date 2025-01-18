@@ -3,6 +3,7 @@
 namespace Modules\Kopokopo\Models;
 
 use Modules\Base\Models\BaseModel;
+use Illuminate\Database\Schema\Blueprint;
 
 class Transaction extends BaseModel
 {
@@ -27,4 +28,22 @@ class Transaction extends BaseModel
      * @var array <string>
      */
     protected $dates = ['created_at', 'updated_at', 'deleted_at'];
+
+
+    public function migration(Blueprint $table): void
+    {
+        $table->id();
+
+        $table->enum('type', ['buygoods_transaction_received', 'buygoods_transaction_reversed', 'b2b_transaction_received', 'm2m_transaction_received', 'settlement_transfer_completed', 'customer_created'])->default('buygoods_transaction_received')->nullable();
+        $table->string('trans_id');
+        $table->string('passed_created_at');
+        $table->string('event_type');
+        $table->string('resource_id');
+        $table->string('link_self')->nullable();
+        $table->string('link_resource')->nullable();
+        $table->string('location')->nullable();
+        $table->tinyInteger('faking')->nullable()->default(0);
+        $table->tinyInteger('published')->nullable()->default(0);
+
+    }
 }

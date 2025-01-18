@@ -3,6 +3,7 @@
 namespace Modules\Kopokopo\Models;
 
 use Modules\Base\Models\BaseModel;
+use Illuminate\Database\Schema\Blueprint;
 
 class Withdraw extends BaseModel
 {
@@ -27,4 +28,21 @@ class Withdraw extends BaseModel
      */
     protected $dates = ['created_at', 'updated_at', 'deleted_at'];
 
+
+    public function migration(Blueprint $table): void
+    {
+        $table->id();
+
+        $table->string('amount');
+        $table->string('currency');
+        $table->string('callback');
+        $table->string('destination_type')->nullable();
+        $table->string('origination_time')->nullable();
+        $table->string('destination_reference')->nullable();
+        $table->string('transaction_reference')->nullable();
+        $table->string('location')->nullable();
+        $table->tinyInteger('faking')->nullable()->default(0);
+        $table->tinyInteger('published')->nullable()->default(0);
+
+    }
 }

@@ -3,6 +3,7 @@
 namespace Modules\Kopokopo\Models;
 
 use Modules\Base\Models\BaseModel;
+use Illuminate\Database\Schema\Blueprint;
 
 class RecipientPaybill extends BaseModel
 {
@@ -30,4 +31,19 @@ class RecipientPaybill extends BaseModel
      * @var array <string>
      */
     protected $dates = ['created_at', 'updated_at', 'deleted_at'];
+
+    public function migration(Blueprint $table): void
+    {
+        $table->id();
+
+        $table->string('reference');
+        $table->string('paybill_name');
+        $table->string('paybill_number');
+        $table->string('paybill_account_number');
+        $table->string('location')->nullable();
+        $table->text('result')->nullable();
+        $table->tinyInteger('faking')->nullable()->default(0);
+        $table->tinyInteger('published')->nullable()->default(0);
+
+    }
 }

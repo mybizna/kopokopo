@@ -3,6 +3,7 @@
 namespace Modules\Kopokopo\Models;
 
 use Modules\Base\Models\BaseModel;
+use Illuminate\Database\Schema\Blueprint;
 
 class Pay extends BaseModel
 {
@@ -30,4 +31,23 @@ class Pay extends BaseModel
      * @var array <string>
      */
     protected $dates = ['created_at', 'updated_at', 'deleted_at'];
+
+    public function migration(Blueprint $table): void
+    {
+        $table->id();
+
+        $table->string('client_id');
+        $table->string('destination_type');
+        $table->string('destination_reference');
+        $table->string('currency');
+        $table->string('amount');
+        $table->string('callback_url');
+        $table->string('location')->nullable();
+        $table->text('description')->nullable();
+        $table->text('result')->nullable();
+        $table->text('metadata')->nullable();
+        $table->tinyInteger('faking')->nullable()->default(0);
+        $table->tinyInteger('published')->nullable()->default(0);
+
+    }
 }

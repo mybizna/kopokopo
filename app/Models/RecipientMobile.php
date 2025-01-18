@@ -3,6 +3,7 @@
 namespace Modules\Kopokopo\Models;
 
 use Modules\Base\Models\BaseModel;
+use Illuminate\Database\Schema\Blueprint;
 
 class RecipientMobile extends BaseModel
 {
@@ -30,4 +31,21 @@ class RecipientMobile extends BaseModel
      * @var array <string>
      */
     protected $dates = ['created_at', 'updated_at', 'deleted_at'];
+
+    public function migration(Blueprint $table): void
+    {
+        $table->id();
+
+        $table->string('reference');
+        $table->string('first_name');
+        $table->string('last_name');
+        $table->string('email');
+        $table->string('phone_number');
+        $table->string('network');
+        $table->string('location')->nullable();
+        $table->text('result')->nullable();
+        $table->tinyInteger('faking')->nullable()->default(0);
+        $table->tinyInteger('published')->nullable()->default(0);
+
+    }
 }

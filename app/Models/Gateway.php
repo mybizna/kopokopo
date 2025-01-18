@@ -3,6 +3,7 @@
 namespace Modules\Kopokopo\Models;
 
 use Modules\Base\Models\BaseModel;
+use Illuminate\Database\Schema\Blueprint;
 
 class Gateway extends BaseModel
 {
@@ -28,4 +29,16 @@ class Gateway extends BaseModel
      */
     protected $dates = ['created_at', 'updated_at', 'deleted_at'];
 
+
+    public function migration(Blueprint $table): void
+    {
+        $table->id();
+
+        $table->string('client_id');
+        $table->string('client_secret');
+        $table->string('api_key');
+        $table->string('base_url');
+        $table->tinyInteger('published')->nullable()->default(0);
+
+    }
 }
